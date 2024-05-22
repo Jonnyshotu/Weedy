@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Weedy" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="colorPrimary">@color/primary_green</item>
+        <item name="colorOnPrimary">@color/onprimary_green</item>
+        <item name="colorSecondary">@color/secondary_green</item>
+        <item name="colorOnSecondary">@color/onsecondary_green</item>
+        <item name="colorTertiary">@color/tertiary_green</item>
+        <item name="colorOnTertiary">@color/ontertiary_green</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/onerror</item>
+        <item name="backgroundTint">@color/neutral</item>
+        <item name="colorSurface">@color/neutral_variant</item>
+
+    </style>
+
+    <style name="Theme.Weedy" parent="Base.Theme.Weedy" />
+
+</resources>

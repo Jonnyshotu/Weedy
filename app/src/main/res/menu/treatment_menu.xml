@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/watering_option"
+        android:title="Watering" />
+    <item android:id="@+id/fertilizer_option"
+        android:title="Fertilizer" />
+    <item android:id="@+id/checkup_option"
+        android:title="Checkup" />
+</menu>

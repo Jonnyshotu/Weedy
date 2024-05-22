@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="green_progressBar">#00dc37</color>
+    <color name="primary_green">#63A002</color>
+    <color name="onprimary_green">#ffffff</color>
+    <color name="secondary_green">#85976E</color>
+    <color name="onsecondary_green">#ffffff</color>
+    <color name="tertiary_green">#4D9D98</color>
+    <color name="ontertiary_green">#ffffff</color>
+    <color name="error">#FF5449</color>
+    <color name="onerror">#ffffff</color>
+    <color name="neutral">#91918B</color>
+    <color name="neutral_variant">#8F9285</color>
+
+</resources>
