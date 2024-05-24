@@ -5,5 +5,6 @@ import com.example.weedy.data.module.Plant
 
 interface OnClick {
 
+    fun onPlantClick(plant: Plant)
     fun onTreatmentClick(plant: Plant, view: View)
 }

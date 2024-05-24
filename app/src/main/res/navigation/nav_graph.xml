@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_homeFragment_to_checkupFragment"
             app:destination="@id/checkupFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_newPlantFragment"
+            app:destination="@id/newPlantFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/newPlantFragment"
@@ -24,4 +30,8 @@
         android:name="com.example.weedy.ui.CheckupFragment"
         android:label="fragment_checkup"
         tools:layout="@layout/fragment_checkup" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.weedy.ui.DetailFragment"
+        android:label="DetailFragment" />
 </navigation>

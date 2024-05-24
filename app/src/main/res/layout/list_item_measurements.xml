@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/listItemMeasureDateHeaderTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/listItemMeasureDateTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="example Date"
+                app:layout_constraintStart_toEndOf="@+id/listItemMeasureDateHeaderTV"
+                app:layout_constraintTop_toTopOf="@+id/listItemMeasureDateHeaderTV"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="127dp" />
+
+            <TextView
+                android:id="@+id/listItemMeasureHeader1TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Value 1"
+                app:layout_constraintStart_toStartOf="@+id/listItemMeasureDateHeaderTV"
+                app:layout_constraintTop_toBottomOf="@+id/listItemMeasureDateHeaderTV" />
+
+            <TextView
+                android:id="@+id/listItemMeasureTV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="example Data 1"
+                app:layout_constraintStart_toEndOf="@+id/listItemMeasureHeader1TV"
+                app:layout_constraintTop_toTopOf="@+id/listItemMeasureHeader1TV"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="138dp" />
+
+            <TextView
+                android:id="@+id/listItemMeasureHeader2TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="Value 2"
+                app:layout_constraintEnd_toStartOf="@+id/listItemMeasure2TV"
+                app:layout_constraintTop_toTopOf="@+id/listItemMeasureTV1" />
+
+            <TextView
+                android:id="@+id/listItemMeasure2TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="example Data 2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/listItemMeasureHeader2TV"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="138dp" />
+
+            <TextView
+                android:id="@+id/listItemMeasureHeader3TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Value 3"
+                app:layout_constraintStart_toStartOf="@+id/listItemMeasureHeader1TV"
+                app:layout_constraintTop_toBottomOf="@+id/listItemMeasureHeader1TV" />
+
+            <TextView
+                android:id="@+id/listItemMeasure3TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="example Data 3"
+                app:layout_constraintStart_toEndOf="@+id/listItemMeasureHeader3TV"
+                app:layout_constraintStart_toStartOf="@+id/listItemMeasureTV1"
+                app:layout_constraintTop_toTopOf="@+id/listItemMeasureHeader3TV"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="138dp" />
+
+            <TextView
+                android:id="@+id/listItemMeasureHeader4TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Value 4"
+                app:layout_constraintStart_toStartOf="@+id/listItemMeasureHeader2TV"
+                app:layout_constraintTop_toTopOf="@+id/listItemMeasure3TV" />
+
+            <TextView
+                android:id="@+id/listItemMeasure4TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="example Data 4"
+                app:layout_constraintEnd_toEndOf="@+id/listItemMeasure2TV"
+                app:layout_constraintTop_toTopOf="@+id/listItemMeasureHeader4TV"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="138dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

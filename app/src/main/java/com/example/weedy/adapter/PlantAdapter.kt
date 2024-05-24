@@ -28,12 +28,15 @@ class PlantAdapter (
         Log.d("$TAG on BindView", plant.toString())
 
         with(holder.binding) {
-            plantItemtreatmentBTN.setOnClickListener {
-                listener.onTreatmentClick(plant,this.plantItemtreatmentBTN)
+            plantItemActionBTN.setOnClickListener {
+                listener.onTreatmentClick(plant,this.plantItemActionBTN)
             }
             plantItemStrainTV.text = plant.strain
             plantItemWeeksTV.text = "in Week ${plant.weeksTilHarvest()} of ${plant.floweringTime}"
             plantItemHealthBar.progress = plant.health
+            plantItemCV.setOnClickListener {
+                listener.onPlantClick(plant)
+            }
         }
     }
 }

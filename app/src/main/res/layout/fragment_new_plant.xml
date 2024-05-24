@@ -1,14 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.NewPlantFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/secondary_green"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/newPlantPlantIV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/example_plant"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:layout_collapseMode="pin"
+                app:title="New Plant"
+                app:titleTextColor="@color/onsecondary_green" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/newPlant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.NewPlantFragment">
+
+            <Button
+                android:id="@+id/newPlantPhotoBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="+ add photo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/newPlantStrainET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="Strain"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantPhotoBTN" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/newPlantStrainET"
+                app:layout_constraintStart_toStartOf="@+id/newPlantStrainET"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantStrainET">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+
+                    <EditText
+                        android:id="@+id/newPlantSativaET"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sativa"
+                        app:layout_constraintEnd_toEndOf="@+id/newPlantSativaET"
+                        app:layout_constraintStart_toStartOf="@+id/newPlantSativaET"
+                        app:layout_constraintTop_toBottomOf="@+id/newPlantSativaET" />
+
+                    <EditText
+                        android:id="@+id/newPlantIndicaET"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toStartOf="@+id/newPlantRuderalisET"
+                        app:layout_constraintStart_toEndOf="@+id/newPlantSativaET"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Indica"
+                        app:layout_constraintEnd_toEndOf="@+id/newPlantIndicaET"
+                        app:layout_constraintStart_toStartOf="@+id/newPlantIndicaET"
+                        app:layout_constraintTop_toBottomOf="@+id/newPlantIndicaET" />
+
+                    <EditText
+                        android:id="@+id/newPlantRuderalisET"
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ruderalis"
+                        app:layout_constraintEnd_toEndOf="@+id/newPlantRuderalisET"
+                        app:layout_constraintStart_toStartOf="@+id/newPlantRuderalisET"
+                        app:layout_constraintTop_toBottomOf="@+id/newPlantRuderalisET" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <RadioGroup
+                android:id="@+id/newPlantGeneticRG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintStart_toStartOf="@+id/cardView"
+                app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+                <RadioButton
+                    android:id="@+id/newPlantRegularRB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:text="Regular" />
+
+                <RadioButton
+                    android:id="@+id/newPlantFeminizedRB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:text="Feminized" />
+
+                <RadioButton
+                    android:id="@+id/newPlantAutomaticRB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:text="Automatic" />
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/newPlantSeedManufacturerET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="Seed Manufacturer"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="@id/newPlantStrainET"
+                app:layout_constraintStart_toStartOf="@id/newPlantStrainET"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticRG" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

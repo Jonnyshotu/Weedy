@@ -5,4 +5,9 @@
     <string name="checklist_icon">checklist</string>
     <string name="edit_icon">edit</string>
     <string name="delete_icon">delete</string>
+    <string name="watering">Watering</string>
+    <string name="seedling">seedling</string>
+    <string name="cutting">cutting</string>
+    <string name="adult">adult</string>
+    <string name="flower">flower</string>
 </resources>

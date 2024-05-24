@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/secondary_green"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:id="@+id/detailPlantIV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/example_plant"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/detailToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:layout_collapseMode="pin"
+                app:titleTextColor="@color/onsecondary_green" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detailPlant"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.DetailFragment">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detailInfoGeneticCV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:elevation="12dp"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/detailRuderalisDisplayTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="%"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/detailIndicaDisplayTV"
+                        app:layout_constraintTop_toTopOf="@+id/detailIndicaDisplayTV" />
+
+                    <TextView
+                        android:id="@+id/detailIndicaDisplayTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center"
+                        android:text="%"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/detailSativaDisplayTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="%"
+                        app:layout_constraintEnd_toStartOf="@+id/detailIndicaDisplayTV"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/detailIndicaDisplayTV" />
+
+                    <TextView
+                        android:id="@+id/detailRuderalisTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Ruderalis"
+                        app:layout_constraintEnd_toEndOf="@+id/detailRuderalisDisplayTV"
+                        app:layout_constraintStart_toStartOf="@+id/detailRuderalisDisplayTV"
+                        app:layout_constraintTop_toTopOf="@+id/detailIndicaTV" />
+
+                    <TextView
+                        android:id="@+id/detailIndicaTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:text="Indica"
+                        app:layout_constraintEnd_toEndOf="@+id/detailIndicaDisplayTV"
+                        app:layout_constraintStart_toStartOf="@+id/detailIndicaDisplayTV"
+                        app:layout_constraintTop_toBottomOf="@+id/detailIndicaDisplayTV" />
+
+                    <TextView
+                        android:id="@+id/detailSativaTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Sativa"
+                        app:layout_constraintEnd_toEndOf="@+id/detailSativaDisplayTV"
+                        app:layout_constraintStart_toStartOf="@+id/detailSativaDisplayTV"
+                        app:layout_constraintTop_toTopOf="@+id/detailIndicaTV" />
+
+                    <TextView
+                        android:id="@+id/detailManufacturerTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="Manufacturer"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/detailIndicaTV"
+                        app:layout_constraintStart_toStartOf="@+id/detailIndicaTV"
+                        app:layout_constraintTop_toBottomOf="@+id/detailIndicaTV" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detailGerminationCV"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp"
+                android:elevation="12dp"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/detailInfoGeneticCV"
+                app:layout_constraintStart_toStartOf="@+id/detailInfoGeneticCV"
+                app:layout_constraintTop_toBottomOf="@+id/detailInfoGeneticCV">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/detailGerminationTV"
+                        android:layout_width="379dp"
+                        android:layout_height="wrap_content"
+                        android:text="germination example"
+                        tools:layout_editor_absoluteX="32dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/detailWateringTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Watering History"
+                app:layout_constraintStart_toStartOf="@+id/detailWaterCV"
+                app:layout_constraintTop_toBottomOf="@+id/detailGerminationCV" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detailWaterCV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="-400dp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailWateringTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailWateringTV">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailWaterRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_item" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/detailNutrientsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Nutrients history"
+                app:layout_constraintStart_toStartOf="@+id/detailNutrientsCV"
+                app:layout_constraintTop_toBottomOf="@+id/detailWaterCV" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detailNutrientsCV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="-400dp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailNutrientsTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailNutrientsTV">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailNutrientsRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_item" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/detailRepellentsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Repellents history"
+                app:layout_constraintStart_toStartOf="@+id/detailRepellentsCV"
+                app:layout_constraintTop_toBottomOf="@+id/detailNutrientsCV" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detailRepellentsCV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="-400dp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailRepellentsTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailRepellentsTV">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailRepellentsRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_item" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/detailTrainingTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Training history"
+                app:layout_constraintStart_toStartOf="@+id/detailTrainingCV"
+                app:layout_constraintTop_toBottomOf="@+id/detailRepellentsCV" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detailTrainingCV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="-400dp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailTrainingTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailTrainingTV">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailTrainingRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_item" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/detailMeasurementsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Training history"
+                app:layout_constraintStart_toStartOf="@+id/detailMeasurementsCV"
+                app:layout_constraintTop_toBottomOf="@+id/detailTrainingCV" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detailMeasurementsCV"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="-400dp"
+                android:maxHeight="60dp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailMeasurementsTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailMeasurementsTV">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailMeasurementsRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/list_item_measurements" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailInfoGeneticCV"
+                tools:layout_editor_absoluteX="-9dp">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

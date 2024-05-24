@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/listItemTV1"
+            app:layout_constraintTop_toTopOf="@+id/listItemTV1">
+
+            <TextView
+                android:id="@+id/listItemHeader2TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Value 2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/listItemHeader1TV"
+                app:layout_constraintTop_toTopOf="@+id/listItemHeader1TV" />
+
+            <TextView
+                android:id="@+id/listItemHeader1TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Value 1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/listItemDateHeaderTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Date"
+                app:layout_constraintEnd_toStartOf="@+id/listItemHeader1TV"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/listItemHeader1TV" />
+
+            <TextView
+                android:id="@+id/listItemTV1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="example Data 1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/listItemHeader1TV"
+                app:layout_constraintStart_toStartOf="@+id/listItemHeader1TV"
+                app:layout_constraintTop_toBottomOf="@+id/listItemHeader1TV"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="138dp" />
+
+            <TextView
+                android:id="@+id/listItem2TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="example Data 2"
+                app:layout_constraintEnd_toEndOf="@+id/listItemHeader2TV"
+                app:layout_constraintStart_toStartOf="@+id/listItemHeader2TV"
+                app:layout_constraintTop_toTopOf="@+id/listItemTV1"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="138dp" />
+
+            <TextView
+                android:id="@+id/listItemDateTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="example Date"
+                app:layout_constraintEnd_toEndOf="@+id/listItemDateHeaderTV"
+                app:layout_constraintStart_toStartOf="@+id/listItemDateHeaderTV"
+                app:layout_constraintTop_toTopOf="@+id/listItemTV1"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="127dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,33 @@
 package com.example.weedy.data
 
 import com.example.weedy.data.module.Genetic
+import com.example.weedy.data.module.Nutrients
 import com.example.weedy.data.module.Plant
+import com.example.weedy.data.module.Soil
 import java.time.LocalDate
 
 object Repository {
+
+    fun loadSoilTypes(): List<Soil>{
+        return listOf(
+            Soil("Light Mix BioBizz"),
+            Soil("All Mix BioBizz" ),
+            Soil("Coco BioBizz"),
+        )
+    }
+
+    fun loadNutrients () : List<Nutrients>{
+        return  listOf(
+        Nutrients("Root Juice BioBizz", "liquid"),
+        Nutrients("Bio Grow BioBizz", "liquid"),
+        Nutrients("Fish Mix BioBizz", "liquid"),
+        Nutrients("Bio Bloom BioBizz", "liquid"),
+        Nutrients("Top Max BioBizz", "liquid"),
+        Nutrients("Bio Heaven BioBizz", "liquid"),
+        Nutrients("Acti Vera BioBizz", "liquid"),
+        Nutrients("Microbes BioBizz", "solid"),
+        )
+    }
     fun loadExamplePlants(): List<Plant> {
         return listOf(
             Plant(
@@ -17,7 +40,9 @@ object Repository {
                 LocalDate.of(2024, 4, 18),
                 12,
                 false,
-                20
+                20,
+                manufacturer = "Royal Queen Seeds",
+                watering = listOf(Pair(56.0,LocalDate.now()), Pair(89489.0,LocalDate.now()), Pair(4891.0,LocalDate.now()), Pair(87900.0,LocalDate.now()), Pair(305250.0,LocalDate.now()), Pair(5880.0,LocalDate.now()), Pair(566660.0,LocalDate.now()), Pair(20.0,LocalDate.now()), Pair(5600.0,LocalDate.now()), Pair(590.0,LocalDate.now()))
             ),
             Plant(
                 2,

@@ -8,12 +8,12 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/plantItemCV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:elevation="12dp"
         app:cardCornerRadius="12dp"
-        android:backgroundTint="@color/neutral_variant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -44,27 +44,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/plantItemStrainTV" />
 
 
-            <Button
-                android:id="@+id/plantItemtreatmentBTN"
-                android:layout_width="91dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="Treatment"
-                app:layout_constraintBottom_toBottomOf="@+id/middleButton"
-                app:layout_constraintEnd_toStartOf="@+id/middleButton"
-                app:layout_constraintStart_toStartOf="@+id/plantItemStrainTV"
-                app:layout_constraintTop_toTopOf="@+id/middleButton" />
-
-            <Space
-                android:id="@+id/middleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/middle"
-                app:layout_constraintStart_toStartOf="@+id/plantItemStrainTV"
-                app:layout_constraintTop_toBottomOf="@+id/plantItemWeeksTV" />
-
             <ProgressBar
                 android:id="@+id/plantItemHealthBar"
                 style="?android:attr/progressBarStyleHorizontal"
@@ -77,33 +56,59 @@
                 app:layout_constraintTop_toTopOf="@+id/plantItemWeeksTV" />
 
             <ImageButton
+                android:id="@+id/plantItemActionBTN"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="4dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="@+id/middleButton"
+                app:layout_constraintEnd_toStartOf="@id/middleButton"
+                app:layout_constraintStart_toStartOf="@id/plantItemStrainTV"
+                app:layout_constraintTop_toTopOf="@id/middleButton"
+                app:srcCompat="@drawable/bolt" />
+
+            <Space
+                android:id="@+id/middleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/middle"
+                app:layout_constraintStart_toStartOf="@+id/plantItemStrainTV"
+                app:layout_constraintTop_toBottomOf="@+id/plantItemWeeksTV" />
+
+            <ImageButton
                 android:id="@+id/plantItemCheckupBTN"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="4dp"
-                android:src="@drawable/checklist_big"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
-                android:backgroundTint="@color/primary_green"
-                app:layout_constraintBottom_toBottomOf="@+id/plantItemtreatmentBTN"
-                app:layout_constraintEnd_toStartOf="@+id/middle"
-                app:layout_constraintStart_toEndOf="@+id/middleButton"
-                app:layout_constraintTop_toTopOf="@+id/plantItemtreatmentBTN" />
+                app:layout_constraintBottom_toBottomOf="@+id/middleButton"
+                app:layout_constraintEnd_toStartOf="@id/middle"
+                app:layout_constraintStart_toEndOf="@id/middleButton"
+                app:layout_constraintTop_toTopOf="@id/middleButton"
+                app:srcCompat="@drawable/checklist_big" />
 
             <Space
                 android:id="@+id/middle"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/middleButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/plantItemStrainTV" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_margin="24dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:elevation="8dp"
-                app:cardCornerRadius="80dp"
+                app:cardCornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="@+id/middle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/middle"
@@ -113,7 +118,7 @@
                     android:id="@+id/plantItemPlantIV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/example_plant" />
 
             </androidx.cardview.widget.CardView>

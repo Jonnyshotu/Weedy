@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/take_photo_option"
+        android:title="take new photo" />
+    <item
+        android:id="@+id/add_from_libary_option"
+        android:title="add from libary" />
+
+</menu>

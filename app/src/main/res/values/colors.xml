@@ -14,5 +14,6 @@
     <color name="onerror">#ffffff</color>
     <color name="neutral">#91918B</color>
     <color name="neutral_variant">#8F9285</color>
+    <color name="action">#DFCA11</color>
 
 </resources>
