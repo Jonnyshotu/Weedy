@@ -22,6 +22,8 @@ class ListNutrientsAdapter (private val dataset: List<Triple<String, Double, Loc
         val listEntry = dataset[position]
 
         with(holder.binding){
+            listItemHeader1TV.text = "Type"
+            listItemHeader2TV.text = "Amount"
             listItemTV1.text = listEntry.first
             listItem2TV.text = listEntry.second.toString()
             listItemDateTV.text = listEntry.third.toString()

@@ -48,6 +48,7 @@ class DetailFragment : MainFragment() {
 
         if (plant != null) {
             with(binding) {
+
                 detailToolbar.title = plant.strain
                 detailIndicaDisplayTV.text = plant.genetic.indica.toString()
                 detailSativaDisplayTV.text = plant.genetic.sativa.toString()
@@ -57,10 +58,14 @@ class DetailFragment : MainFragment() {
                 detailGerminationTV.text = plant.genetic.breedingType
 
                 //region Recycler Views
+
                 waterRecyclerView = detailWaterRV
                 if (plant.watering.isNotEmpty()) {
                     waterAdapter = ListWaterAdapter(plant.watering)
                     waterRecyclerView.adapter = waterAdapter
+                } else {
+                    detailWaterCV.visibility = View.GONE
+                    detailWateringTV.text = "No watering records"
                 }
 
                 nutrientsRecyclerView = detailNutrientsRV
@@ -68,6 +73,9 @@ class DetailFragment : MainFragment() {
                 if (plant.nutrients.isNotEmpty()) {
                     nutrientsAdapter = ListNutrientsAdapter(plant.nutrients)
                     nutrientsRecyclerView.adapter = nutrientsAdapter
+                } else {
+                    detailNutrientsCV.visibility = View.GONE
+                    detailNutrientsTV.text = "No nutrients records"
                 }
 
                 repellentsRecyclerView = detailRepellentsRV
@@ -75,6 +83,9 @@ class DetailFragment : MainFragment() {
                 if (plant.repellents.isNotEmpty()) {
                     repellentsAdapter = ListRepellentsAdapter(plant.repellents)
                     repellentsRecyclerView.adapter = repellentsAdapter
+                } else {
+                    detailRepellentsCV.visibility = View.GONE
+                    detailRepellentsTV.text = "No repellents records"
                 }
 
                 trainingRecyclerView = detailTrainingRV
@@ -82,6 +93,9 @@ class DetailFragment : MainFragment() {
                 if (plant.training.isNotEmpty()) {
                     trainingAdapter = ListTrainingAdapter(plant.training)
                     trainingRecyclerView.adapter = trainingAdapter
+                } else {
+                    detailTrainingCV.visibility = View.GONE
+                    detailTrainingTV.text = "No training records"
                 }
 
                 measurementsRecyclerView = detailMeasurementsRV
@@ -89,23 +103,23 @@ class DetailFragment : MainFragment() {
                 if (plant.measurements.isNotEmpty()) {
                     measurementsAdapter = ListMeasurementsAdapter(plant.measurements)
                     measurementsRecyclerView.adapter = measurementsAdapter
+                } else {
+                    detailMeasurementsCV.visibility = View.GONE
+                    detailMeasurementsTV.text = "No measurement records"
                 }
+
             }
             //endregion
         }
 
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
-
-
     override fun onImageCaptured(imageBitmap: Bitmap) {
         TODO("Not yet implemented")
     }
-
     override fun onImagePicked(imageUri: Uri?) {
         TODO("Not yet implemented")
     }

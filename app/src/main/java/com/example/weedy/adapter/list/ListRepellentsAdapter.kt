@@ -22,6 +22,8 @@ class ListRepellentsAdapter (private val dataset: List<Pair<String, LocalDate>>)
         val listEntry = dataset[position]
 
         with(holder.binding){
+            listItemHeader1TV.text = "Incident"
+            listItemHeader2TV.text = null
             listItemTV1.text = listEntry.first
             listItem2TV.text = null
             listItemDateTV.text = listEntry.second.toString()

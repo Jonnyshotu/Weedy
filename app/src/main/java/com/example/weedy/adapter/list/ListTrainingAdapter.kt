@@ -21,6 +21,8 @@ class ListTrainingAdapter (private val dataset: List<Pair<String, LocalDate>>) :
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
         val listEntry = dataset[position]
         with(holder.binding){
+            listItemHeader1TV.text = "Training method"
+            listItemHeader2TV.text = null
             listItemTV1.text = listEntry.first
             listItem2TV.text = null
             listItemDateTV.text = listEntry.second.toString()
