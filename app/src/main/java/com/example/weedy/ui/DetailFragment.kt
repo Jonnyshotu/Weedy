@@ -16,6 +16,7 @@ import com.example.weedy.adapter.list.ListTrainingAdapter
 import com.example.weedy.adapter.list.ListWaterAdapter
 import com.example.weedy.data.module.Plant
 import com.example.weedy.databinding.FragmentDetailBinding
+import java.time.LocalDate
 
 class DetailFragment : MainFragment() {
 
@@ -56,6 +57,28 @@ class DetailFragment : MainFragment() {
                 detailManufacturerTV.text = plant.manufacturer
 
                 detailGerminationTV.text = plant.genetic.breedingType
+
+                detailProgressStartDateTV.text = plant.germinationWater.toString()
+                val weeksTilHarvest = plant.weeksTilHarvest()
+                val weeksOld = plant.weeksOld()
+                detailProgressEndDateTV.text = weeksTilHarvest.toString()
+                detailProgressWeekOfTV.text = "Week $weeksOld of ${plant.floweringTime}"
+                with(detaillProgressWeekPB) {
+                    max = plant.floweringTime
+                    progress = weeksOld
+                }
+
+                detailProgressStartGerminationWaterTV.text = "Germination Water: ${plant.germinationWater}"
+                detailProgressSoilTV.text = "Germination Soil: ${plant.germinationSoil}"
+
+                val latestEntry = plant.light.maxByOrNull { it.second }
+                if (latestEntry != null) {
+                    detaillLightCyclePB.progress = latestEntry.first
+                    detaillLightHoursTV.text = "${latestEntry.first} hours light on and ${24 - latestEntry.first} hours off"
+                } else {
+                    detaillLightCyclePB.progress = 0
+                    detaillLightHoursTV.text = "No data"
+                }
 
                 //region Recycler Views
 
@@ -114,12 +137,15 @@ class DetailFragment : MainFragment() {
 
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
     override fun onImageCaptured(imageBitmap: Bitmap) {
         TODO("Not yet implemented")
     }
+
     override fun onImagePicked(imageUri: Uri?) {
         TODO("Not yet implemented")
     }

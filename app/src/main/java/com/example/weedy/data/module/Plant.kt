@@ -23,12 +23,19 @@ data class Plant(
     var repot: List<Triple<String, Int, LocalDate>> = listOf(),
     var training: List<Pair<String, LocalDate>> = listOf(),
     var measurements: List<Pair<Measurements, LocalDate>> = listOf(),
-    var light: List<Pair<Int,LocalDate>> = listOf(),
+    var light: List<Pair<Int, LocalDate>> = listOf(),
     var manufacturer: String = ""
 ) {
 
-    fun weeksTilHarvest(): Int {
+    fun weeksOld(): Int {
         return (ChronoUnit.WEEKS.between(planted, LocalDate.now())).toInt()
+    }
+
+    fun weeksTilHarvest(): Int {
+        return (ChronoUnit.WEEKS.between(
+            planted,
+            planted.plusWeeks(floweringTime.toLong())
+        )).toInt()
     }
 
     //region Equals

@@ -32,7 +32,7 @@ class PlantAdapter (
                 listener.onTreatmentClick(plant,this.plantItemActionBTN)
             }
             plantItemStrainTV.text = plant.strain
-            plantItemWeeksTV.text = "in Week ${plant.weeksTilHarvest()} of ${plant.floweringTime}"
+            plantItemWeeksTV.text = "in Week ${plant.weeksOld()} of ${plant.floweringTime}"
             plantItemHealthBar.progress = plant.health
             plantItemCV.setOnClickListener {
                 listener.onPlantClick(plant)
