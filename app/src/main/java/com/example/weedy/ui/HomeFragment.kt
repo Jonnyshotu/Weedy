@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weedy.SharedViewModel
 import com.example.weedy.adapter.OnClick
 import com.example.weedy.adapter.PlantAdapter
-import com.example.weedy.data.module.Plant
+import com.example.weedy.data.entities.Plant
 import com.example.weedy.databinding.FragmentHomeBinding
+import com.example.weedy.ui.main.MainFragment
 
 class HomeFragment : MainFragment(), OnClick {
 
@@ -25,10 +26,6 @@ class HomeFragment : MainFragment(), OnClick {
 
 
     private val TAG = "Debug_HomeFragment"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +56,8 @@ class HomeFragment : MainFragment(), OnClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         viewModel.plants.observe(viewLifecycleOwner) {
             adapter.submitList(viewModel.plants.value)
             Log.d("$TAG Observer", viewModel.plants.value.toString())
@@ -83,10 +82,10 @@ class HomeFragment : MainFragment(), OnClick {
     }
 
     override fun onImageCaptured(imageBitmap: Bitmap) {
-        TODO("Not yet implemented")
+        TODO()
     }
 
     override fun onImagePicked(imageUri: Uri?) {
-        TODO("Not yet implemented")
+        TODO()
     }
 }

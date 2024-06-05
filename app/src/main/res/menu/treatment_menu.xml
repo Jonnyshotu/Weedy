@@ -4,6 +4,9 @@
         android:id="@+id/photo_option"
         android:title="Photo" />
     <item
+        android:id="@+id/health_option"
+        android:title="Health" />
+    <item
         android:id="@+id/watering_option"
         android:title="Watering" />
     <item

@@ -1,7 +1,7 @@
 package com.example.weedy.adapter
 
 import android.view.View
-import com.example.weedy.data.module.Plant
+import com.example.weedy.data.entities.Plant
 
 interface OnClick {
 

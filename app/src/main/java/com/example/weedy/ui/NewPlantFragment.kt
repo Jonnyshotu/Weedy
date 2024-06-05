@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.example.weedy.R
 import com.example.weedy.databinding.FragmentNewPlantBinding
+import com.example.weedy.ui.main.MainFragment
 
 class NewPlantFragment : MainFragment() {
 

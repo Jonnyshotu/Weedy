@@ -31,6 +31,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize"
         android:clipToPadding="false"
+        android:paddingBottom="40dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/plant_item" />
@@ -40,9 +41,7 @@
         style="@style/Base.Theme.Weedy"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="bottom"
-        app:menu="@menu/bottom_app_bar"
-        app:navigationIcon="@drawable/cannabis_leaf" />
+        android:layout_gravity="bottom" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/homeAddFAB"

@@ -1,10 +1,13 @@
-package com.example.weedy.data.module
+package com.example.weedy.data.entities
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
-
+@Entity
 data class Plant(
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val strain: String,
     val genetic: Genetic,
@@ -27,16 +30,7 @@ data class Plant(
     var manufacturer: String = ""
 ) {
 
-    fun weeksOld(): Int {
-        return (ChronoUnit.WEEKS.between(planted, LocalDate.now())).toInt()
-    }
 
-    fun weeksTilHarvest(): Int {
-        return (ChronoUnit.WEEKS.between(
-            planted,
-            planted.plusWeeks(floweringTime.toLong())
-        )).toInt()
-    }
 
     //region Equals
     override fun equals(other: Any?): Boolean {
@@ -56,17 +50,5 @@ data class Plant(
     //endregion
 }
 
-data class Genetic(
-    val sativa: Int,
-    val indica: Int,
-    val ruderalis: Int,
-    val breedingType: String
-)
 
-data class Measurements(
-    val ph: Double,
-    val ec: Double,
-    val temperature: Double,
-    val humidity: Double,
-    val height: Double
-)
+

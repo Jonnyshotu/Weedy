@@ -16,4 +16,16 @@
     <color name="neutral_variant">#8F9285</color>
     <color name="action">#DFCA11</color>
 
+
+    <color name="darK_primary">#388E3C</color>
+    <color name="light_primary">#C8E6C9</color>
+    <color name="primary">#4CAF50</color>
+    <color name="text_icons">#FFFFFF</color>
+    <color name="accent_color">#FFC107</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="divider">#BDBDBD</color>
+
+
+
 </resources>

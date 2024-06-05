@@ -3,7 +3,7 @@ package com.example.weedy.adapter.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weedy.data.module.Measurements
+import com.example.weedy.data.entities.Measurements
 import com.example.weedy.databinding.ListItemMeasurementsBinding
 import java.time.LocalDate
 

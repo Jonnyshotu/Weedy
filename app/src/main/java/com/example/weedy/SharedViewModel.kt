@@ -1,20 +1,30 @@
 package com.example.weedy
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.weedy.data.Repository
-import com.example.weedy.data.module.Nutrients
-import com.example.weedy.data.module.Plant
-import com.example.weedy.data.module.Soil
+import com.example.weedy.data.local.getDatabase
+import com.example.weedy.data.models.Nutrients
+import com.example.weedy.data.entities.Plant
+import com.example.weedy.data.models.Soil
+import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
-class SharedViewModel : ViewModel() {
+class SharedViewModel(application: Application) : AndroidViewModel(application) {
 
     private val TAG = "ViewModel"
 
     var navigatePlantID: Int = 0
+
+    private val database = getDatabase(application)
+    private val repository = Repository(database)
+
+    val plantList = repository.plantList
 
     private var _plants = MutableLiveData<List<Plant>>()
     val plants: LiveData<List<Plant>>
@@ -29,20 +39,51 @@ class SharedViewModel : ViewModel() {
         get() = _nutrients
 
     private var _soilTypes = MutableLiveData<List<Soil>>()
-    val soilTypes : LiveData<List<Soil>>
+    val soilTypes: LiveData<List<Soil>>
         get() = _soilTypes
 
 
-    fun loadExamplePlants() {
-        _plants.value = Repository.loadExamplePlants()
+    init {
+        suspend fun exampleData(plant: Plant){
+            viewModelScope.launch {
+                repository.checkLoadingExampleData()
+            }
+        }
     }
-    fun loadNutrients() {
-        _nutrients.value = Repository.loadNutrients()
+
+    suspend fun insertPlant(plant: Plant){
+        viewModelScope.launch {
+            repository.insert(plant)
+        }
     }
-    fun loadSoiltypes() {
-        _soilTypes.value = Repository.loadSoilTypes()
+
+//TODO
+    fun weeksOld(): Int {
+        return (ChronoUnit.WEEKS.between(planted, LocalDate.now())).toInt()
     }
-//region treatments
+
+    fun weeksTilHarvest(): Int {
+        return (ChronoUnit.WEEKS.between(
+            planted,
+            planted.plusWeeks(floweringTime.toLong())
+        )).toInt()
+    }
+
+
+    //region treatments
+    fun health(health: Int) {
+        if (health != null) {
+            _plants.value = _plants.value?.map { plant ->
+                if (plant.id == navigatePlantID) {
+                    plant.copy(health = health)
+                } else {
+                    plant
+                }
+            }
+            Log.d("$TAG health", _plants.value?.filter { it.id == navigatePlantID }.toString())
+        }
+    }
+
     fun water(water: Pair<Double?, LocalDate>) {
         if (water.first != null) {
             _plants.value = _plants.value?.map { plant ->
@@ -91,7 +132,10 @@ class SharedViewModel : ViewModel() {
                     plant
                 }
             }
-            Log.d("$TAG growthStateChange", _plants.value?.filter { it.id == navigatePlantID }.toString())
+            Log.d(
+                "$TAG growthStateChange",
+                _plants.value?.filter { it.id == navigatePlantID }.toString()
+            )
         }
     }
 
@@ -121,7 +165,7 @@ class SharedViewModel : ViewModel() {
         }
     }
 
-    fun light (light: Pair<Int, LocalDate>){
+    fun light(light: Pair<Int, LocalDate>) {
         if (light != null) {
             _plants.value = _plants.value?.map { plant ->
                 if (plant.id == navigatePlantID) {
@@ -135,8 +179,9 @@ class SharedViewModel : ViewModel() {
     }
 
     fun markAsDead() {
-        _plantsHistory.value = _plants.value?.let { _plantsHistory.value?.plus(it.filter { plant: Plant ->  plant.id == navigatePlantID }) }
-            ?: listOf()
+        _plantsHistory.value =
+            _plants.value?.let { _plantsHistory.value?.plus(it.filter { plant: Plant -> plant.id == navigatePlantID }) }
+                ?: listOf()
         _plants.value = _plants.value?.filter { plant -> plant.id != navigatePlantID }
         Log.d("$TAG markAsDead", _plantsHistory.value.toString())
     }

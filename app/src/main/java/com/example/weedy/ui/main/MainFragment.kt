@@ -1,4 +1,4 @@
-package com.example.weedy.ui
+package com.example.weedy.ui.main
 
 import android.Manifest
 import android.app.Activity
@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.RadioGroup
+import android.widget.RatingBar
 import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.TextView
@@ -107,8 +108,32 @@ abstract class MainFragment : Fragment() {
 
         popup.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
+// Dialog Photo
                 R.id.photo_option -> {
                     showPhotoOptionMenu(v)
+                    true
+                }
+// Health Dialog
+                R.id.health_option -> {
+                    val dialogView =
+                        LayoutInflater.from(v.context).inflate(R.layout.health_dialog, null, false)
+                    val input = dialogView.findViewById<RatingBar>(R.id.healhDialogRB)
+
+                    MaterialAlertDialogBuilder(v.context).setTitle(resources.getString(R.string.watering))
+                        .setView(dialogView).setNegativeButton("Cancel") { _, _ ->
+                        }.setPositiveButton("Save") { _, _ ->
+                            viewModel.health(
+                                when (input.rating) {
+                                    0F -> 0
+                                    1F -> 20
+                                    2F -> 40
+                                    3F -> 60
+                                    4F -> 80
+                                    5F -> 100
+                                    else -> 0
+                                }
+                            )
+                        }.show()
                     true
                 }
                 // Dialog Water
@@ -118,8 +143,8 @@ abstract class MainFragment : Fragment() {
                     val input = dialogView.findViewById<EditText>(R.id.waterDialogET)
 
                     MaterialAlertDialogBuilder(v.context).setTitle(resources.getString(R.string.watering))
-                        .setView(dialogView).setNegativeButton("Cancel") { dialog, which ->
-                        }.setPositiveButton("Save") { dialog, which ->
+                        .setView(dialogView).setNegativeButton("Cancel") { _, _ ->
+                        }.setPositiveButton("Save") { _, _ ->
                             viewModel.water(
                                 Pair(
                                     input.text.toString().toDoubleOrNull(), LocalDate.now()
@@ -142,8 +167,8 @@ abstract class MainFragment : Fragment() {
                     spinner.adapter = adapter
 
                     MaterialAlertDialogBuilder(v.context).setTitle("Nutrients").setView(dialogView)
-                        .setNegativeButton("Cancel") { dialog, which ->
-                        }.setPositiveButton("Save") { dialog, which ->
+                        .setNegativeButton("Cancel") { _, _ ->
+                        }.setPositiveButton("Save") { _, _ ->
                             val selectedItem = spinner.selectedItem.toString()
                             val amount = input.text.toString().toDoubleOrNull()
                             if (amount != null) {
@@ -159,8 +184,8 @@ abstract class MainFragment : Fragment() {
                     val input = dialogView.findViewById<EditText>(R.id.repellentsDialogET)
 
                     MaterialAlertDialogBuilder(v.context).setTitle("Repellents").setView(dialogView)
-                        .setNegativeButton("Cancel") { dialogInterface, which ->
-                        }.setPositiveButton("Save") { dialogInterface, which ->
+                        .setNegativeButton("Cancel") { _, _ ->
+                        }.setPositiveButton("Save") { _, _ ->
                             viewModel.reppelents(
                                 Pair(
                                     input.text.toString(), LocalDate.now()
@@ -176,8 +201,8 @@ abstract class MainFragment : Fragment() {
                     val radioGroup = dialog.findViewById<RadioGroup>(R.id.growthStateRG)
 
                     MaterialAlertDialogBuilder(v.context).setTitle("Growth State").setView(dialog)
-                        .setNegativeButton("Cancel") { dialogInterface, which ->
-                        }.setPositiveButton("Save") { dialogInterface, which ->
+                        .setNegativeButton("Cancel") { _, _ ->
+                        }.setPositiveButton("Save") { _, _ ->
                             val selectedId = radioGroup.checkedRadioButtonId
                             val growthState = when (selectedId) {
                                 R.id.seedling_radio -> 1
@@ -204,8 +229,8 @@ abstract class MainFragment : Fragment() {
                     spinner.adapter = adapter
 
                     MaterialAlertDialogBuilder(v.context).setTitle("Repot").setView(dialogView)
-                        .setNegativeButton("Cancel") { dialog, which ->
-                        }.setPositiveButton("Save") { dialog, which ->
+                        .setNegativeButton("Cancel") { _, _ ->
+                        }.setPositiveButton("Save") { _, _ ->
                             val selectedItem = spinner.selectedItem.toString()
                             val amount = input.text.toString().toIntOrNull()
                             if (amount != null) {
@@ -221,8 +246,8 @@ abstract class MainFragment : Fragment() {
                     val input = dialogView.findViewById<EditText>(R.id.trainingDialogET)
 
                     MaterialAlertDialogBuilder(v.context).setTitle("Training").setView(dialogView)
-                        .setNegativeButton("Cancel") { dialogInterface, which ->
-                        }.setPositiveButton("Save") { dialogInterface, which ->
+                        .setNegativeButton("Cancel") { _, _ ->
+                        }.setPositiveButton("Save") { _, _ ->
                             viewModel.training(
                                 Pair(
                                     input.text.toString(), LocalDate.now()
@@ -258,8 +283,8 @@ abstract class MainFragment : Fragment() {
                     })
 
                     MaterialAlertDialogBuilder(v.context).setTitle("Light cycle")
-                        .setView(dialogView).setNegativeButton("Cancel") { dialogInterface, which ->
-                        }.setPositiveButton("Save") { dialogInterface, which ->
+                        .setView(dialogView).setNegativeButton("Cancel") { _, _ ->
+                        }.setPositiveButton("Save") { _, _ ->
                             val selectedValue = seekBar.progress
                             viewModel.light(Pair(selectedValue, LocalDate.now()))
                         }.show()

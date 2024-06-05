@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
+    id ("kotlin-kapt")
 }
 
 android {
@@ -49,9 +50,30 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.firebase.crashlytics.buildtools)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+
+    // Moshi
+    implementation ("com.squareup.moshi:moshi-kotlin:1.15.0")
+
+    // Coil
+    implementation ("io.coil-kt:coil:2.4.0")
+
+    // Room Dependencies
+    implementation ("androidx.room:room-runtime:2.5.2")
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.room:room-ktx:2.5.2")
+
+    // Jetty Server
+    implementation("org.eclipse.jetty:jetty-server:9.4.44.v20210927")
+    implementation("org.eclipse.jetty:jetty-servlet:9.4.44.v20210927")
 }
 
 

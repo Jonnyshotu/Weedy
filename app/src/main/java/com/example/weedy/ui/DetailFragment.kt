@@ -14,9 +14,9 @@ import com.example.weedy.adapter.list.ListNutrientsAdapter
 import com.example.weedy.adapter.list.ListRepellentsAdapter
 import com.example.weedy.adapter.list.ListTrainingAdapter
 import com.example.weedy.adapter.list.ListWaterAdapter
-import com.example.weedy.data.module.Plant
+import com.example.weedy.data.entities.Plant
 import com.example.weedy.databinding.FragmentDetailBinding
-import java.time.LocalDate
+import com.example.weedy.ui.main.MainFragment
 
 class DetailFragment : MainFragment() {
 

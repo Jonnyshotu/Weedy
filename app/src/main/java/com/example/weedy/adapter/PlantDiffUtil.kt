@@ -1,7 +1,8 @@
-package com.example.weedy.data.module
+package com.example.weedy.adapter
 
 import android.util.Log
 import androidx.recyclerview.widget.DiffUtil
+import com.example.weedy.data.entities.Plant
 
 class PlantDiffUtil : DiffUtil.ItemCallback<Plant>() {
 

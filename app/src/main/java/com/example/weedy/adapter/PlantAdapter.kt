@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weedy.data.module.Plant
-import com.example.weedy.data.module.PlantDiffUtil
+import com.example.weedy.data.entities.Plant
 import com.example.weedy.databinding.PlantItemBinding
 
 class PlantAdapter (
