@@ -3,16 +3,14 @@ package com.example.weedy.adapter.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weedy.data.entities.Measurements
+import com.example.weedy.data.models.record.MeasurementsRecord
 import com.example.weedy.databinding.ListItemMeasurementsBinding
-import java.time.LocalDate
 
-class ListMeasurementsAdapter (private val dataset: List<Pair<Measurements, LocalDate>>) : RecyclerView.Adapter<ListMeasurementsAdapter.ListItemViewHolder>() {
+class ListMeasurementsAdapter (private val dataset: List<MeasurementsRecord>) : RecyclerView.Adapter<ListMeasurementsAdapter.ListItemViewHolder>() {
 
     inner class ListItemViewHolder(val binding: ListItemMeasurementsBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val TAG = "Debug_ListMeasurementsAdapter"
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
         val binding = ListItemMeasurementsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,15 +21,15 @@ class ListMeasurementsAdapter (private val dataset: List<Pair<Measurements, Loca
         val listEntry = dataset[position]
 
         with(holder.binding){
-            listItemMeasureDateTV.text = listEntry.second.toString()
+            listItemMeasureDateTV.text = listEntry.date.toString()
             listItemMeasureHeader1TV.text= "PH"
             listItemMeasureHeader2TV.text= "EC"
             listItemMeasureHeader3TV.text= "Temperature (°C)"
             listItemMeasureHeader4TV.text= "Humidity (%)"
-            listItemMeasureTV1.text = listEntry.first.ph.toString()
-            listItemMeasure2TV.text = listEntry.first.ec.toString()
-            listItemMeasure3TV.text = listEntry.first.temperature.toString()
-            listItemMeasure4TV.text = listEntry.first.humidity.toString()
+            listItemMeasureTV1.text = listEntry.ph.toString()
+            listItemMeasure2TV.text = listEntry.ec.toString()
+            listItemMeasure3TV.text = listEntry.temperature.toString()
+            listItemMeasure4TV.text = listEntry.humidity.toString()
         }
 
     }

@@ -3,10 +3,11 @@ package com.example.weedy.adapter.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weedy.data.models.record.RepellentsRecord
 import com.example.weedy.databinding.ListItemBinding
 import java.time.LocalDate
 
-class ListRepellentsAdapter (private val dataset: List<Pair<String, LocalDate>>) : RecyclerView.Adapter<ListRepellentsAdapter.ListItemViewHolder>() {
+class ListRepellentsAdapter (private val dataset: List<RepellentsRecord>) : RecyclerView.Adapter<ListRepellentsAdapter.ListItemViewHolder>() {
 
     inner class ListItemViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -24,9 +25,9 @@ class ListRepellentsAdapter (private val dataset: List<Pair<String, LocalDate>>)
         with(holder.binding){
             listItemHeader1TV.text = "Incident"
             listItemHeader2TV.text = null
-            listItemTV1.text = listEntry.first
+            listItemTV1.text = listEntry.infestationType
             listItem2TV.text = null
-            listItemDateTV.text = listEntry.second.toString()
+            listItemDateTV.text = listEntry.date.toString()
         }
 
     }

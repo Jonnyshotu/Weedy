@@ -40,12 +40,6 @@ class HomeFragment : MainFragment(), OnClick {
 
         recyclerView.adapter = adapter
 
-        with(viewModel) {
-            loadExamplePlants()
-            loadNutrients()
-            loadSoiltypes()
-        }
-
         if (!allPermissionsGranted()) {
             requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
@@ -58,9 +52,9 @@ class HomeFragment : MainFragment(), OnClick {
 
 
 
-        viewModel.plants.observe(viewLifecycleOwner) {
-            adapter.submitList(viewModel.plants.value)
-            Log.d("$TAG Observer", viewModel.plants.value.toString())
+        viewModel.plantList.observe(viewLifecycleOwner) {
+            adapter.submitList(viewModel.plantList.value)
+            Log.d("$TAG Observer", viewModel.plantList.value.toString())
 
         }
 
@@ -78,7 +72,7 @@ class HomeFragment : MainFragment(), OnClick {
 
     override fun onTreatmentClick(plant: Plant, view: View) {
         viewModel.navigatePlantID = plant.id
-        showTreatmentMenu(view)
+//        showTreatmentMenu(view)
     }
 
     override fun onImageCaptured(imageBitmap: Bitmap) {

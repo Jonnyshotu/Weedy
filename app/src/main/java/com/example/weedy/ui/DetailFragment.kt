@@ -45,7 +45,7 @@ class DetailFragment : MainFragment() {
 
 
         val plant =
-            viewModel.plants.value?.find { plant: Plant -> plant.id == viewModel.navigatePlantID }
+            viewModel.plantList.value?.find { plant: Plant -> plant.id == viewModel.navigatePlantID }
 
         if (plant != null) {
             with(binding) {
@@ -54,27 +54,27 @@ class DetailFragment : MainFragment() {
                 detailIndicaDisplayTV.text = plant.genetic.indica.toString()
                 detailSativaDisplayTV.text = plant.genetic.sativa.toString()
                 detailRuderalisDisplayTV.text = plant.genetic.ruderalis.toString()
-                detailManufacturerTV.text = plant.manufacturer
+                detailManufacturerTV.text = plant.genetic.manufacturer
 
                 detailGerminationTV.text = plant.genetic.breedingType
 
                 detailProgressStartDateTV.text = plant.germinationWater.toString()
-                val weeksTilHarvest = plant.weeksTilHarvest()
-                val weeksOld = plant.weeksOld()
+                val weeksTilHarvest = plant.harvestDate
+                val weeksOld = plant.weeksOld
                 detailProgressEndDateTV.text = weeksTilHarvest.toString()
-                detailProgressWeekOfTV.text = "Week $weeksOld of ${plant.floweringTime}"
+                detailProgressWeekOfTV.text = "Week $weeksOld of ${plant.genetic.floweringTime}"
                 with(detaillProgressWeekPB) {
-                    max = plant.floweringTime
-                    progress = weeksOld
+                    max = plant.genetic.floweringTime
+                    progress = weeksOld.toInt()
                 }
 
-                detailProgressStartGerminationWaterTV.text = "Germination Water: ${plant.germinationWater}"
-                detailProgressSoilTV.text = "Germination Soil: ${plant.germinationSoil}"
+                detailProgressStartGerminationWaterTV.text = "Germination Water: ${plant.germinationWater?.germinationWater}"
+                detailProgressSoilTV.text = "Germination Soil: ${plant.germinationSoil?.germinationSoil}"
 
-                val latestEntry = plant.light.maxByOrNull { it.second }
+                val latestEntry = plant.light?.lightHours
                 if (latestEntry != null) {
-                    detaillLightCyclePB.progress = latestEntry.first
-                    detaillLightHoursTV.text = "${latestEntry.first} hours light on and ${24 - latestEntry.first} hours off"
+                    detaillLightCyclePB.progress = latestEntry
+                    detaillLightHoursTV.text = "${latestEntry} hours light on and ${24 - latestEntry} hours off"
                 } else {
                     detaillLightCyclePB.progress = 0
                     detaillLightHoursTV.text = "No data"
@@ -82,54 +82,54 @@ class DetailFragment : MainFragment() {
 
                 //region Recycler Views
 
-                waterRecyclerView = detailWaterRV
-                if (plant.watering.isNotEmpty()) {
-                    waterAdapter = ListWaterAdapter(plant.watering)
-                    waterRecyclerView.adapter = waterAdapter
-                } else {
-                    detailWaterCV.visibility = View.GONE
-                    detailWateringTV.text = "No watering records"
-                }
-
-                nutrientsRecyclerView = detailNutrientsRV
-
-                if (plant.nutrients.isNotEmpty()) {
-                    nutrientsAdapter = ListNutrientsAdapter(plant.nutrients)
-                    nutrientsRecyclerView.adapter = nutrientsAdapter
-                } else {
-                    detailNutrientsCV.visibility = View.GONE
-                    detailNutrientsTV.text = "No nutrients records"
-                }
-
-                repellentsRecyclerView = detailRepellentsRV
-
-                if (plant.repellents.isNotEmpty()) {
-                    repellentsAdapter = ListRepellentsAdapter(plant.repellents)
-                    repellentsRecyclerView.adapter = repellentsAdapter
-                } else {
-                    detailRepellentsCV.visibility = View.GONE
-                    detailRepellentsTV.text = "No repellents records"
-                }
-
-                trainingRecyclerView = detailTrainingRV
-
-                if (plant.training.isNotEmpty()) {
-                    trainingAdapter = ListTrainingAdapter(plant.training)
-                    trainingRecyclerView.adapter = trainingAdapter
-                } else {
-                    detailTrainingCV.visibility = View.GONE
-                    detailTrainingTV.text = "No training records"
-                }
-
-                measurementsRecyclerView = detailMeasurementsRV
-
-                if (plant.measurements.isNotEmpty()) {
-                    measurementsAdapter = ListMeasurementsAdapter(plant.measurements)
-                    measurementsRecyclerView.adapter = measurementsAdapter
-                } else {
-                    detailMeasurementsCV.visibility = View.GONE
-                    detailMeasurementsTV.text = "No measurement records"
-                }
+//                waterRecyclerView = detailWaterRV
+//                if (plant.watering.isNotEmpty()) {
+//                    waterAdapter = ListWaterAdapter(plant.watering)
+//                    waterRecyclerView.adapter = waterAdapter
+//                } else {
+//                    detailWaterCV.visibility = View.GONE
+//                    detailWateringTV.text = "No watering records"
+//                }
+//
+//                nutrientsRecyclerView = detailNutrientsRV
+//
+//                if (plant.nutrients.isNotEmpty()) {
+//                    nutrientsAdapter = ListNutrientsAdapter(plant.nutrients)
+//                    nutrientsRecyclerView.adapter = nutrientsAdapter
+//                } else {
+//                    detailNutrientsCV.visibility = View.GONE
+//                    detailNutrientsTV.text = "No nutrients records"
+//                }
+//
+//                repellentsRecyclerView = detailRepellentsRV
+//
+//                if (plant.repellents.isNotEmpty()) {
+//                    repellentsAdapter = ListRepellentsAdapter(plant.repellents)
+//                    repellentsRecyclerView.adapter = repellentsAdapter
+//                } else {
+//                    detailRepellentsCV.visibility = View.GONE
+//                    detailRepellentsTV.text = "No repellents records"
+//                }
+//
+//                trainingRecyclerView = detailTrainingRV
+//
+//                if (plant.training.isNotEmpty()) {
+//                    trainingAdapter = ListTrainingAdapter(plant.training)
+//                    trainingRecyclerView.adapter = trainingAdapter
+//                } else {
+//                    detailTrainingCV.visibility = View.GONE
+//                    detailTrainingTV.text = "No training records"
+//                }
+//
+//                measurementsRecyclerView = detailMeasurementsRV
+//
+//                if (plant.measurements.isNotEmpty()) {
+//                    measurementsAdapter = ListMeasurementsAdapter(plant.measurements)
+//                    measurementsRecyclerView.adapter = measurementsAdapter
+//                } else {
+//                    detailMeasurementsCV.visibility = View.GONE
+//                    detailMeasurementsTV.text = "No measurement records"
+//                }
 
             }
             //endregion

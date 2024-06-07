@@ -3,10 +3,11 @@ package com.example.weedy.adapter.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weedy.data.models.record.WateringRecord
 import com.example.weedy.databinding.ListItemBinding
 import java.time.LocalDate
 
-class ListWaterAdapter(private val dataset: List<Pair<Double, LocalDate>>) : RecyclerView.Adapter<ListWaterAdapter.ListItemViewHolder>() {
+class ListWaterAdapter(private val dataset: List<WateringRecord>) : RecyclerView.Adapter<ListWaterAdapter.ListItemViewHolder>() {
 
     inner class ListItemViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -24,9 +25,9 @@ class ListWaterAdapter(private val dataset: List<Pair<Double, LocalDate>>) : Rec
         with(holder.binding){
             listItemHeader1TV.text = "Water in ml"
             listItemHeader2TV.text = null
-            listItemTV1.text = listEntry.first.toString()
-            listItem2TV.text = null
-            listItemDateTV.text = listEntry.second.toString()
+            listItemTV1.text = listEntry.amount.toString()
+            listItem2TV.text = listEntry.ph.toString()
+            listItemDateTV.text = listEntry.date.toString()
         }
 
     }

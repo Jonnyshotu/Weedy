@@ -3,10 +3,11 @@ package com.example.weedy.adapter.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weedy.data.models.record.TrainingRecord
 import com.example.weedy.databinding.ListItemBinding
 import java.time.LocalDate
 
-class ListTrainingAdapter (private val dataset: List<Pair<String, LocalDate>>) : RecyclerView.Adapter<ListTrainingAdapter.ListItemViewHolder>() {
+class ListTrainingAdapter (private val dataset: List<TrainingRecord>) : RecyclerView.Adapter<ListTrainingAdapter.ListItemViewHolder>() {
 
     inner class ListItemViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -23,12 +24,10 @@ class ListTrainingAdapter (private val dataset: List<Pair<String, LocalDate>>) :
         with(holder.binding){
             listItemHeader1TV.text = "Training method"
             listItemHeader2TV.text = null
-            listItemTV1.text = listEntry.first
+            listItemTV1.text = listEntry.trainingType
             listItem2TV.text = null
-            listItemDateTV.text = listEntry.second.toString()
+            listItemDateTV.text = listEntry.date.toString()
         }
-
-
     }
 
     override fun getItemCount(): Int {

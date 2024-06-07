@@ -101,206 +101,206 @@ abstract class MainFragment : Fragment() {
      *
      * @param v View
      */
-    open fun showTreatmentMenu(v: View) {
-
-        val popup = PopupMenu(requireContext(), v)
-        popup.menuInflater.inflate(R.menu.treatment_menu, popup.menu)
-
-        popup.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-// Dialog Photo
-                R.id.photo_option -> {
-                    showPhotoOptionMenu(v)
-                    true
-                }
-// Health Dialog
-                R.id.health_option -> {
-                    val dialogView =
-                        LayoutInflater.from(v.context).inflate(R.layout.health_dialog, null, false)
-                    val input = dialogView.findViewById<RatingBar>(R.id.healhDialogRB)
-
-                    MaterialAlertDialogBuilder(v.context).setTitle(resources.getString(R.string.watering))
-                        .setView(dialogView).setNegativeButton("Cancel") { _, _ ->
-                        }.setPositiveButton("Save") { _, _ ->
-                            viewModel.health(
-                                when (input.rating) {
-                                    0F -> 0
-                                    1F -> 20
-                                    2F -> 40
-                                    3F -> 60
-                                    4F -> 80
-                                    5F -> 100
-                                    else -> 0
-                                }
-                            )
-                        }.show()
-                    true
-                }
-                // Dialog Water
-                R.id.watering_option -> {
-                    val dialogView =
-                        LayoutInflater.from(v.context).inflate(R.layout.water_dialog, null, false)
-                    val input = dialogView.findViewById<EditText>(R.id.waterDialogET)
-
-                    MaterialAlertDialogBuilder(v.context).setTitle(resources.getString(R.string.watering))
-                        .setView(dialogView).setNegativeButton("Cancel") { _, _ ->
-                        }.setPositiveButton("Save") { _, _ ->
-                            viewModel.water(
-                                Pair(
-                                    input.text.toString().toDoubleOrNull(), LocalDate.now()
-                                )
-                            )
-                        }.show()
-                    true
-                }
-// Dialog Nutrients
-                R.id.nutrients_option -> {
-                    val dialogView = LayoutInflater.from(v.context)
-                        .inflate(R.layout.nutrients_dialog, null, false)
-                    val spinner = dialogView.findViewById<Spinner>(R.id.spinner_nutrients)
-                    val input = dialogView.findViewById<EditText>(R.id.nutrientsDialogET)
-
-                    val items = viewModel.nutrients.value?.map { it.name } ?: listOf()
-                    val adapter = ArrayAdapter(
-                        v.context, android.R.layout.simple_spinner_dropdown_item, items
-                    )
-                    spinner.adapter = adapter
-
-                    MaterialAlertDialogBuilder(v.context).setTitle("Nutrients").setView(dialogView)
-                        .setNegativeButton("Cancel") { _, _ ->
-                        }.setPositiveButton("Save") { _, _ ->
-                            val selectedItem = spinner.selectedItem.toString()
-                            val amount = input.text.toString().toDoubleOrNull()
-                            if (amount != null) {
-                                viewModel.nutrients(Triple(selectedItem, amount, LocalDate.now()))
-                            }
-                        }.show()
-                    true
-                }
-// Dialog Repellents
-                R.id.repellents_option -> {
-                    val dialogView = LayoutInflater.from(v.context)
-                        .inflate(R.layout.repellents_dialog, null, false)
-                    val input = dialogView.findViewById<EditText>(R.id.repellentsDialogET)
-
-                    MaterialAlertDialogBuilder(v.context).setTitle("Repellents").setView(dialogView)
-                        .setNegativeButton("Cancel") { _, _ ->
-                        }.setPositiveButton("Save") { _, _ ->
-                            viewModel.reppelents(
-                                Pair(
-                                    input.text.toString(), LocalDate.now()
-                                )
-                            )
-                        }.show()
-                    true
-                }
-// Dialog Growth State
-                R.id.growth_state_change_option -> {
-                    val dialog = LayoutInflater.from(v.context)
-                        .inflate(R.layout.growth_state_dialog, null, false)
-                    val radioGroup = dialog.findViewById<RadioGroup>(R.id.growthStateRG)
-
-                    MaterialAlertDialogBuilder(v.context).setTitle("Growth State").setView(dialog)
-                        .setNegativeButton("Cancel") { _, _ ->
-                        }.setPositiveButton("Save") { _, _ ->
-                            val selectedId = radioGroup.checkedRadioButtonId
-                            val growthState = when (selectedId) {
-                                R.id.seedling_radio -> 1
-                                R.id.cutting_radio -> 2
-                                R.id.adult_radio -> 3
-                                R.id.flower_radio -> 4
-                                else -> 0
-                            }
-                            viewModel.growthStateChange(Pair(growthState, LocalDate.now()))
-                        }.show()
-                    true
-                }
-// Dialog Repot
-                R.id.repot_option -> {
-                    val dialogView =
-                        LayoutInflater.from(v.context).inflate(R.layout.repot_dialog, null, false)
-                    val spinner = dialogView.findViewById<Spinner>(R.id.spinner_pot_size)
-                    val input = dialogView.findViewById<EditText>(R.id.repotDialogET)
-
-                    val items = viewModel.soilTypes.value?.map { it.name } ?: listOf()
-                    val adapter = ArrayAdapter(
-                        v.context, android.R.layout.simple_spinner_dropdown_item, items
-                    )
-                    spinner.adapter = adapter
-
-                    MaterialAlertDialogBuilder(v.context).setTitle("Repot").setView(dialogView)
-                        .setNegativeButton("Cancel") { _, _ ->
-                        }.setPositiveButton("Save") { _, _ ->
-                            val selectedItem = spinner.selectedItem.toString()
-                            val amount = input.text.toString().toIntOrNull()
-                            if (amount != null) {
-                                viewModel.repot(Triple(selectedItem, amount, LocalDate.now()))
-                            }
-                        }.show()
-                    true
-                }
-// Dialog Trainng
-                R.id.training_option -> {
-                    val dialogView = LayoutInflater.from(v.context)
-                        .inflate(R.layout.training_dialog, null, false)
-                    val input = dialogView.findViewById<EditText>(R.id.trainingDialogET)
-
-                    MaterialAlertDialogBuilder(v.context).setTitle("Training").setView(dialogView)
-                        .setNegativeButton("Cancel") { _, _ ->
-                        }.setPositiveButton("Save") { _, _ ->
-                            viewModel.training(
-                                Pair(
-                                    input.text.toString(), LocalDate.now()
-                                )
-                            )
-                        }.show()
-                    true
-                }
-// Dialog Light Cycle
-                R.id.light_option -> {
-                    val dialogView =
-                        LayoutInflater.from(v.context).inflate(R.layout.light_dialog, null, false)
-                    val seekBar = dialogView.findViewById<SeekBar>(R.id.lightDialogSB)
-
-                    seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                        override fun onProgressChanged(
-                            seekBar: SeekBar, progress: Int, fromUser: Boolean
-                        ) {
-
-                            val currentValue = progress
-                            val lightHoursTV =
-                                dialogView.findViewById<TextView>(R.id.lightDialogHoursTV)
-                            val nighthours = 24 - currentValue
-
-                            lightHoursTV.text = "$currentValue / $nighthours cycle"
-                        }
-
-                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                        }
-
-                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                        }
-                    })
-
-                    MaterialAlertDialogBuilder(v.context).setTitle("Light cycle")
-                        .setView(dialogView).setNegativeButton("Cancel") { _, _ ->
-                        }.setPositiveButton("Save") { _, _ ->
-                            val selectedValue = seekBar.progress
-                            viewModel.light(Pair(selectedValue, LocalDate.now()))
-                        }.show()
-                    true
-                }
-                // Dialog Dead
-                R.id.dead_option -> {
-                    viewModel.markAsDead()
-                    true
-                }
-
-                else -> false
-            }
-        }
-        popup.show()
-    }
+//    open fun showTreatmentMenu(v: View) {
+//
+//        val popup = PopupMenu(requireContext(), v)
+//        popup.menuInflater.inflate(R.menu.treatment_menu, popup.menu)
+//
+//        popup.setOnMenuItemClickListener { menuItem ->
+//            when (menuItem.itemId) {
+//// Dialog Photo
+//                R.id.photo_option -> {
+//                    showPhotoOptionMenu(v)
+//                    true
+//                }
+//// Health Dialog
+//                R.id.health_option -> {
+//                    val dialogView =
+//                        LayoutInflater.from(v.context).inflate(R.layout.health_dialog, null, false)
+//                    val input = dialogView.findViewById<RatingBar>(R.id.healhDialogRB)
+//
+//                    MaterialAlertDialogBuilder(v.context).setTitle(resources.getString(R.string.watering))
+//                        .setView(dialogView).setNegativeButton("Cancel") { _, _ ->
+//                        }.setPositiveButton("Save") { _, _ ->
+//                            viewModel.health(
+//                                when (input.rating) {
+//                                    0F -> 0
+//                                    1F -> 20
+//                                    2F -> 40
+//                                    3F -> 60
+//                                    4F -> 80
+//                                    5F -> 100
+//                                    else -> 0
+//                                }
+//                            )
+//                        }.show()
+//                    true
+//                }
+//                // Dialog Water
+//                R.id.watering_option -> {
+//                    val dialogView =
+//                        LayoutInflater.from(v.context).inflate(R.layout.water_dialog, null, false)
+//                    val input = dialogView.findViewById<EditText>(R.id.waterDialogET)
+//
+//                    MaterialAlertDialogBuilder(v.context).setTitle(resources.getString(R.string.watering))
+//                        .setView(dialogView).setNegativeButton("Cancel") { _, _ ->
+//                        }.setPositiveButton("Save") { _, _ ->
+//                            viewModel.water(
+//                                Pair(
+//                                    input.text.toString().toDoubleOrNull(), LocalDate.now()
+//                                )
+//                            )
+//                        }.show()
+//                    true
+//                }
+//// Dialog Nutrients
+//                R.id.nutrients_option -> {
+//                    val dialogView = LayoutInflater.from(v.context)
+//                        .inflate(R.layout.nutrients_dialog, null, false)
+//                    val spinner = dialogView.findViewById<Spinner>(R.id.spinner_nutrients)
+//                    val input = dialogView.findViewById<EditText>(R.id.nutrientsDialogET)
+//
+//                    val items = viewModel.nutrients.value?.map { it.name } ?: listOf()
+//                    val adapter = ArrayAdapter(
+//                        v.context, android.R.layout.simple_spinner_dropdown_item, items
+//                    )
+//                    spinner.adapter = adapter
+//
+//                    MaterialAlertDialogBuilder(v.context).setTitle("Nutrients").setView(dialogView)
+//                        .setNegativeButton("Cancel") { _, _ ->
+//                        }.setPositiveButton("Save") { _, _ ->
+//                            val selectedItem = spinner.selectedItem.toString()
+//                            val amount = input.text.toString().toDoubleOrNull()
+//                            if (amount != null) {
+//                                viewModel.nutrients(Triple(selectedItem, amount, LocalDate.now()))
+//                            }
+//                        }.show()
+//                    true
+//                }
+//// Dialog Repellents
+//                R.id.repellents_option -> {
+//                    val dialogView = LayoutInflater.from(v.context)
+//                        .inflate(R.layout.repellents_dialog, null, false)
+//                    val input = dialogView.findViewById<EditText>(R.id.repellentsDialogET)
+//
+//                    MaterialAlertDialogBuilder(v.context).setTitle("Repellents").setView(dialogView)
+//                        .setNegativeButton("Cancel") { _, _ ->
+//                        }.setPositiveButton("Save") { _, _ ->
+//                            viewModel.reppelents(
+//                                Pair(
+//                                    input.text.toString(), LocalDate.now()
+//                                )
+//                            )
+//                        }.show()
+//                    true
+//                }
+//// Dialog Growth State
+//                R.id.growth_state_change_option -> {
+//                    val dialog = LayoutInflater.from(v.context)
+//                        .inflate(R.layout.growth_state_dialog, null, false)
+//                    val radioGroup = dialog.findViewById<RadioGroup>(R.id.growthStateRG)
+//
+//                    MaterialAlertDialogBuilder(v.context).setTitle("Growth State").setView(dialog)
+//                        .setNegativeButton("Cancel") { _, _ ->
+//                        }.setPositiveButton("Save") { _, _ ->
+//                            val selectedId = radioGroup.checkedRadioButtonId
+//                            val growthState = when (selectedId) {
+//                                R.id.seedling_radio -> 1
+//                                R.id.cutting_radio -> 2
+//                                R.id.adult_radio -> 3
+//                                R.id.flower_radio -> 4
+//                                else -> 0
+//                            }
+//                            viewModel.growthStateChange(Pair(growthState, LocalDate.now()))
+//                        }.show()
+//                    true
+//                }
+//// Dialog Repot
+//                R.id.repot_option -> {
+//                    val dialogView =
+//                        LayoutInflater.from(v.context).inflate(R.layout.repot_dialog, null, false)
+//                    val spinner = dialogView.findViewById<Spinner>(R.id.spinner_pot_size)
+//                    val input = dialogView.findViewById<EditText>(R.id.repotDialogET)
+//
+//                    val items = viewModel.soilTypes.value?.map { it.name } ?: listOf()
+//                    val adapter = ArrayAdapter(
+//                        v.context, android.R.layout.simple_spinner_dropdown_item, items
+//                    )
+//                    spinner.adapter = adapter
+//
+//                    MaterialAlertDialogBuilder(v.context).setTitle("Repot").setView(dialogView)
+//                        .setNegativeButton("Cancel") { _, _ ->
+//                        }.setPositiveButton("Save") { _, _ ->
+//                            val selectedItem = spinner.selectedItem.toString()
+//                            val amount = input.text.toString().toIntOrNull()
+//                            if (amount != null) {
+//                                viewModel.repot(Triple(selectedItem, amount, LocalDate.now()))
+//                            }
+//                        }.show()
+//                    true
+//                }
+//// Dialog Trainng
+//                R.id.training_option -> {
+//                    val dialogView = LayoutInflater.from(v.context)
+//                        .inflate(R.layout.training_dialog, null, false)
+//                    val input = dialogView.findViewById<EditText>(R.id.trainingDialogET)
+//
+//                    MaterialAlertDialogBuilder(v.context).setTitle("Training").setView(dialogView)
+//                        .setNegativeButton("Cancel") { _, _ ->
+//                        }.setPositiveButton("Save") { _, _ ->
+//                            viewModel.training(
+//                                Pair(
+//                                    input.text.toString(), LocalDate.now()
+//                                )
+//                            )
+//                        }.show()
+//                    true
+//                }
+//// Dialog Light Cycle
+//                R.id.light_option -> {
+//                    val dialogView =
+//                        LayoutInflater.from(v.context).inflate(R.layout.light_dialog, null, false)
+//                    val seekBar = dialogView.findViewById<SeekBar>(R.id.lightDialogSB)
+//
+//                    seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+//                        override fun onProgressChanged(
+//                            seekBar: SeekBar, progress: Int, fromUser: Boolean
+//                        ) {
+//
+//                            val currentValue = progress
+//                            val lightHoursTV =
+//                                dialogView.findViewById<TextView>(R.id.lightDialogHoursTV)
+//                            val nighthours = 24 - currentValue
+//
+//                            lightHoursTV.text = "$currentValue / $nighthours cycle"
+//                        }
+//
+//                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+//                        }
+//
+//                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+//                        }
+//                    })
+//
+//                    MaterialAlertDialogBuilder(v.context).setTitle("Light cycle")
+//                        .setView(dialogView).setNegativeButton("Cancel") { _, _ ->
+//                        }.setPositiveButton("Save") { _, _ ->
+//                            val selectedValue = seekBar.progress
+//                            viewModel.light(Pair(selectedValue, LocalDate.now()))
+//                        }.show()
+//                    true
+//                }
+//                // Dialog Dead
+//                R.id.dead_option -> {
+//                    viewModel.markAsDead()
+//                    true
+//                }
+//
+//                else -> false
+//            }
+//        }
+//        popup.show()
+//    }
 
     /**
      * displays the photo option menu and handles the selected option.

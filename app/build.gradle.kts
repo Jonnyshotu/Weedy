@@ -67,9 +67,9 @@ dependencies {
     implementation ("io.coil-kt:coil:2.4.0")
 
     // Room Dependencies
-    implementation ("androidx.room:room-runtime:2.5.2")
+    implementation ("androidx.room:room-runtime:2.6.1")
     kapt ("androidx.room:room-compiler:2.6.1")
-    implementation ("androidx.room:room-ktx:2.5.2")
+    implementation ("androidx.room:room-ktx:2.6.1")
 
     // Jetty Server
     implementation("org.eclipse.jetty:jetty-server:9.4.44.v20210927")
