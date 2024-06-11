@@ -7,10 +7,10 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.weedy.data.entities.Plant
-import com.example.weedy.data.models.Genetic
-import com.example.weedy.data.models.Nutrients
-import com.example.weedy.data.models.Soil
+import com.example.weedy.data.entities.MasterPlant
+import com.example.weedy.data.entities.Genetic
+import com.example.weedy.data.entities.Nutrients
+import com.example.weedy.data.entities.Soil
 import com.example.weedy.data.models.actions.GerminationSoilAction
 import com.example.weedy.data.models.actions.GerminationWaterAction
 import com.example.weedy.data.models.actions.PlantedAction
@@ -29,6 +29,68 @@ import com.example.weedy.data.models.record.WateringRecord
 @Dao
 interface PlantDao {
 
+    //region Master Plant
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(plant: MasterPlant)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertList(plantList: List<MasterPlant>)
+
+    @Update
+    suspend fun update(plant: MasterPlant)
+
+    @Query("SELECT * FROM plant_table")
+    fun getAll(): LiveData<List<MasterPlant>>
+
+    @Query("SELECT COUNT(*) FROM plant_table")
+    suspend fun getPlantListSize(): Int
+
+    @Delete
+    suspend fun deletePlant(plant: MasterPlant)
+
+    //endregion
+
+    //region Genetic
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertGenetic(genetic: Genetic)
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    suspend fun insertGeneticList(geneticList: List<Genetic>)
+
+    @Query("SELECT * FROM genetic_table")
+    fun getAllGenetics(): LiveData<List<Genetic>>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateGenetic(genetic: Genetic)
+    //endregion
+
+    //region Nutrients
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNutrient(nutrient: Nutrients)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNutrientList(nutrientList: List<Nutrients>)
+
+    @Query("SELECT * FROM nutrients_table")
+    fun getAllNutrients(): LiveData<List<Nutrients>>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateNutrient(nutrient: Nutrients)
+    //endregion
+
+    //region Soil
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSoil(soil: Soil)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSoilList(soilList: List<Soil>)
+
+    @Query("SELECT * FROM soil_table")
+    fun getAllSoilTypes(): LiveData<List<Soil>>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateSoil(soil: Soil)
+    //endregion
 
     //regionGermination Soil
 
@@ -146,56 +208,5 @@ interface PlantDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateWateringRecord(watering: WateringRecord)
 
-    //endregion
-
-    //region Plant
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(plant: Plant)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertList(plantList: List<Plant>)
-
-    @Update
-    suspend fun update(plant: Plant)
-
-    @Query("SELECT * FROM plant_table")
-    fun getAll(): LiveData<List<Plant>>
-
-    @Query("SELECT COUNT(*) FROM plant_table")
-    suspend fun getPlantListSize(): Int
-
-    @Delete
-    suspend fun deletePlant(plant: Plant)
-
-    //endregion
-
-    //region Genetic
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGenetic(genetic: Genetic)
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateGenetic(genetic: Genetic)
-    //endregion
-
-    //region Nutrients
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNutrient(nutrient: Nutrients)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNutrientList(nutrientList: List<Nutrients>)
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateNutrient(nutrient: Nutrients)
-    //endregion
-
-    //region Soil
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSoil(soil: Soil)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSoilList(soilList: List<Soil>)
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateSoil(soil: Soil)
     //endregion
 }

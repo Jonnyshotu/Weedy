@@ -1,18 +1,29 @@
 package com.example.weedy.data.models.actions
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.example.weedy.data.entities.MasterPlant
 import java.time.LocalDate
-@Entity(tableName = "germinationWaterAction_table")
-data class GerminationWaterAction (
 
-    @PrimaryKey (autoGenerate = true)
-    val id: Long,
+@Entity(
+    tableName = "germinationWaterAction_table",
+    foreignKeys = [
+        ForeignKey(
+            entity = MasterPlant::class,
+            parentColumns = ["id"],
+            childColumns = ["plantID"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
+data class GerminationWaterAction(
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
 
-    @ColumnInfo(name = "germinationWaterDate")
+    val plantID: Long,
+
     val germinationWater: LocalDate,
 
-    @ColumnInfo(name = "germinationWaterVisibleDate")
     val germinationWaterVisible: LocalDate? = null,
 )

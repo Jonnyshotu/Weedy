@@ -1,5 +1,5 @@
 package com.example.weedy.data.local.offlineData
-import com.example.weedy.data.models.Soil
+import com.example.weedy.data.entities.Soil
 
 object SoilProducts {
     fun loadSoilTypes(): List<Soil>{

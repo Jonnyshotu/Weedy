@@ -1,17 +1,15 @@
 package com.example.weedy.data.local
 
 import android.content.Context
-import android.graphics.Mesh
 import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import com.example.weedy.data.entities.Plant
-import com.example.weedy.data.models.Genetic
-import com.example.weedy.data.models.Nutrients
-import com.example.weedy.data.models.Soil
+import com.example.weedy.data.entities.MasterPlant
+import com.example.weedy.data.entities.Genetic
+import com.example.weedy.data.entities.Nutrients
+import com.example.weedy.data.entities.Soil
 import com.example.weedy.data.models.actions.GerminationSoilAction
 import com.example.weedy.data.models.actions.GerminationWaterAction
 import com.example.weedy.data.models.actions.PlantedAction
@@ -28,7 +26,7 @@ import com.example.weedy.data.models.record.WateringRecord
 
 @Database(
     entities = [
-        Plant::class,
+        MasterPlant::class,
         Genetic::class,
         Nutrients::class,
         Soil::class,

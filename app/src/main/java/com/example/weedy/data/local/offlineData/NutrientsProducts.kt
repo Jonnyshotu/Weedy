@@ -1,5 +1,5 @@
 package com.example.weedy.data.local.offlineData
-import com.example.weedy.data.models.Nutrients
+import com.example.weedy.data.entities.Nutrients
 
 object NutrientsProducts {
     fun loadNutrients () : List<Nutrients>{

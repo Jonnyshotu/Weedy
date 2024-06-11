@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weedy.data.entities.Plant
+import com.example.weedy.data.Plant
 import com.example.weedy.databinding.PlantItemBinding
 
 class PlantAdapter (
@@ -30,9 +30,9 @@ class PlantAdapter (
             plantItemActionBTN.setOnClickListener {
                 listener.onTreatmentClick(plant,this.plantItemActionBTN)
             }
-            plantItemStrainTV.text = plant.strain
-            plantItemWeeksTV.text = "in Week of ${plant.genetic.floweringTime}"
-            plantItemHealthBar.progress = plant.health?.health ?: 0
+            plantItemStrainTV.text = plant.genetic?.strainName ?: ""
+            plantItemWeeksTV.text = "in Week of ${plant.genetic?.floweringTime}"
+            plantItemHealthBar.progress = plant.healthRecord?.last()?.health ?: 0
             plantItemCV.setOnClickListener {
                 listener.onPlantClick(plant)
             }

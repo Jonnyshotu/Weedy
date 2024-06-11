@@ -25,7 +25,7 @@ class ListNutrientsAdapter (private val dataset: List<NutrientsRecord>) : Recycl
         with(holder.binding){
             listItemHeader1TV.text = "Type"
             listItemHeader2TV.text = "Amount"
-            listItemTV1.text = listEntry.nutrient.name
+            listItemTV1.text = listEntry.nutrientID.toString()
             listItem2TV.text = listEntry.amount.toString()
             listItemDateTV.text = listEntry.date.toString()
         }

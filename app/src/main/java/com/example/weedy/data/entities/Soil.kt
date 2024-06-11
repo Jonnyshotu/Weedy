@@ -1,4 +1,4 @@
-package com.example.weedy.data.models
+package com.example.weedy.data.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

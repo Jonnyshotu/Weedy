@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weedy.SharedViewModel
 import com.example.weedy.adapter.OnClick
 import com.example.weedy.adapter.PlantAdapter
-import com.example.weedy.data.entities.Plant
+import com.example.weedy.data.Plant
 import com.example.weedy.databinding.FragmentHomeBinding
 import com.example.weedy.ui.main.MainFragment
 
@@ -66,12 +66,12 @@ class HomeFragment : MainFragment(), OnClick {
     }
 
     override fun onPlantClick(plant: Plant) {
-        viewModel.navigatePlantID = plant.id
+        viewModel.navigatePlantID = plant.masterPlant.id
         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
     }
 
     override fun onTreatmentClick(plant: Plant, view: View) {
-        viewModel.navigatePlantID = plant.id
+        viewModel.navigatePlantID = plant.masterPlant.id
 //        showTreatmentMenu(view)
     }
 

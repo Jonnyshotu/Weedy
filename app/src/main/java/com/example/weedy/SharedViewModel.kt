@@ -4,81 +4,72 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weedy.data.entities.MasterPlant
 import com.example.weedy.data.Repository
+import com.example.weedy.data.StrainRepository
+import com.example.weedy.data.entities.Genetic
 import com.example.weedy.data.local.getDatabase
-import com.example.weedy.data.entities.Plant
 import com.example.weedy.data.local.offlineData.NutrientsProducts
 import com.example.weedy.data.local.offlineData.SoilProducts
-import com.example.weedy.data.models.Nutrients
-import com.example.weedy.data.models.Soil
-import com.example.weedy.data.models.actions.RepotAction
-import com.example.weedy.data.models.record.GrowthStateRecord
-import com.example.weedy.data.models.record.HealthRecord
-import com.example.weedy.data.models.record.LightRecord
-import com.example.weedy.data.models.record.NutrientsRecord
-import com.example.weedy.data.models.record.RepellentsRecord
-import com.example.weedy.data.models.record.TrainingRecord
-import com.example.weedy.data.models.record.WateringRecord
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 
 class SharedViewModel(application: Application) : AndroidViewModel(application) {
 
     private val TAG = "SharedViewModel"
 
-    var navigatePlantID: Int = 0
+    var navigatePlantID: Long = 0
 
     private val database = getDatabase(application)
     private val repository = Repository(database)
+    private val strainRepository = StrainRepository(database)
 
-    val plantList = repository.plantList
+    val plantList = repository.plantlist
     val nutrientsList = repository.nutrientList
     val soilList = repository.soilList
 
     init {
-        exampleData()
+        loadStrains()
         loadSoilTypes()
         loadNutrients()
     }
 
     //region coroutines
 
-    fun insertPlant(plant: Plant) {
+    fun loadStrains() {
+        viewModelScope.launch {
+            strainRepository.fetchStrains()
+        }
+    }
+
+    fun insertPlant(plant: MasterPlant) {
         viewModelScope.launch {
             repository.insertPlant(plant)
         }
     }
 
-    fun updatePlant(plant: Plant) {
+    fun updatePlant(plant: MasterPlant) {
         viewModelScope.launch {
             repository.updatePlant(plant)
         }
     }
 
-    fun deletePlant(plant: Plant) {
+    fun deletePlant(plant: MasterPlant) {
         viewModelScope.launch {
             repository.deletePlant(plant)
         }
     }
 
-    fun exampleData() {
-        viewModelScope.launch {
-            repository.checkLoadingExampleData()
-        }
-    }
-
-    fun loadNutrients() {
+    private fun loadNutrients() {
         viewModelScope.launch {
             repository.loadNutrientList(NutrientsProducts.loadNutrients())
         }
     }
 
-    fun loadSoilTypes() {
+    private fun loadSoilTypes() {
         viewModelScope.launch {
             repository.loadSoilList(SoilProducts.loadSoilTypes())
         }
     }
-
 
 
     //endregion
