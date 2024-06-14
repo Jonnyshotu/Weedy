@@ -9,5 +9,5 @@ data class MasterPlant(
 
     @PrimaryKey(autoGenerate = true)
     val id: Long,
-    val geneticID: Long? = null,
+    val geneticID: String? = null,
 )

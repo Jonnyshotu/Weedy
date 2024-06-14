@@ -1,20 +1,19 @@
 package com.example.weedy.data.entities
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "genetic_table")
-data class Genetic(
+@Entity(tableName = "remote_genetic_table")
+data class RemoteGenetic(
 
-    @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "OCPC")
+    val stainOCPC: String,
 
     @ColumnInfo(name = "Strain")
     val strainName: String,
-
-    @ColumnInfo(name = "OCPC")
-    val stainOCPC: String,
 
     @ColumnInfo(name = "Seed Company")
     var seedCompany: String?,
@@ -27,6 +26,12 @@ data class Genetic(
 
     @ColumnInfo(name = "Parent Names")
     val parentNames: String?,
+
+    @ColumnInfo(name = "Children")
+    val children: String?,
+
+    @ColumnInfo(name = "Lineage")
+    val lineage: String?,
 
     @ColumnInfo(name = "Sativa")
     val sativa: Int?,

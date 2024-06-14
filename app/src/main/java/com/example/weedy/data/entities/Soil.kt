@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "soil_table")
 data class Soil(
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     val id: Long,
 
     @ColumnInfo(name = "soilName")

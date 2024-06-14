@@ -41,7 +41,8 @@
         style="@style/Base.Theme.Weedy"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="bottom" />
+        android:layout_gravity="bottom"
+        app:navigationIcon="@drawable/cannabis_leaf" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/homeAddFAB"

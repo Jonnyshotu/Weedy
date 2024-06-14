@@ -1,9 +1,9 @@
 package com.example.weedy.data.remote
 
-import com.example.weedy.data.Strain
+import com.example.weedy.data.RemoteStrain
 
 data class StrainResponse(
-    val data: List<Strain>,
+    val data: List<RemoteStrain>,
     val meta: Meta
 )
 

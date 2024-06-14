@@ -10,7 +10,7 @@
         <item name="colorOnTertiary">@color/ontertiary_green</item>
         <item name="colorError">@color/error</item>
         <item name="colorOnError">@color/onerror</item>
-        <item name="backgroundTint">@color/neutral</item>
+        <item name="backgroundTint">#8091918B</item>
         <item name="colorSurface">@color/neutral_variant</item>
 
     </style>

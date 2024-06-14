@@ -1,66 +1,65 @@
 package com.example.weedy.data
 
+import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.weedy.data.entities.Genetic
+import com.example.weedy.data.entities.LocalGenetic
+import com.example.weedy.data.entities.RemoteGenetic
 import com.example.weedy.data.local.PlantDatabase
-import com.example.weedy.data.remote.StrainApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
-class StrainRepository(private val database: PlantDatabase) {
+class StrainRepository(private val database: PlantDatabase, private val context: Context) {
 
     private val TAG = "StrainRepository"
 
-    var geneticCollection = database.plantDao.getAllGenetics()
+    var localGeneticCollection = database.localGeneticDao.getAllGenetics()
+    var remoteGeneticCollection = database.remoteGeneticDao.getAllGenetics()
 
-    suspend fun insertGenetic(genetic: Genetic) = database.plantDao.insertGenetic(genetic)
 
-    suspend fun fetchStrains() {
+    suspend fun getRemoteStrains() {
+
         withContext(Dispatchers.IO) {
+
             var currentPage = 1
             var totalPages = 1
 
             do {
                 try {
-                    val response = StrainApi.apiService.getStrainResponse(currentPage)
+
+                    val response = StrainApi.apiService.getRemoteStrainResponse(currentPage)
                     Log.d(TAG, "Response: $response")
 
                     val strains = response.data
-                    Log.d(TAG, "Strains: $strains")
-
                     Log.d(TAG, "Fetched ${strains.size} strains")
 
                     if (strains.isNotEmpty()) {
-                        val geneticList = strains.map { strain ->
-                            Genetic(
-                                id = 0,
-                                strainName = strain.name,
+                        val remoteGeneticList = strains.map { strain ->
+                            RemoteGenetic(
                                 stainOCPC = strain.ocpc,
-                                seedCompany = strain.seedCompany?.name ?: "",
-                                seedCompanyOCPC = strain.seedCompany?.ocpc ?: "",
+                                strainName = strain.name,
+                                seedCompany = strain.seedCompany.name ?: "",
+                                seedCompanyOCPC = strain.seedCompany.ocpc ?: "",
                                 parentOCPC = strain.genetics?.ocpc.toString(),
                                 parentNames = strain.genetics?.names.toString(),
                                 sativa = null,
                                 indica = null,
                                 ruderalis = null,
                                 breedingType = null,
-                                floweringTime = null
+                                floweringTime = null,
+                                children = strain.children.toString(),
+                                lineage = strain.lineage.toString(),
                             )
                         }
 
-                        Log.d(TAG, "Prepared genetics for database insertion $geneticList")
+                        Log.d(TAG, "Prepared genetics for database insertion $remoteGeneticList")
 
-                        database.plantDao.insertGeneticList(geneticList)
-
-                        Log.d(
-                            TAG,
-                            "Genetics in database after insertion: $geneticCollection"
-                        )
+                        database.remoteGeneticDao.insertGeneticList(remoteGeneticList)
 
                         totalPages = response.meta.pagination.total_pages
+
                     } else {
                         Log.d(TAG, "No strains fetched from API")
                     }
@@ -71,6 +70,46 @@ class StrainRepository(private val database: PlantDatabase) {
 
                 currentPage++
             } while (currentPage <= totalPages)
+        }
+    }
+
+    suspend fun getLocalStrains() {
+        withContext(Dispatchers.IO) {
+
+            try {
+                val gson = Gson()
+                val inputStream = context.assets.open("leafly_strain_data.json")
+                val jsonString = inputStream.bufferedReader().use { it.readText() }
+
+                val type = object : TypeToken<List<LocalStrain>>() {}.type
+                val strains = gson.fromJson<List<LocalStrain>>(jsonString, type)
+
+
+                Log.d(TAG, "Local strains count: ${strains.size} strains")
+
+                if (strains.isNotEmpty()) {
+                    val localGeneticList = strains.map { strain ->
+                        LocalGenetic(
+                            strainName = strain.name,
+                            strainImageURL = strain.img_url,
+                            strainType = strain.type,
+                            thcLevel = strain.thc_level,
+                            description = strain.description,
+                            mostCommonTerpene = strain.most_common_terpene,
+                            effects = strain.effects.toString()
+                        )
+                    }
+
+                    Log.d(TAG, "Prepared local genetics for database insertion $localGeneticList")
+
+                    database.localGeneticDao.insertGeneticList(localGeneticList)
+
+                } else {
+                    Log.d(TAG, "No strains loaded from local")
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error loading local strains", e)
+            }
         }
     }
 }

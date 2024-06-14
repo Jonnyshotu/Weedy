@@ -55,6 +55,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // GSON
+    implementation ("com.google.code.gson:gson:2.10.1")
+
     // Logging Interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 

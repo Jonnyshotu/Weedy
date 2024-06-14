@@ -25,7 +25,7 @@ class HomeFragment : MainFragment(), OnClick {
     private val viewModel: SharedViewModel by activityViewModels()
 
 
-    private val TAG = "Debug_HomeFragment"
+    private val TAG = "Home Fragment"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +51,30 @@ class HomeFragment : MainFragment(), OnClick {
         super.onViewCreated(view, savedInstanceState)
 
 
+        viewModel.localGeneticCollection.observe(viewLifecycleOwner) { genetics ->
+            Log.d(TAG, "Local genetic list: $genetics")
+        }
+
+        var counter = 0
+
+        viewModel.remoteGeneticCollection.observe(viewLifecycleOwner) { genetics ->
+            Log.d(TAG, "remote genetic list: $genetics")
+            val localList = viewModel.localGeneticCollection.value
+
+            if (genetics != null && localList != null) {
+                for (remoteGenetic in genetics) {
+                    for (localGenetic in localList) {
+                        if (remoteGenetic.strainName == localGenetic.strainName) {
+                            counter++
+                            Log.d(TAG, "Matching Counter: $counter")
+                            Log.d(TAG, "Local genetic: $localGenetic")
+                            Log.d(TAG, "Remote genetic: $remoteGenetic")
+                        }
+
+                    }
+                }
+            }
+        }
 
         viewModel.plantList.observe(viewLifecycleOwner) {
             adapter.submitList(viewModel.plantList.value)
@@ -58,9 +82,13 @@ class HomeFragment : MainFragment(), OnClick {
 
         }
 
-        with(binding) {
+        with(binding)
+        {
             homeAddFAB.setOnClickListener {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewPlantFragment())
+            }
+            bottomAppBar.setNavigationOnClickListener {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExploreFragment())
             }
         }
     }

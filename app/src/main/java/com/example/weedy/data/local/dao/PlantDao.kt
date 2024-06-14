@@ -1,4 +1,4 @@
-package com.example.weedy.data.local
+package com.example.weedy.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.weedy.data.entities.MasterPlant
-import com.example.weedy.data.entities.Genetic
+import com.example.weedy.data.entities.LocalGenetic
 import com.example.weedy.data.entities.Nutrients
 import com.example.weedy.data.entities.Soil
 import com.example.weedy.data.models.actions.GerminationSoilAction
@@ -48,20 +48,6 @@ interface PlantDao {
     @Delete
     suspend fun deletePlant(plant: MasterPlant)
 
-    //endregion
-
-    //region Genetic
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGenetic(genetic: Genetic)
-
-    @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insertGeneticList(geneticList: List<Genetic>)
-
-    @Query("SELECT * FROM genetic_table")
-    fun getAllGenetics(): LiveData<List<Genetic>>
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateGenetic(genetic: Genetic)
     //endregion
 
     //region Nutrients

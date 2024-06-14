@@ -7,7 +7,7 @@ import java.time.LocalDate
 @Entity(tableName = "nutrients_table")
 data class Nutrients(
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     val id: Long,
 
     @ColumnInfo(name = "nutrientsName")

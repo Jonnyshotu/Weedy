@@ -1,5 +1,4 @@
-package com.example.weedy.data.remote
-
+import com.example.weedy.data.remote.StrainResponse
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,27 +20,28 @@ val client = OkHttpClient.Builder().addInterceptor { chain ->
 }.addInterceptor(loggingInterceptor)
     .build()
 
-
 val moshi = Moshi.Builder()
     .add(com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory())
     .build()
 
-val retrofit = Retrofit.Builder()
+val retrofitApi = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
     .client(client)
     .build()
 
+
 interface StrainApiService {
 
     @GET("v1/strains")
-    suspend fun getStrainResponse(
+    suspend fun getRemoteStrainResponse(
         @Query("page") page: Int,
         @Query("count") count: Int = 50,
         @Query("sort") sort: String = "name"
     ): StrainResponse
 }
 
+
 object StrainApi {
-    val apiService: StrainApiService by lazy { retrofit.create(StrainApiService::class.java) }
+    val apiService: StrainApiService by lazy { retrofitApi.create(StrainApiService::class.java) }
 }

@@ -1,7 +1,8 @@
 package com.example.weedy.data
 
-import com.example.weedy.data.entities.Genetic
+import com.example.weedy.data.entities.LocalGenetic
 import com.example.weedy.data.entities.MasterPlant
+import com.example.weedy.data.entities.RemoteGenetic
 import com.example.weedy.data.models.actions.GerminationSoilAction
 import com.example.weedy.data.models.actions.GerminationWaterAction
 import com.example.weedy.data.models.actions.PlantedAction
@@ -23,7 +24,8 @@ data class Plant(
 
     val masterPlant: MasterPlant,
 
-    val genetic: Genetic? = null,
+    val localGenetic: LocalGenetic? = null,
+    val remoteGenetic: RemoteGenetic? = null,
 
     val germinationWaterActions: List<GerminationWaterAction>? = null,
     val germinationSoilActions: List<GerminationSoilAction>? = null,

@@ -1,13 +1,11 @@
 package com.example.weedy
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weedy.data.entities.MasterPlant
 import com.example.weedy.data.Repository
 import com.example.weedy.data.StrainRepository
-import com.example.weedy.data.entities.Genetic
 import com.example.weedy.data.local.getDatabase
 import com.example.weedy.data.local.offlineData.NutrientsProducts
 import com.example.weedy.data.local.offlineData.SoilProducts
@@ -21,23 +19,32 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     private val database = getDatabase(application)
     private val repository = Repository(database)
-    private val strainRepository = StrainRepository(database)
+    private val strainRepository = StrainRepository(database, application.applicationContext)
 
     val plantList = repository.plantlist
+    val localGeneticCollection = strainRepository.localGeneticCollection
+    val remoteGeneticCollection = strainRepository.remoteGeneticCollection
     val nutrientsList = repository.nutrientList
     val soilList = repository.soilList
 
     init {
-        loadStrains()
+//        loadRemoteenetics()
+        loadLocalGenetics()
         loadSoilTypes()
         loadNutrients()
     }
 
     //region coroutines
 
-    fun loadStrains() {
+    fun loadLocalGenetics() {
         viewModelScope.launch {
-            strainRepository.fetchStrains()
+            strainRepository.getLocalStrains()
+        }
+    }
+
+    fun loadRemoteenetics() {
+        viewModelScope.launch {
+            strainRepository.getRemoteStrains()
         }
     }
 

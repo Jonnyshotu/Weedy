@@ -7,9 +7,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.weedy.data.entities.MasterPlant
-import com.example.weedy.data.entities.Genetic
+import com.example.weedy.data.entities.LocalGenetic
 import com.example.weedy.data.entities.Nutrients
+import com.example.weedy.data.entities.RemoteGenetic
 import com.example.weedy.data.entities.Soil
+import com.example.weedy.data.local.dao.LocalGeneticDao
+import com.example.weedy.data.local.dao.PlantDao
+import com.example.weedy.data.local.dao.RemoteGeneticDao
 import com.example.weedy.data.models.actions.GerminationSoilAction
 import com.example.weedy.data.models.actions.GerminationWaterAction
 import com.example.weedy.data.models.actions.PlantedAction
@@ -27,7 +31,8 @@ import com.example.weedy.data.models.record.WateringRecord
 @Database(
     entities = [
         MasterPlant::class,
-        Genetic::class,
+        LocalGenetic::class,
+        RemoteGenetic::class,
         Nutrients::class,
         Soil::class,
         GerminationWaterAction::class,
@@ -50,6 +55,8 @@ import com.example.weedy.data.models.record.WateringRecord
 abstract class PlantDatabase : RoomDatabase() {
 
     abstract val plantDao: PlantDao
+    abstract val localGeneticDao: LocalGeneticDao
+    abstract val remoteGeneticDao: RemoteGeneticDao
 }
 
 private val TAG = "PlantDatabase"
@@ -65,8 +72,8 @@ fun getDatabase(context: Context): PlantDatabase {
                 PlantDatabase::class.java,
                 "Plant_Database"
             ).build()
-        }
+            Log.d(TAG, " Database initialized")
+        } else Log.d(TAG, "Database found")
     }
-    Log.d(TAG, " Database initialized")
     return dbInstance
 }

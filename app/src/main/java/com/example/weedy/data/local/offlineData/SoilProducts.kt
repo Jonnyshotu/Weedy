@@ -4,9 +4,9 @@ import com.example.weedy.data.entities.Soil
 object SoilProducts {
     fun loadSoilTypes(): List<Soil>{
         return listOf(
-            Soil(0,"Light Mix BioBizz"),
-            Soil(0,"All Mix BioBizz" ),
-            Soil(0,"Coco BioBizz"),
+            Soil(1,"Coco BioBizz"),
+            Soil(2,"Light Mix BioBizz"),
+            Soil(3,"All Mix BioBizz" ),
         )
     }
 }

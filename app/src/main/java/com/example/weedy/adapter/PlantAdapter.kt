@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weedy.data.Plant
 import com.example.weedy.databinding.PlantItemBinding
 
-class PlantAdapter (
-    private val listener : OnClick
+class PlantAdapter(
+    private val listener: OnClick
 ) : ListAdapter<Plant, PlantAdapter.ItemViewHolder>(PlantDiffUtil()) {
 
-    inner class ItemViewHolder(val binding: PlantItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ItemViewHolder(val binding: PlantItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     private val TAG = "Debug_PlantAdapter"
 
@@ -28,10 +29,10 @@ class PlantAdapter (
 
         with(holder.binding) {
             plantItemActionBTN.setOnClickListener {
-                listener.onTreatmentClick(plant,this.plantItemActionBTN)
+                listener.onTreatmentClick(plant, this.plantItemActionBTN)
             }
-            plantItemStrainTV.text = plant.genetic?.strainName ?: ""
-            plantItemWeeksTV.text = "in Week of ${plant.genetic?.floweringTime}"
+            plantItemStrainTV.text = plant.localGenetic?.strainName ?: ""
+            plantItemWeeksTV.text = "in Week of ${plant.remoteGenetic?.floweringTime}"
             plantItemHealthBar.progress = plant.healthRecord?.last()?.health ?: 0
             plantItemCV.setOnClickListener {
                 listener.onPlantClick(plant)

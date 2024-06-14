@@ -1,25 +1,18 @@
 package com.example.weedy.data
 
-import ExampleData
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.weedy.data.local.PlantDatabase
 import com.example.weedy.data.entities.Nutrients
 import com.example.weedy.data.entities.Soil
-import com.example.weedy.data.entities.Genetic
 import com.example.weedy.data.entities.MasterPlant
-import com.example.weedy.data.remote.StrainApi
 
 class Repository(private val database: PlantDatabase) {
 
     private val TAG = "Repository"
 
-
-
     val plantMasterList = database.plantDao.getAll()
-
-    val geneticList = database.plantDao.getAllGenetics()
 
     val nutrientList = database.plantDao.getAllNutrients()
 
@@ -36,29 +29,17 @@ class Repository(private val database: PlantDatabase) {
                 plantlist.value?.plus(
                     Plant(
                         masterPlant = masterPlant,
-                        genetic = geneticList.value?.find { it.id == geneticID },
-
                         )
                 )
             }
         }
     }
 
-
-    private suspend fun insertPlantList(plantList: List<MasterPlant>) =
-        database.plantDao.insertList(plantList)
-
     suspend fun insertPlant(plant: MasterPlant) = database.plantDao.insert(plant)
 
     suspend fun updatePlant(plant: MasterPlant) = database.plantDao.update(plant)
 
     suspend fun deletePlant(plant: MasterPlant) = database.plantDao.deletePlant(plant)
-    suspend fun checkLoadingExampleData() {
-        if (database.plantDao.getPlantListSize() == 0) {
-            insertPlantList(ExampleData.loadExampleMasterPlants())
-            Log.d(TAG, "Example data Loaded")
-        }
-    }
 
     suspend fun loadNutrientList(nutrientList: List<Nutrients>) =
         database.plantDao.insertNutrientList(nutrientList)
