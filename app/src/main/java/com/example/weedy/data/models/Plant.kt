@@ -1,4 +1,4 @@
-package com.example.weedy.data
+package com.example.weedy.data.models
 
 import com.example.weedy.data.entities.LocalGenetic
 import com.example.weedy.data.entities.MasterPlant

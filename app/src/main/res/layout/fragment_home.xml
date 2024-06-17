@@ -9,19 +9,16 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/secondary_green">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/secondary_green"
             app:layout_scrollEffect="compress"
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:title="Weedy"
-            app:titleCentered="true"
-            app:titleTextColor="@color/white" />
+            app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -32,7 +29,6 @@
         android:layout_marginBottom="?attr/actionBarSize"
         android:clipToPadding="false"
         android:paddingBottom="40dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/plant_item" />
 
@@ -49,7 +45,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/primary_green"
         app:layout_anchor="@id/bottomAppBar"
         app:layout_anchorGravity="center|end"
         app:srcCompat="@drawable/add" />

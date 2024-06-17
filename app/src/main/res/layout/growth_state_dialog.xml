@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/growthStateTV"
+                android:id="@+id/newPlantgrowthStateTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <RadioGroup
-                android:id="@+id/growthStateRG"
+                android:id="@+id/newPlantgrowthStateRG"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -41,7 +41,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/growthStateTV">
+                app:layout_constraintTop_toBottomOf="@+id/newPlantgrowthStateTV">
 
                 <RadioButton
                     android:id="@+id/seedling_radio"
@@ -73,8 +73,6 @@
                     android:text="@string/flower" />
 
             </RadioGroup>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

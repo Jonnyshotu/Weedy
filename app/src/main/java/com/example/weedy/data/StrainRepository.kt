@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.weedy.data.entities.LocalGenetic
 import com.example.weedy.data.entities.RemoteGenetic
 import com.example.weedy.data.local.PlantDatabase
+import com.example.weedy.data.models.strains.LocalStrain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -44,11 +45,6 @@ class StrainRepository(private val database: PlantDatabase, private val context:
                                 seedCompanyOCPC = strain.seedCompany.ocpc ?: "",
                                 parentOCPC = strain.genetics?.ocpc.toString(),
                                 parentNames = strain.genetics?.names.toString(),
-                                sativa = null,
-                                indica = null,
-                                ruderalis = null,
-                                breedingType = null,
-                                floweringTime = null,
                                 children = strain.children.toString(),
                                 lineage = strain.lineage.toString(),
                             )
@@ -90,6 +86,7 @@ class StrainRepository(private val database: PlantDatabase, private val context:
                 if (strains.isNotEmpty()) {
                     val localGeneticList = strains.map { strain ->
                         LocalGenetic(
+                            id = 0,
                             strainName = strain.name,
                             strainImageURL = strain.img_url,
                             strainType = strain.type,

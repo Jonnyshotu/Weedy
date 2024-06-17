@@ -14,7 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/secondary_green"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
@@ -35,8 +34,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"
-                app:title="Plant Strain"
-                app:titleTextColor="@color/white" />
+                app:title="Plant Strain" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -461,9 +459,8 @@
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:listitem="@layout/list_item_measurements" />
+
             </androidx.cardview.widget.CardView>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

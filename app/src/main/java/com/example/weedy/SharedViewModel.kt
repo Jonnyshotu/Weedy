@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weedy.data.entities.MasterPlant
-import com.example.weedy.data.Repository
+import com.example.weedy.data.AppRepository
 import com.example.weedy.data.StrainRepository
 import com.example.weedy.data.local.getDatabase
 import com.example.weedy.data.local.offlineData.NutrientsProducts
@@ -18,17 +18,17 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     var navigatePlantID: Long = 0
 
     private val database = getDatabase(application)
-    private val repository = Repository(database)
+    private val appRepository = AppRepository(database)
     private val strainRepository = StrainRepository(database, application.applicationContext)
 
-    val plantList = repository.plantlist
+    val plantList = appRepository.plantlist
     val localGeneticCollection = strainRepository.localGeneticCollection
     val remoteGeneticCollection = strainRepository.remoteGeneticCollection
-    val nutrientsList = repository.nutrientList
-    val soilList = repository.soilList
+    val nutrientsList = appRepository.nutrientList
+    val soilList = appRepository.soilList
 
     init {
-//        loadRemoteenetics()
+   //     loadRemoteenetics()
         loadLocalGenetics()
         loadSoilTypes()
         loadNutrients()
@@ -50,31 +50,31 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     fun insertPlant(plant: MasterPlant) {
         viewModelScope.launch {
-            repository.insertPlant(plant)
+            appRepository.insertPlant(plant)
         }
     }
 
     fun updatePlant(plant: MasterPlant) {
         viewModelScope.launch {
-            repository.updatePlant(plant)
+            appRepository.updatePlant(plant)
         }
     }
 
     fun deletePlant(plant: MasterPlant) {
         viewModelScope.launch {
-            repository.deletePlant(plant)
+            appRepository.deletePlant(plant)
         }
     }
 
     private fun loadNutrients() {
         viewModelScope.launch {
-            repository.loadNutrientList(NutrientsProducts.loadNutrients())
+            appRepository.loadNutrientList(NutrientsProducts.loadNutrients())
         }
     }
 
     private fun loadSoilTypes() {
         viewModelScope.launch {
-            repository.loadSoilList(SoilProducts.loadSoilTypes())
+            appRepository.loadSoilList(SoilProducts.loadSoilTypes())
         }
     }
 

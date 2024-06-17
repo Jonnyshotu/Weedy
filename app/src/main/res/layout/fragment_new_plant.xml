@@ -16,8 +16,7 @@
             android:minHeight="?attr/actionBarSize"
             app:navigationIcon="@drawable/back"
             app:title="New plant"
-            app:titleCentered="true"
-            app:titleTextColor="@color/white" />
+            app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -88,8 +87,51 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Spinner
+                android:id="@+id/newPlantStrainSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/newPlantStrainETL"
+                app:layout_constraintStart_toStartOf="@+id/newPlantStrainETL"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantStrainETL" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/newPlantSeedCompanyETL"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Seed company"
+                android:inputType="text"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="@id/newPlantStrainETL"
+                app:layout_constraintStart_toStartOf="@id/newPlantStrainETL"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantStrainSpinner">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/new_plant_seed_company_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/newPlantSeedCompanySpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/newPlantSeedCompanyETL"
+                app:layout_constraintStart_toStartOf="@+id/newPlantSeedCompanyETL"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantSeedCompanyETL" />
+
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
+                android:id="@+id/newPlantGeneticCV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -97,7 +139,7 @@
                 app:cardCornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="@+id/newPlantStrainETL"
                 app:layout_constraintStart_toStartOf="@+id/newPlantStrainETL"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantStrainETL">
+                app:layout_constraintTop_toBottomOf="@+id/newPlantSeedCompanySpinner">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -169,9 +211,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/cardView"
-                app:layout_constraintStart_toStartOf="@+id/cardView"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+                app:layout_constraintEnd_toEndOf="@+id/newPlantGeneticCV"
+                app:layout_constraintStart_toStartOf="@+id/newPlantGeneticCV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticCV">
 
                 <RadioButton
                     android:id="@+id/newPlantRegularRB"
@@ -199,37 +241,15 @@
 
             </RadioGroup>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/newPlantSeedManufacturerETL"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:hint="Seed manufacturer"
-                android:inputType="text"
-                app:endIconMode="clear_text"
-                app:layout_constraintEnd_toEndOf="@id/newPlantStrainETL"
-                app:layout_constraintStart_toStartOf="@id/newPlantStrainETL"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticRG">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/newPlantSeedManufacturerET"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
             <androidx.cardview.widget.CardView
+                android:id="@+id/newPlantLightCV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="@+id/newPlantSeedManufacturerETL"
-                app:layout_constraintStart_toStartOf="@+id/newPlantSeedManufacturerETL"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantSeedManufacturerETL">
+                app:layout_constraintEnd_toEndOf="@+id/newPlantGrowthStateCV"
+                app:layout_constraintStart_toStartOf="@+id/newPlantGrowthStateCV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantGrowthStateCV">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -277,10 +297,156 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/newPlantLightDialogHoursTV" />
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/newPlantGrowthStateCV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/newPlantGeneticCV"
+                app:layout_constraintStart_toStartOf="@+id/newPlantGeneticCV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticRG">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/newPlantgrowthStateTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Select the growth sate"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RadioGroup
+                        android:id="@+id/newPlantgrowthStateRG"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="24dp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/newPlantgrowthStateTV">
+
+                        <RadioButton
+                            android:id="@+id/seedling_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="12dp"
+                            android:checked="true"
+                            android:text="@string/seedling" />
+
+                        <RadioButton
+                            android:id="@+id/cutting_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="12dp"
+                            android:text="@string/cutting" />
+
+                        <RadioButton
+                            android:id="@+id/adult_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="12dp"
+                            android:text="@string/adult" />
+
+                        <RadioButton
+                            android:id="@+id/flower_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="12dp"
+                            android:text="@string/flower" />
+
+                    </RadioGroup>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/newPlantSoilCV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/newPlantGrowthStateCV"
+                app:layout_constraintStart_toStartOf="@+id/newPlantGrowthStateCV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantGrowthStateCV">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/newPlantrepotDialogSoilTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Wich Soil type?"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Spinner
+                        android:id="@+id/newPlantSpinner_pot_size"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/newPlantrepotDialogSoilTV" />
+
+                    <TextView
+                        android:id="@+id/repotDialogPotTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="Wich pot size?"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/newPlantSpinner_pot_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textField"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="24dp"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/repotDialogPotTV">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/newPlantPotSizeET"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="top"
+                            android:hint="Pot size"
+                            android:inputType="number|numberDecimal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/waterDialogTV" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

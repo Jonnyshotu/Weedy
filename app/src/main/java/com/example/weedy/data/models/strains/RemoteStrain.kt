@@ -1,4 +1,4 @@
-package com.example.weedy.data
+package com.example.weedy.data.models.strains
 
 data class RemoteStrain(
     val ocpc: String,

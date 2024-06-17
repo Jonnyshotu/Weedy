@@ -1,6 +1,6 @@
 package com.example.weedy.data.remote
 
-import com.example.weedy.data.RemoteStrain
+import com.example.weedy.data.models.strains.RemoteStrain
 
 data class StrainResponse(
     val data: List<RemoteStrain>,

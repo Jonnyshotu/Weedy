@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">Weedy</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="checklist_icon">checklist</string>
-    <string name="edit_icon">edit</string>
-    <string name="delete_icon">delete</string>
+    <string name="edit_icon">Edit</string>
+    <string name="delete_icon">Delete</string>
     <string name="watering">Watering</string>
-    <string name="seedling">seedling</string>
-    <string name="cutting">cutting</string>
-    <string name="adult">adult</string>
-    <string name="flower">flower</string>
+    <string name="seedling">Seedling</string>
+    <string name="cutting">Cutting</string>
+    <string name="adult">Adult</string>
+    <string name="flower">Flower</string>
 </resources>

@@ -11,7 +11,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/darK_primary_transparent"
         android:elevation="20dp"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +48,6 @@
                 android:layout_marginStart="16dp"
                 android:autoSizeTextType="none"
                 android:text="Strain Name"
-                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/space2"
@@ -85,7 +83,6 @@
                     android:id="@+id/exploreItemIV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/black"
                     android:scaleType="centerCrop"
                     tools:srcCompat="@drawable/cannabis_leaf" />
 
@@ -122,6 +119,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/space2"
                 app:layout_constraintStart_toStartOf="@+id/space2"
                 app:layout_constraintTop_toBottomOf="@+id/exploreItemTypeTV" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

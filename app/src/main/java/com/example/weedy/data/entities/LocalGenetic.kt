@@ -11,6 +11,8 @@ data class LocalGenetic(
     @ColumnInfo(name = "Strain")
     val strainName: String,
 
+    val id: Long,
+
     @ColumnInfo(name = "Strain type")
     val strainType: String?,
 

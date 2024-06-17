@@ -1,14 +1,14 @@
 package com.example.weedy.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.weedy.data.local.PlantDatabase
 import com.example.weedy.data.entities.Nutrients
 import com.example.weedy.data.entities.Soil
 import com.example.weedy.data.entities.MasterPlant
+import com.example.weedy.data.models.Plant
 
-class Repository(private val database: PlantDatabase) {
+class AppRepository(private val database: PlantDatabase) {
 
     private val TAG = "Repository"
 
@@ -25,7 +25,7 @@ class Repository(private val database: PlantDatabase) {
     private fun createDisplayPlants() {
         if (plantMasterList.value != null) {
             for (masterPlant in plantMasterList.value!!) {
-                val geneticID = masterPlant.geneticID
+                val geneticID = masterPlant.localGeneticID
                 plantlist.value?.plus(
                     Plant(
                         masterPlant = masterPlant,

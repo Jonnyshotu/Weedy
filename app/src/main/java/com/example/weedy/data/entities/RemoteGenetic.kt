@@ -33,18 +33,4 @@ data class RemoteGenetic(
     @ColumnInfo(name = "Lineage")
     val lineage: String?,
 
-    @ColumnInfo(name = "Sativa")
-    val sativa: Int?,
-
-    @ColumnInfo(name = "Indica")
-    val indica: Int?,
-
-    @ColumnInfo(name = "Ruderalis")
-    val ruderalis: Int?,
-
-    @ColumnInfo(name = "Breeding type")
-    val breedingType: String?,
-
-    @ColumnInfo(name = "Flowering time")
-    val floweringTime: Int?,
 )

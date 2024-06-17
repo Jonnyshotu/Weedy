@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weedy.SharedViewModel
 import com.example.weedy.adapter.OnClick
 import com.example.weedy.adapter.PlantAdapter
-import com.example.weedy.data.Plant
+import com.example.weedy.data.models.Plant
 import com.example.weedy.databinding.FragmentHomeBinding
 import com.example.weedy.ui.main.MainFragment
+import com.google.android.material.carousel.CarouselLayoutManager
 
 class HomeFragment : MainFragment(), OnClick {
 
@@ -36,6 +37,8 @@ class HomeFragment : MainFragment(), OnClick {
         binding = FragmentHomeBinding.inflate(inflater)
 
         recyclerView = binding.homeRV
+        recyclerView.layoutManager = CarouselLayoutManager()
+
         adapter = PlantAdapter(this)
 
         recyclerView.adapter = adapter
@@ -51,6 +54,7 @@ class HomeFragment : MainFragment(), OnClick {
         super.onViewCreated(view, savedInstanceState)
 
 
+
         viewModel.localGeneticCollection.observe(viewLifecycleOwner) { genetics ->
             Log.d(TAG, "Local genetic list: $genetics")
         }
@@ -59,27 +63,11 @@ class HomeFragment : MainFragment(), OnClick {
 
         viewModel.remoteGeneticCollection.observe(viewLifecycleOwner) { genetics ->
             Log.d(TAG, "remote genetic list: $genetics")
-            val localList = viewModel.localGeneticCollection.value
-
-            if (genetics != null && localList != null) {
-                for (remoteGenetic in genetics) {
-                    for (localGenetic in localList) {
-                        if (remoteGenetic.strainName == localGenetic.strainName) {
-                            counter++
-                            Log.d(TAG, "Matching Counter: $counter")
-                            Log.d(TAG, "Local genetic: $localGenetic")
-                            Log.d(TAG, "Remote genetic: $remoteGenetic")
-                        }
-
-                    }
-                }
-            }
         }
 
         viewModel.plantList.observe(viewLifecycleOwner) {
             adapter.submitList(viewModel.plantList.value)
             Log.d("$TAG Observer", viewModel.plantList.value.toString())
-
         }
 
         with(binding)
