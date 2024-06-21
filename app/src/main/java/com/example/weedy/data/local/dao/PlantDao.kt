@@ -31,13 +31,16 @@ interface PlantDao {
 
     //region Master Plant
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(plant: MasterPlant)
+    suspend fun insert(plant: MasterPlant): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertList(plantList: List<MasterPlant>)
 
     @Update
     suspend fun update(plant: MasterPlant)
+
+    @Query("SELECT * FROM plant_table WHERE id == :searchID")
+    suspend fun getPlantByID(searchID: Long): MasterPlant
 
     @Query("SELECT * FROM plant_table")
     fun getAll(): LiveData<List<MasterPlant>>

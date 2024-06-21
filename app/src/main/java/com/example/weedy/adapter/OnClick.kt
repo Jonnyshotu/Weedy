@@ -1,10 +1,10 @@
 package com.example.weedy.adapter
 
 import android.view.View
-import com.example.weedy.data.models.Plant
+import com.example.weedy.data.entities.MasterPlant
 
 interface OnClick {
 
-    fun onPlantClick(plant: Plant)
-    fun onTreatmentClick(plant: Plant, view: View)
+    fun onPlantClick(plant: MasterPlant)
+    fun onTreatmentClick(plant: MasterPlant, view: View)
 }

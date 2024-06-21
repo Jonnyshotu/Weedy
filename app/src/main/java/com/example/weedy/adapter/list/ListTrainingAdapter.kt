@@ -7,11 +7,13 @@ import com.example.weedy.data.models.record.TrainingRecord
 import com.example.weedy.databinding.ListItemBinding
 import java.time.LocalDate
 
-class ListTrainingAdapter (private val dataset: List<TrainingRecord>) : RecyclerView.Adapter<ListTrainingAdapter.ListItemViewHolder>() {
+class ListTrainingAdapter(private val dataset: List<TrainingRecord>) :
+    RecyclerView.Adapter<ListTrainingAdapter.ListItemViewHolder>() {
 
-    inner class ListItemViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ListItemViewHolder(val binding: ListItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    private val TAG = "Debug_ListTrainingAdapter"
+    private val TAG = "Training Adapter"
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
@@ -21,7 +23,7 @@ class ListTrainingAdapter (private val dataset: List<TrainingRecord>) : Recycler
 
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
         val listEntry = dataset[position]
-        with(holder.binding){
+        with(holder.binding) {
             listItemHeader1TV.text = "Training method"
             listItemHeader2TV.text = null
             listItemTV1.text = listEntry.trainingType

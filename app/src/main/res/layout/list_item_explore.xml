@@ -62,7 +62,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/exploreItemStrainTV"
                 app:layout_constraintStart_toStartOf="@+id/exploreItemStrainTV"
                 app:layout_constraintTop_toBottomOf="@+id/exploreItemStrainTV"
-                app:srcCompat="@drawable/ellipse_1" />
+                app:srcCompat="@drawable/ellipse_strain" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"

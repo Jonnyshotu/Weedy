@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDate
+
 @Entity(tableName = "nutrients_table")
 data class Nutrients(
 

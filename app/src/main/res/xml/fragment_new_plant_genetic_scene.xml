@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/transitionGeneticDetail"
+        motion:constraintSetEnd="@+id/endGeneticDetail"
+        motion:constraintSetStart="@id/startGenetic"
+        motion:duration="500"
+        motion:motionInterpolator="easeIn">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/transitionGeneticCannabinoids"
+        motion:constraintSetEnd="@+id/endGeneticCanabinoids"
+        motion:constraintSetStart="@id/startGenetic"
+        motion:duration="500"
+        motion:motionInterpolator="easeIn">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/startGenetic">
+        <Constraint
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/newPlantGeneticCV"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="8dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/space4"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/space4" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/endGeneticCanabinoids">
+        <Constraint
+            android:id="@+id/newPlantCannabinoidsCV"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/space4"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/newPlantGeneticCV"
+            android:visibility="gone" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/endGeneticDetail">
+        <Constraint
+            android:id="@+id/newPlantGeneticCV"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/space4"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/newPlantCannabinoidsCV"
+            android:visibility="gone" />
+
+    </ConstraintSet>
+</MotionScene>

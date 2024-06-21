@@ -33,4 +33,4 @@ data class RemoteGenetic(
     @ColumnInfo(name = "Lineage")
     val lineage: String?,
 
-)
+    )

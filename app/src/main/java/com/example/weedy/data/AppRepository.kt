@@ -6,7 +6,8 @@ import com.example.weedy.data.local.PlantDatabase
 import com.example.weedy.data.entities.Nutrients
 import com.example.weedy.data.entities.Soil
 import com.example.weedy.data.entities.MasterPlant
-import com.example.weedy.data.models.Plant
+import com.example.weedy.data.models.actions.RepotAction
+import com.example.weedy.data.models.record.GrowthStateRecord
 
 class AppRepository(private val database: PlantDatabase) {
 
@@ -18,33 +19,13 @@ class AppRepository(private val database: PlantDatabase) {
 
     val soilList = database.plantDao.getAllSoilTypes()
 
-    private var _plantList = MutableLiveData<List<Plant>>()
-    val plantlist: LiveData<List<Plant>> get() = _plantList
 
-
-    private fun createDisplayPlants() {
-        if (plantMasterList.value != null) {
-            for (masterPlant in plantMasterList.value!!) {
-                val geneticID = masterPlant.localGeneticID
-                plantlist.value?.plus(
-                    Plant(
-                        masterPlant = masterPlant,
-                        )
-                )
-            }
-        }
-    }
-
-    suspend fun insertPlant(plant: MasterPlant) = database.plantDao.insert(plant)
-
+    suspend fun insertGrowthState(state: GrowthStateRecord) = database.plantDao.insertGrowthStateRecord(state)
+    suspend fun insertRepotRecord(repot: RepotAction) = database.plantDao.insertRepot(repot)
+    suspend fun getPlantByID(searchID: Long): MasterPlant = database.plantDao.getPlantByID(searchID)
+    suspend fun insertPlant(plant: MasterPlant): Long = database.plantDao.insert(plant)
     suspend fun updatePlant(plant: MasterPlant) = database.plantDao.update(plant)
-
     suspend fun deletePlant(plant: MasterPlant) = database.plantDao.deletePlant(plant)
-
-    suspend fun loadNutrientList(nutrientList: List<Nutrients>) =
-        database.plantDao.insertNutrientList(nutrientList)
-
+    suspend fun loadNutrientList(nutrientList: List<Nutrients>) = database.plantDao.insertNutrientList(nutrientList)
     suspend fun loadSoilList(soilList: List<Soil>) = database.plantDao.insertSoilList(soilList)
-
-
 }

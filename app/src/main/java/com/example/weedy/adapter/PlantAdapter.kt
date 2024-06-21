@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weedy.data.models.Plant
+import com.example.weedy.data.entities.MasterPlant
 import com.example.weedy.databinding.PlantItemBinding
 
 class PlantAdapter(
     private val listener: OnClick
-) : ListAdapter<Plant, PlantAdapter.ItemViewHolder>(PlantDiffUtil()) {
+) : ListAdapter<MasterPlant, PlantAdapter.ItemViewHolder>(PlantDiffUtil()) {
 
     inner class ItemViewHolder(val binding: PlantItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val TAG = "Debug_PlantAdapter"
+    private val TAG = "Plant Adapter"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding = PlantItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -31,9 +31,8 @@ class PlantAdapter(
             plantItemActionBTN.setOnClickListener {
                 listener.onTreatmentClick(plant, this.plantItemActionBTN)
             }
-            plantItemStrainTV.text = plant.localGenetic?.strainName ?: ""
-            plantItemWeeksTV.text = "in Week of ${plant.masterPlant.floweringTime}"
-            plantItemHealthBar.progress = plant.healthRecord?.last()?.health ?: 0
+            plantItemStrainTV.text = plant.strainName
+
             plantItemCV.setOnClickListener {
                 listener.onPlantClick(plant)
             }

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weedy.SharedViewModel
 import com.example.weedy.adapter.OnClick
 import com.example.weedy.adapter.PlantAdapter
-import com.example.weedy.data.models.Plant
+import com.example.weedy.data.entities.MasterPlant
 import com.example.weedy.databinding.FragmentHomeBinding
 import com.example.weedy.ui.main.MainFragment
 import com.google.android.material.carousel.CarouselLayoutManager
@@ -37,7 +37,6 @@ class HomeFragment : MainFragment(), OnClick {
         binding = FragmentHomeBinding.inflate(inflater)
 
         recyclerView = binding.homeRV
-        recyclerView.layoutManager = CarouselLayoutManager()
 
         adapter = PlantAdapter(this)
 
@@ -53,17 +52,11 @@ class HomeFragment : MainFragment(), OnClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        viewModel.localGeneticCollection.observe(viewLifecycleOwner) { genetics ->
-            Log.d(TAG, "Local genetic list: $genetics")
+        binding.homeRefreshBTN.setOnClickListener{
+            viewModel.loadRemoteenetics()
         }
 
-        var counter = 0
 
-        viewModel.remoteGeneticCollection.observe(viewLifecycleOwner) { genetics ->
-            Log.d(TAG, "remote genetic list: $genetics")
-        }
 
         viewModel.plantList.observe(viewLifecycleOwner) {
             adapter.submitList(viewModel.plantList.value)
@@ -72,22 +65,18 @@ class HomeFragment : MainFragment(), OnClick {
 
         with(binding)
         {
+
             homeAddFAB.setOnClickListener {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewPlantFragment())
-            }
-            bottomAppBar.setNavigationOnClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExploreFragment())
             }
         }
     }
 
-    override fun onPlantClick(plant: Plant) {
-        viewModel.navigatePlantID = plant.masterPlant.id
+    override fun onPlantClick(plant: MasterPlant) {
         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
     }
 
-    override fun onTreatmentClick(plant: Plant, view: View) {
-        viewModel.navigatePlantID = plant.masterPlant.id
+    override fun onTreatmentClick(plant: MasterPlant, view: View) {
 //        showTreatmentMenu(view)
     }
 

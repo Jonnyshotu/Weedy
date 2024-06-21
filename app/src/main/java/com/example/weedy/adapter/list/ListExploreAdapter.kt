@@ -9,7 +9,7 @@ import com.example.weedy.databinding.ListItemExploreBinding
 class ListExploreAdapter(private val dataset: List<LocalGenetic>) :
     RecyclerView.Adapter<ListExploreAdapter.ListItemViewHolder>() {
 
-    private val TAG = "ListExploreAdapter"
+    private val TAG = "Explore Adapter"
 
     inner class ListItemViewHolder(val binding: ListItemExploreBinding) :
         RecyclerView.ViewHolder(binding.root)

@@ -7,11 +7,13 @@ import com.example.weedy.data.models.record.RepellentsRecord
 import com.example.weedy.databinding.ListItemBinding
 import java.time.LocalDate
 
-class ListRepellentsAdapter (private val dataset: List<RepellentsRecord>) : RecyclerView.Adapter<ListRepellentsAdapter.ListItemViewHolder>() {
+class ListRepellentsAdapter(private val dataset: List<RepellentsRecord>) :
+    RecyclerView.Adapter<ListRepellentsAdapter.ListItemViewHolder>() {
 
-    inner class ListItemViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ListItemViewHolder(val binding: ListItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    private val TAG = "Debug_ListRepellentsAdapter"
+    private val TAG = "Repellents Adapter"
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
@@ -22,7 +24,7 @@ class ListRepellentsAdapter (private val dataset: List<RepellentsRecord>) : Recy
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
         val listEntry = dataset[position]
 
-        with(holder.binding){
+        with(holder.binding) {
             listItemHeader1TV.text = "Incident"
             listItemHeader2TV.text = null
             listItemTV1.text = listEntry.infestationType

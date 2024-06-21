@@ -11,7 +11,7 @@ class ListWaterAdapter(private val dataset: List<WateringRecord>) : RecyclerView
 
     inner class ListItemViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private val TAG = "Debug_ListWaterAdapter"
+    private val TAG = "Water Adapter"
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {

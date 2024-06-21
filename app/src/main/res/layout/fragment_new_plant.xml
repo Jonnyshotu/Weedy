@@ -3,63 +3,86 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            app:navigationIcon="@drawable/back"
-            app:title="New plant"
-            app:titleCentered="true" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    android:layout_height="match_parent"
+    android:background="#00FFFFFF">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/newPlant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.NewPlantFragment">
+            tools:context=".ui.new_plant.NewPlantFragment"
+            app:layoutDescription="@xml/fragment_new_plant">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/newPlantPhotoCV"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_height="480dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
                 android:elevation="12dp"
                 app:cardCornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/newPlantPlantIV"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/example_plant" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/newPlantPhotoBTN"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="+ add photo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantPhotoCV" />
+                    <androidx.constraintlayout.helper.widget.Layer
+                        android:id="@+id/layer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="newPlantTitleTV,newPlantSubTitleTV"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5" />
+
+                    <ImageView
+                        android:id="@+id/newPlantPlantIV"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/background_vertical" />
+
+                    <TextView
+                        android:id="@+id/newPlantTitleTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Starting\n a new Grow"
+                        android:textColor="@color/design_default_color_on_primary"
+                        android:textSize="42sp"
+                        app:layout_constraintBottom_toTopOf="@+id/newPlantSubTitleTV"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/newPlantSubTitleTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Search for the strain of your Choice!"
+                        android:textColor="@color/design_default_color_on_primary"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -67,14 +90,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
-                android:hint="Strain"
+                android:hint="@string/strain"
                 android:inputType="text"
                 app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantPhotoBTN">
+                app:layout_constraintTop_toBottomOf="@+id/newPlantPhotoCV">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/newPlantStrainET"
@@ -87,27 +110,28 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/newPlantStrainSpinner"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/newPlantStrainRV"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_marginTop="4dp"
                 android:visibility="invisible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="@+id/newPlantStrainETL"
                 app:layout_constraintStart_toStartOf="@+id/newPlantStrainETL"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantStrainETL" />
+                app:layout_constraintTop_toBottomOf="@+id/newPlantStrainETL"
+                tools:listitem="@layout/simple_string_item" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/newPlantSeedCompanyETL"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Seed company"
+                android:hint="@string/seed_company"
                 android:inputType="text"
                 app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="@id/newPlantStrainETL"
                 app:layout_constraintStart_toStartOf="@id/newPlantStrainETL"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantStrainSpinner">
+                app:layout_constraintTop_toBottomOf="@+id/newPlantStrainRV">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/new_plant_seed_company_et"
@@ -120,333 +144,41 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/newPlantSeedCompanySpinner"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/newPlantSeedCompanyRV"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_marginTop="4dp"
                 android:visibility="invisible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="@+id/newPlantSeedCompanyETL"
+                app:layout_constraintStart_toStartOf="@+id/newPlantSeedCompanyETL"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantSeedCompanyETL"
+                tools:listitem="@layout/simple_string_item" />
+
+            <Button
+                android:id="@+id/newPlantSaveBTN"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/continue_button"
+                app:layout_constraintBottom_toBottomOf="@+id/space3"
+                app:layout_constraintEnd_toEndOf="@+id/newPlantSeedCompanyETL"
+                app:layout_constraintStart_toEndOf="@+id/space3"
+                app:layout_constraintTop_toTopOf="@+id/space3" />
+
+            <Space
+                android:id="@+id/space3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="120dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/newPlantSeedCompanyETL"
                 app:layout_constraintStart_toStartOf="@+id/newPlantSeedCompanyETL"
                 app:layout_constraintTop_toBottomOf="@+id/newPlantSeedCompanyETL" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/newPlantGeneticCV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:elevation="8dp"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="@+id/newPlantStrainETL"
-                app:layout_constraintStart_toStartOf="@+id/newPlantStrainETL"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantSeedCompanySpinner">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="8dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/newPlantSativaET"
-                        android:layout_width="96dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:inputType="number|numberDecimal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sativa"
-                        app:layout_constraintEnd_toEndOf="@+id/newPlantSativaET"
-                        app:layout_constraintStart_toStartOf="@+id/newPlantSativaET"
-                        app:layout_constraintTop_toBottomOf="@+id/newPlantSativaET" />
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/newPlantIndicaET"
-                        android:layout_width="96dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="number|numberDecimal"
-                        app:layout_constraintEnd_toStartOf="@+id/newPlantRuderalisET"
-                        app:layout_constraintStart_toEndOf="@+id/newPlantSativaET"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Indica"
-                        app:layout_constraintEnd_toEndOf="@+id/newPlantIndicaET"
-                        app:layout_constraintStart_toStartOf="@+id/newPlantIndicaET"
-                        app:layout_constraintTop_toBottomOf="@+id/newPlantIndicaET" />
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/newPlantRuderalisET"
-                        android:layout_width="96dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:inputType="number|numberDecimal"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ruderalis"
-                        app:layout_constraintEnd_toEndOf="@+id/newPlantRuderalisET"
-                        app:layout_constraintStart_toStartOf="@+id/newPlantRuderalisET"
-                        app:layout_constraintTop_toBottomOf="@+id/newPlantRuderalisET" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <RadioGroup
-                android:id="@+id/newPlantGeneticRG"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/newPlantGeneticCV"
-                app:layout_constraintStart_toStartOf="@+id/newPlantGeneticCV"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticCV">
-
-                <RadioButton
-                    android:id="@+id/newPlantRegularRB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:padding="8dp"
-                    android:text="Regular" />
-
-                <RadioButton
-                    android:id="@+id/newPlantFeminizedRB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:padding="8dp"
-                    android:text="Feminized" />
-
-                <RadioButton
-                    android:id="@+id/newPlantAutomaticRB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:padding="8dp"
-                    android:text="Automatic" />
-
-            </RadioGroup>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/newPlantLightCV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="@+id/newPlantGrowthStateCV"
-                app:layout_constraintStart_toStartOf="@+id/newPlantGrowthStateCV"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantGrowthStateCV">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/newPlantLightDialogTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Light Cycle"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/newPlantLightDialogHoursTV"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:gravity="center"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/newPlantLightDialogTV" />
-
-                    <SeekBar
-                        android:id="@+id/lightDialogSB"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:elevation="8dp"
-                        android:max="24"
-                        android:padding="16dp"
-                        android:progress="0"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/newPlantLightDialogHoursTV" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/newPlantGrowthStateCV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="@+id/newPlantGeneticCV"
-                app:layout_constraintStart_toStartOf="@+id/newPlantGeneticCV"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticRG">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/newPlantgrowthStateTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Select the growth sate"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <RadioGroup
-                        android:id="@+id/newPlantgrowthStateRG"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="24dp"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/newPlantgrowthStateTV">
-
-                        <RadioButton
-                            android:id="@+id/seedling_radio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="12dp"
-                            android:checked="true"
-                            android:text="@string/seedling" />
-
-                        <RadioButton
-                            android:id="@+id/cutting_radio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="12dp"
-                            android:text="@string/cutting" />
-
-                        <RadioButton
-                            android:id="@+id/adult_radio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="12dp"
-                            android:text="@string/adult" />
-
-                        <RadioButton
-                            android:id="@+id/flower_radio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="12dp"
-                            android:text="@string/flower" />
-
-                    </RadioGroup>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/newPlantSoilCV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="@+id/newPlantGrowthStateCV"
-                app:layout_constraintStart_toStartOf="@+id/newPlantGrowthStateCV"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantGrowthStateCV">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/newPlantrepotDialogSoilTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Wich Soil type?"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <Spinner
-                        android:id="@+id/newPlantSpinner_pot_size"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="8dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/newPlantrepotDialogSoilTV" />
-
-                    <TextView
-                        android:id="@+id/repotDialogPotTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="Wich pot size?"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/newPlantSpinner_pot_size" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textField"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="24dp"
-                        app:endIconMode="clear_text"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/repotDialogPotTV">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/newPlantPotSizeET"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="top"
-                            android:hint="Pot size"
-                            android:inputType="number|numberDecimal"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/waterDialogTV" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

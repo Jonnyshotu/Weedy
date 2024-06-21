@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newPlantGeneticML"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_new_plant_genetic_scene"
+    tools:context=".ui.new_plant.NewPlantGeneticFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/newPlantCannabinoidsCV"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/space4"
+        app:layout_constraintEnd_toStartOf="@+id/space4"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/newPlantCannabinoidsML"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutDescription="@xml/fragment_new_plant_genetic_scene">
+
+            <ImageView
+                android:id="@+id/newPlantGeneticCannabinoidsIV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/thc_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/newPlantTHCTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/thc"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <SeekBar
+                android:id="@+id/newPlantTHCSB"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantTHCTV" />
+
+            <TextView
+                android:id="@+id/newPlantCBDTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/cbd"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/newPlantTHCTV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantTHCSB" />
+
+            <SeekBar
+                android:id="@+id/newPlantCBDSB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/newPlantCBDTV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantCBDTV" />
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/newPlantGeneticCV"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/space4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/space4">
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/newPlantGeneticDetailsML"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layoutDescription="@xml/fragment_new_plant_genetic_detail">
+
+            <ImageView
+                android:id="@+id/newPlantGeneticIV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/search_genetik"
+                tools:layout_editor_absoluteY="81dp" />
+
+            <TextView
+                android:id="@+id/newPlantGeneticTitleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Genetic"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/newPlantSativaTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/sativa"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/newPlantGeneticTitleTV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticTitleTV" />
+
+            <TextView
+                android:id="@+id/newPlantRuderalisResultTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/newPlantRuderalisTV"
+                app:layout_constraintEnd_toEndOf="@+id/newPlantIndicaResultTV"
+                app:layout_constraintTop_toTopOf="@+id/newPlantRuderalisTV" />
+
+            <SeekBar
+                android:id="@+id/newPlantGeneticSativaSB"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/newPlantSativaTV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantSativaTV" />
+
+            <TextView
+                android:id="@+id/newPlantIndicaTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/indica"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/newPlantSativaTV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticSativaSB" />
+
+            <TextView
+                android:id="@+id/newPlantIndicaResultTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/newPlantIndicaTV"
+                app:layout_constraintEnd_toEndOf="@+id/newPlantSativaResultTV"
+                app:layout_constraintTop_toTopOf="@+id/newPlantIndicaTV" />
+
+            <SeekBar
+                android:id="@+id/newPlantGeneticRuderalisSB"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/newPlantRuderalisTV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantRuderalisTV" />
+
+            <TextView
+                android:id="@+id/newPlantRuderalisTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/ruderalis"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/newPlantIndicaTV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticIndicaSB" />
+
+            <TextView
+                android:id="@+id/newPlantSativaResultTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="%"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/newPlantSativaTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/newPlantSativaTV" />
+
+            <SeekBar
+                android:id="@+id/newPlantGeneticIndicaSB"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/newPlantIndicaTV"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantIndicaTV" />
+
+            <CheckBox
+                android:id="@+id/newPlantHybridCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Hybrid"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticRuderalisSB" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/newPlantHybridCB"
+                app:layout_constraintStart_toStartOf="@+id/newPlantHybridCB"
+                app:layout_constraintTop_toBottomOf="@+id/newPlantHybridCB">
+
+                <RadioButton
+                    android:id="@+id/newPlantSativaRB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:text="@string/sativa" />
+
+                <RadioButton
+                    android:id="@+id/newPlantIndicaRB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    android:text="@string/indica" />
+
+            </RadioGroup>
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <RadioGroup
+        android:id="@+id/newPlantGeneticRG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/space4"
+        app:layout_constraintStart_toStartOf="@+id/space4"
+        app:layout_constraintTop_toBottomOf="@+id/space4">
+
+        <RadioButton
+            android:id="@+id/newPlantRegularRB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:text="@string/regular" />
+
+        <RadioButton
+            android:id="@+id/newPlantFeminizedRB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:text="@string/feminized" />
+
+        <RadioButton
+            android:id="@+id/newPlantAutomaticRB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:text="@string/automatic" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/newPlantGeneticSaveBTN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/save"
+        app:layout_constraintBottom_toBottomOf="@+id/space3"
+        app:layout_constraintStart_toEndOf="@+id/space3"
+        app:layout_constraintTop_toTopOf="@+id/space3" />
+
+    <Space
+        android:id="@+id/space4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/space3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/space4"
+        app:layout_constraintStart_toStartOf="@id/space4"
+        app:layout_constraintTop_toBottomOf="@+id/space4" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

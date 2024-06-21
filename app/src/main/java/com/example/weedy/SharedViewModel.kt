@@ -1,7 +1,10 @@
 package com.example.weedy
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.weedy.data.entities.MasterPlant
 import com.example.weedy.data.AppRepository
@@ -9,32 +12,48 @@ import com.example.weedy.data.StrainRepository
 import com.example.weedy.data.local.getDatabase
 import com.example.weedy.data.local.offlineData.NutrientsProducts
 import com.example.weedy.data.local.offlineData.SoilProducts
+import com.example.weedy.data.models.actions.RepotAction
+import com.example.weedy.data.models.record.GrowthStateRecord
 import kotlinx.coroutines.launch
 
 class SharedViewModel(application: Application) : AndroidViewModel(application) {
 
     private val TAG = "SharedViewModel"
 
-    var navigatePlantID: Long = 0
+
 
     private val database = getDatabase(application)
     private val appRepository = AppRepository(database)
     private val strainRepository = StrainRepository(database, application.applicationContext)
 
-    val plantList = appRepository.plantlist
+    private var _plant = MutableLiveData<MasterPlant>()
+    val plant : LiveData<MasterPlant> get() = _plant
+
+    val plantList = appRepository.plantMasterList
     val localGeneticCollection = strainRepository.localGeneticCollection
     val remoteGeneticCollection = strainRepository.remoteGeneticCollection
     val nutrientsList = appRepository.nutrientList
     val soilList = appRepository.soilList
 
     init {
-   //     loadRemoteenetics()
         loadLocalGenetics()
         loadSoilTypes()
         loadNutrients()
     }
 
     //region coroutines
+
+    private fun loadNutrients() {
+        viewModelScope.launch {
+            appRepository.loadNutrientList(NutrientsProducts.loadNutrients())
+        }
+    }
+
+    private fun loadSoilTypes() {
+        viewModelScope.launch {
+            appRepository.loadSoilList(SoilProducts.loadSoilTypes())
+        }
+    }
 
     fun loadLocalGenetics() {
         viewModelScope.launch {
@@ -48,9 +67,11 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    fun insertPlant(plant: MasterPlant) {
+    fun insertPlant(plant: MasterPlant, onResult: (Long) -> Unit) {
         viewModelScope.launch {
-            appRepository.insertPlant(plant)
+            val id = appRepository.insertPlant(plant)
+            onResult(id)
+            Log.d(TAG,"Inserted plant ID: $id")
         }
     }
 
@@ -60,23 +81,34 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    fun getPlantByID(searchID: Long) {
+        viewModelScope.launch {
+            val plant = appRepository.getPlantByID(searchID)
+            _plant.value = plant
+        }
+    }
+
     fun deletePlant(plant: MasterPlant) {
         viewModelScope.launch {
             appRepository.deletePlant(plant)
         }
     }
 
-    private fun loadNutrients() {
+    fun insertRepot(repot: RepotAction){
         viewModelScope.launch {
-            appRepository.loadNutrientList(NutrientsProducts.loadNutrients())
+            appRepository.insertRepotRecord(repot)
         }
     }
 
-    private fun loadSoilTypes() {
+    fun insertGrowthState(state: GrowthStateRecord){
         viewModelScope.launch {
-            appRepository.loadSoilList(SoilProducts.loadSoilTypes())
+            appRepository.insertGrowthState(state)
         }
     }
+
+
+
+
 
 
     //endregion

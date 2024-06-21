@@ -7,11 +7,13 @@ import com.example.weedy.data.models.record.NutrientsRecord
 import com.example.weedy.databinding.ListItemBinding
 import java.time.LocalDate
 
-class ListNutrientsAdapter (private val dataset: List<NutrientsRecord>) : RecyclerView.Adapter<ListNutrientsAdapter.ListItemViewHolder>() {
+class ListNutrientsAdapter(private val dataset: List<NutrientsRecord>) :
+    RecyclerView.Adapter<ListNutrientsAdapter.ListItemViewHolder>() {
 
-    inner class ListItemViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ListItemViewHolder(val binding: ListItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    private val TAG = "Debug_ListNutrientsAdapter"
+    private val TAG = "Nutrients Adapter"
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
@@ -22,7 +24,7 @@ class ListNutrientsAdapter (private val dataset: List<NutrientsRecord>) : Recycl
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
         val listEntry = dataset[position]
 
-        with(holder.binding){
+        with(holder.binding) {
             listItemHeader1TV.text = "Type"
             listItemHeader2TV.text = "Amount"
             listItemTV1.text = listEntry.nutrientID.toString()

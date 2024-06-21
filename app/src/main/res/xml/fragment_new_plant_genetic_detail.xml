@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/endGeneticDetail"
+        motion:constraintSetStart="@id/startGeneticDetail"
+        motion:duration="500">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/startGeneticDetail"></ConstraintSet>
+
+    <ConstraintSet android:id="@+id/endGeneticDetail">
+        <Constraint
+            android:id="@+id/newPlantGeneticCannabinoidsIV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+        <Constraint
+            android:id="@+id/newPlantGeneticTitleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/newPlantSativaTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:visibility="visible"
+            motion:layout_constraintStart_toStartOf="@+id/newPlantGeneticTitleTV"
+            motion:layout_constraintTop_toBottomOf="@+id/newPlantGeneticTitleTV" />
+        <Constraint
+            android:id="@+id/newPlantRuderalisResultTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="@+id/newPlantRuderalisTV"
+            motion:layout_constraintEnd_toEndOf="@+id/newPlantIndicaResultTV"
+            motion:layout_constraintTop_toTopOf="@+id/newPlantRuderalisTV" />
+        <Constraint
+            android:id="@+id/newPlantGeneticSativaSB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="visible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="@+id/newPlantSativaTV"
+            motion:layout_constraintTop_toBottomOf="@+id/newPlantSativaTV" />
+        <Constraint
+            android:id="@+id/newPlantIndicaTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:visibility="visible"
+            motion:layout_constraintStart_toStartOf="@+id/newPlantSativaTV"
+            motion:layout_constraintTop_toBottomOf="@+id/newPlantGeneticSativaSB" />
+        <Constraint
+            android:id="@+id/newPlantIndicaResultTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="@+id/newPlantIndicaTV"
+            motion:layout_constraintEnd_toEndOf="@+id/newPlantSativaResultTV"
+            motion:layout_constraintTop_toTopOf="@+id/newPlantIndicaTV" />
+        <Constraint
+            android:id="@+id/newPlantGeneticRuderalisSB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="visible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="@+id/newPlantRuderalisTV"
+            motion:layout_constraintTop_toBottomOf="@+id/newPlantRuderalisTV" />
+        <Constraint
+            android:id="@+id/newPlantRuderalisTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:visibility="visible"
+            motion:layout_constraintStart_toStartOf="@+id/newPlantIndicaTV"
+            motion:layout_constraintTop_toBottomOf="@+id/newPlantGeneticIndicaSB" />
+        <Constraint
+            android:id="@+id/newPlantSativaResultTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="@+id/newPlantSativaTV"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@+id/newPlantSativaTV" />
+        <Constraint
+            android:id="@+id/newPlantGeneticIndicaSB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="visible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="@+id/newPlantIndicaTV"
+            motion:layout_constraintTop_toBottomOf="@+id/newPlantIndicaTV" />
+        <Constraint
+            android:id="@+id/newPlantHybridCB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:visibility="visible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/newPlantGeneticRuderalisSB" />
+        <Constraint
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="@+id/newPlantHybridCB"
+            motion:layout_constraintStart_toStartOf="@+id/newPlantHybridCB"
+            motion:layout_constraintTop_toBottomOf="@+id/newPlantHybridCB" />
+    </ConstraintSet>
+</MotionScene>

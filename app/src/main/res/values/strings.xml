@@ -9,4 +9,23 @@
     <string name="cutting">Cutting</string>
     <string name="adult">Adult</string>
     <string name="flower">Flower</string>
+    <string name="thc">THC</string>
+    <string name="ruderalis">Ruderalis</string>
+    <string name="indica">Indica</string>
+    <string name="sativa">Sativa</string>
+    <string name="seed_company">Seed company</string>
+    <string name="strain">Strain</string>
+    <string name="add_photo">+ add photo</string>
+    <string name="cbd">CBD</string>
+    <string name="regular">Regular</string>
+    <string name="feminized">Feminized</string>
+    <string name="automatic">Automatic</string>
+    <string name="select_the_growth_sate">Select the growth sate</string>
+    <string name="wich_soil_type">Wich Soil type?</string>
+    <string name="wich_pot_size">Wich pot size?</string>
+    <string name="pot_size">Pot size</string>
+    <string name="light_cycle">Light Cycle</string>
+    <string name="soil_type">Soil type</string>
+    <string name="save">Save</string>
+    <string name="continue_button">continue</string>
 </resources>

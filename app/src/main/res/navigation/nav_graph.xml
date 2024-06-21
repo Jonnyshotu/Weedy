@@ -25,9 +25,13 @@
     </fragment>
     <fragment
         android:id="@+id/newPlantFragment"
-        android:name="com.example.weedy.ui.NewPlantFragment"
+        android:name="com.example.weedy.ui.new_plant.NewPlantFragment"
         android:label="fragment_new_plant"
-        tools:layout="@layout/fragment_new_plant" />
+        tools:layout="@layout/fragment_new_plant" >
+        <action
+            android:id="@+id/action_newPlantFragment_to_newPlantGeneticFragment"
+            app:destination="@id/newPlantGeneticFragment" />
+    </fragment>
     <fragment
         android:id="@+id/checkupFragment"
         android:name="com.example.weedy.ui.CheckupFragment"
@@ -42,4 +46,25 @@
         android:name="com.example.weedy.ui.ExploreFragment"
         android:label="fragment_explore"
         tools:layout="@layout/fragment_explore" />
+    <fragment
+        android:id="@+id/newPlantGeneticFragment"
+        android:name="com.example.weedy.ui.new_plant.NewPlantGeneticFragment"
+        android:label="fragment_new_plant_genetic"
+        tools:layout="@layout/fragment_new_plant_genetic" >
+        <action
+            android:id="@+id/action_newPlantGeneticFragment_to_newPlantStateFragment"
+            app:destination="@id/newPlantStateFragment" />
+        <argument
+            android:name="databaseMasterPlantID"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/newPlantStateFragment"
+        android:name="com.example.weedy.ui.new_plant.NewPlantStateFragment"
+        android:label="fragment_new_plant_state"
+        tools:layout="@layout/fragment_new_plant_state" >
+        <argument
+            android:name="databaseMasterPlantID"
+            app:argType="long" />
+    </fragment>
 </navigation>
