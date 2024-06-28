@@ -8,11 +8,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.weedy.data.entities.MasterPlant
-import com.example.weedy.data.entities.LocalGenetic
 import com.example.weedy.data.entities.Nutrients
 import com.example.weedy.data.entities.Soil
-import com.example.weedy.data.models.actions.GerminationSoilAction
-import com.example.weedy.data.models.actions.GerminationWaterAction
+import com.example.weedy.data.models.actions.GerminationAction
 import com.example.weedy.data.models.actions.PlantedAction
 import com.example.weedy.data.models.actions.RepotAction
 import com.example.weedy.data.models.record.GrowthStateRecord
@@ -81,22 +79,12 @@ interface PlantDao {
     suspend fun updateSoil(soil: Soil)
     //endregion
 
-    //regionGermination Soil
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGerminationSoil(germination: GerminationSoilAction)
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateGerminationSoil(germination: GerminationSoilAction)
-
-    //endregion
-
     //region GerminationWater
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGerminationWater(germination: GerminationWaterAction)
+    suspend fun insertGermination(germination: GerminationAction)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateGerminationWater(germination: GerminationWaterAction)
+    suspend fun updateGermination(germination: GerminationAction)
 
     //endregion
 
@@ -193,6 +181,9 @@ interface PlantDao {
     //region Watering Record
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWateringRecord(watering: WateringRecord)
+
+    @Query("SELECT * FROM watering_record_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getWateringRecordByPlantID(plantID: Long) : LiveData<List<WateringRecord>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateWateringRecord(watering: WateringRecord)

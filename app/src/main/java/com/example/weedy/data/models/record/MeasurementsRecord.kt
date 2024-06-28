@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import com.example.weedy.data.entities.MasterPlant
 import java.time.LocalDate
 
-@Entity(tableName = "measurementsRecord_table",
+@Entity(tableName = "measurements_record_table",
     foreignKeys = [
         ForeignKey(
             entity = MasterPlant::class,
@@ -24,21 +24,21 @@ data class MeasurementsRecord(
 
     val plantID: Long,
 
-    @ColumnInfo(name = "measurementsRecordPH")
+    @ColumnInfo(name = "PH")
     val ph: Double,
 
-    @ColumnInfo(name = "measurementsRecordEC")
+    @ColumnInfo(name = "EC")
     val ec: Double,
 
-    @ColumnInfo(name = "measurementsRecordTemperature")
+    @ColumnInfo(name = "Temperature")
     val temperature: Double,
 
-    @ColumnInfo(name = "measurementsRecordHumidity")
+    @ColumnInfo(name = "Humidity")
     val humidity: Double,
 
-    @ColumnInfo(name = "measurementsRecordHeight")
+    @ColumnInfo(name = "Height")
     val height: Double,
 
-    @ColumnInfo(name = "measurementsRecordDate")
+    @ColumnInfo(name = "Date")
     val date: LocalDate,
 )

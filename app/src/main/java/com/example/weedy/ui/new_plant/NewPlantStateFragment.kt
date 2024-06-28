@@ -1,5 +1,6 @@
 package com.example.weedy.ui.new_plant
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,10 +17,13 @@ import com.example.weedy.R
 import com.example.weedy.SharedViewModel
 import com.example.weedy.data.entities.MasterPlant
 import com.example.weedy.data.entities.Soil
+import com.example.weedy.data.models.actions.PlantedAction
 import com.example.weedy.data.models.actions.RepotAction
 import com.example.weedy.data.models.record.GrowthStateRecord
 import com.example.weedy.databinding.FragmentNewPlantStateBinding
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
 
 class NewPlantStateFragment : Fragment() {
 
@@ -28,26 +32,16 @@ class NewPlantStateFragment : Fragment() {
     private val viewModel: SharedViewModel by activityViewModels()
     private val args: NewPlantStateFragmentArgs by navArgs()
 
-    private val databaseID = args.databaseMasterPlantID
     private lateinit var plant: MasterPlant
     private var soilList: List<Soil>? = null
+    private var selectedDate = LocalDate.now()
+    private val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        viewModel.getPlantByID(databaseID)
-
-        viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
-            plant = masterPlant
-        }
-
-        viewModel.soilList.observe(viewLifecycleOwner) { soilList ->
-            this.soilList = soilList
-        }
-
         binding = FragmentNewPlantStateBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -55,28 +49,40 @@ class NewPlantStateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val databaseID = args.databaseMasterPlantID
+
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        binding.newPlantStateDateTV.text = selectedDate?.format(dateFormatter)
+
+        viewModel.getPlantByID(databaseID)
+        Log.d(TAG, "Navigation plant ID: $databaseID")
+
+        viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
+            plant = masterPlant
+            binding.newPlantStateStrainTV.text = plant.strainName
+        }
+
+        viewModel.soilList.observe(viewLifecycleOwner) { soils ->
+            soilList = soils
+            binding.newPlantSpinnerPotSize.adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                soilList?.map { it.name } ?: emptyList()
+            )
+        }
+
         var growthState = 0
         binding.newPlantgrowthStateRG.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
-                R.id.seedling_radio -> {
-                    growthState = 1
-                }
-
-                R.id.cutting_radio -> {
-                    growthState = 2
-                }
-
-                R.id.veg_radio -> {
-                    growthState = 3
-                }
-
-                R.id.flower_radio -> {
-                    growthState = 4
-                }
-
-                else -> {
-                    growthState = 0
-                }
+                R.id.seedling_radio -> growthState = 1
+                R.id.cutting_radio -> growthState = 2
+                R.id.veg_radio -> growthState = 3
+                R.id.flower_radio -> growthState = 4
+                else -> growthState = 0
             }
         }
 
@@ -98,38 +104,73 @@ class NewPlantStateFragment : Fragment() {
                 override fun onNothingSelected(parent: AdapterView<*>) {}
             }
 
+        binding.newPlantStateEnterBTN.setOnClickListener {
+            binding.newPlantStateML.transitionToEnd()
+        }
+
+        binding.newPlantStateSkipBTN.setOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
+        }
+
+        binding.newPlantStateDateTV.setOnClickListener {
+            showDatePickerDialog(year, month, day)
+        }
+
         binding.newPlantStateSaveBTN.setOnClickListener {
-            val potSize = binding.newPlantPotSizeET.text.toString().toDouble()
 
-            if (soil != null) {
+            var potSize: Double? = null
 
-                val repot = RepotAction(0, plant.id, soil!!.id, potSize, LocalDate.now())
-                val state = GrowthStateRecord(0, plant.id, growthState, LocalDate.now())
+            try {
+                potSize = binding.newPlantPotSizeET.text.toString().toDouble()
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Invalid pot size", Toast.LENGTH_LONG).show()
+            }
 
-                insertState(repot, state)
+            if (soil != null && potSize != null && selectedDate != null) {
+                val planted = PlantedAction(0, plant.id, soil!!.id, selectedDate!!)
+                val repot = RepotAction(0, plant.id, soil!!.id, potSize, selectedDate!!)
+                val state = GrowthStateRecord(0, plant.id, growthState, selectedDate!!)
+
+                insertState(repot, state, planted)
+
+                findNavController().navigate(R.id.homeFragment)
+            } else {
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_LONG)
+                    .show()
             }
         }
     }
 
-    fun insertState(repotAction: RepotAction, state: GrowthStateRecord) {
+    private fun insertState(repot: RepotAction, state: GrowthStateRecord, planted: PlantedAction) {
         try {
-            viewModel.insertRepot(repotAction)
-            Toast.makeText(context, "Soil inserted", Toast.LENGTH_SHORT).show()
+            viewModel.insertPlanted(planted)
+            Log.d(TAG, "Planted inserted: $planted")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error inserting planted", e)
+        }
+        try {
+            viewModel.insertRepot(repot)
+            Log.d(TAG, "Repot inserted: $repot")
 
         } catch (e: Exception) {
             Log.e(TAG, "Error updating plant", e)
-            Toast.makeText(context, "An error occurred while inserting soil", Toast.LENGTH_LONG)
-                .show()
         }
         try {
             viewModel.insertGrowthState(state)
-            Toast.makeText(context, "State inserted", Toast.LENGTH_SHORT).show()
-
+            Log.d(TAG, "Growth state inserted: $state")
         } catch (e: Exception) {
             Log.e(TAG, "Error inserting state ", e)
-            Toast.makeText(context, "An error occurred while inserting state", Toast.LENGTH_LONG)
-                .show()
         }
+    }
 
+    private fun showDatePickerDialog(year: Int, month: Int, day: Int) {
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, selectedYear, selectedMonth, selectedDay ->
+                selectedDate = LocalDate.of(selectedYear, selectedMonth + 1, selectedDay)
+                binding.newPlantStateDateTV.text = selectedDate?.format(dateFormatter)
+            }, year, month, day
+        )
+        datePickerDialog.show()
     }
 }

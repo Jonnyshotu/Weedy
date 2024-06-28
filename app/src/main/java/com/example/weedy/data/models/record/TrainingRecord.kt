@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.example.weedy.data.entities.MasterPlant
 import java.time.LocalDate
-@Entity(tableName = "trainingRecord_table",
+@Entity(tableName = "training_record_table",
     foreignKeys = [
         ForeignKey(
             entity = MasterPlant::class,
@@ -23,9 +23,9 @@ data class TrainingRecord(
 
     val plantID: Long,
 
-    @ColumnInfo(name = "trainingRecordTrainingType")
+    @ColumnInfo(name = "Training type")
     val trainingType: String,
 
-    @ColumnInfo(name = "trainingRecordDate")
+    @ColumnInfo(name = "Date")
     val date: LocalDate,
 )

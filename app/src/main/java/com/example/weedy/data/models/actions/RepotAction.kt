@@ -9,19 +9,13 @@ import com.example.weedy.data.entities.Soil
 import java.time.LocalDate
 
 @Entity(
-    tableName = "repotAction_table",
+    tableName = "repot_action_table",
     foreignKeys = [
         ForeignKey(
             entity = MasterPlant::class,
             parentColumns = ["id"],
             childColumns = ["plantID"],
             onDelete = ForeignKey.CASCADE
-        ),
-        ForeignKey(
-            entity = Soil::class,
-            parentColumns = ["id"],
-            childColumns = ["soilID"],
-            onDelete = ForeignKey.RESTRICT
         )
     ]
 )
@@ -34,9 +28,9 @@ data class RepotAction(
 
     val soilID: Long,
 
-    @ColumnInfo(name = "repotPotSize")
+    @ColumnInfo(name = "Pot size")
     val potSize: Double,
 
-    @ColumnInfo(name = "repotDate")
+    @ColumnInfo(name = "Date")
     val date: LocalDate,
 )

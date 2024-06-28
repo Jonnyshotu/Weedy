@@ -52,12 +52,6 @@ class HomeFragment : MainFragment(), OnClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.homeRefreshBTN.setOnClickListener{
-            viewModel.loadRemoteenetics()
-        }
-
-
-
         viewModel.plantList.observe(viewLifecycleOwner) {
             adapter.submitList(viewModel.plantList.value)
             Log.d("$TAG Observer", viewModel.plantList.value.toString())
@@ -66,6 +60,14 @@ class HomeFragment : MainFragment(), OnClick {
         with(binding)
         {
 
+            homeRefreshBTN.setOnClickListener {
+                viewModel.loadRemoteenetics()
+            }
+
+            homeExploreBTN.setOnClickListener {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExploreFragment())
+            }
+
             homeAddFAB.setOnClickListener {
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewPlantFragment())
             }
@@ -73,11 +75,12 @@ class HomeFragment : MainFragment(), OnClick {
     }
 
     override fun onPlantClick(plant: MasterPlant) {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
+        Log.d(TAG,"Plant id: ${plant.id}")
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(plant.id))
     }
 
     override fun onTreatmentClick(plant: MasterPlant, view: View) {
-//        showTreatmentMenu(view)
+        showTreatmentMenu(plant, view)
     }
 
     override fun onImageCaptured(imageBitmap: Bitmap) {

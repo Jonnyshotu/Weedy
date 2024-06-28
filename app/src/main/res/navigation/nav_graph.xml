@@ -40,7 +40,11 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.weedy.ui.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment" >
+        <argument
+            android:name="masterPlantDatabaseID"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/exploreFragment"
         android:name="com.example.weedy.ui.ExploreFragment"

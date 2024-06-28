@@ -50,8 +50,6 @@ class StrainRepository(private val database: PlantDatabase, private val context:
                             )
                         }
 
-                        Log.d(TAG, "Prepared genetics for database insertion $remoteGeneticList")
-
                         database.remoteGeneticDao.insertGeneticList(remoteGeneticList)
 
                         totalPages = response.meta.pagination.total_pages
@@ -96,8 +94,6 @@ class StrainRepository(private val database: PlantDatabase, private val context:
                             effects = strain.effects.toString()
                         )
                     }
-
-                    Log.d(TAG, "Prepared local genetics for database insertion $localGeneticList")
 
                     database.localGeneticDao.insertGeneticList(localGeneticList)
 

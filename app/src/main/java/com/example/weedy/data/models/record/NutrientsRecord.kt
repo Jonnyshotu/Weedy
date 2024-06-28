@@ -9,20 +9,14 @@ import com.example.weedy.data.entities.Nutrients
 import java.time.LocalDate
 
 @Entity(
-    tableName = "nutrientsRecord_table",
+    tableName = "nutrients_record_table",
     foreignKeys = [
         ForeignKey(
             entity = MasterPlant::class,
             parentColumns = ["id"],
             childColumns = ["plantID"],
             onDelete = ForeignKey.CASCADE
-        ),
-        ForeignKey(
-            entity = Nutrients::class,
-            parentColumns = ["id"],
-            childColumns = ["nutrientID"],
-            onDelete = ForeignKey.CASCADE
-        ),
+        )
     ]
 )
 data class NutrientsRecord(
@@ -34,9 +28,9 @@ data class NutrientsRecord(
 
     val nutrientID: Long,
 
-    @ColumnInfo(name = "nutrientsRecordAmount")
+    @ColumnInfo(name = "Amount")
     val amount: Double,
 
-    @ColumnInfo(name = "nutrientsRecordDate")
+    @ColumnInfo(name = "Date")
     val date: LocalDate,
 )

@@ -46,5 +46,4 @@ data class MasterPlant(
     @ColumnInfo(name = "Cycle time")
     var cycleTime: Int? = null,
 
-
     )

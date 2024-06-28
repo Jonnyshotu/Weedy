@@ -29,7 +29,7 @@ class PlantAdapter(
 
         with(holder.binding) {
             plantItemActionBTN.setOnClickListener {
-                listener.onTreatmentClick(plant, this.plantItemActionBTN)
+                listener.onTreatmentClick(plant, it)
             }
             plantItemStrainTV.text = plant.strainName
 

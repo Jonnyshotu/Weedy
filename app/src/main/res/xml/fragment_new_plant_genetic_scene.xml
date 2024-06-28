@@ -3,80 +3,134 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        android:id="@+id/transitionGeneticDetail"
-        motion:constraintSetEnd="@+id/endGeneticDetail"
-        motion:constraintSetStart="@id/startGenetic"
+        motion:constraintSetEnd="@+id/endDetail"
+        motion:constraintSetStart="@id/start"
         motion:duration="500"
-        motion:motionInterpolator="easeIn">
-        <KeyFrameSet></KeyFrameSet>
-    </Transition>
+        motion:motionInterpolator="easeIn" />
 
     <Transition
-        android:id="@+id/transitionGeneticCannabinoids"
-        motion:constraintSetEnd="@+id/endGeneticCanabinoids"
-        motion:constraintSetStart="@id/startGenetic"
+        motion:constraintSetEnd="@+id/endFlowertime"
+        motion:constraintSetStart="@id/start"
         motion:duration="500"
-        motion:motionInterpolator="easeIn">
-        <KeyFrameSet></KeyFrameSet>
-    </Transition>
+        motion:motionInterpolator="easeIn" />
 
-    <ConstraintSet android:id="@+id/startGenetic">
-        <Constraint
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
-        <Constraint
-            android:id="@+id/newPlantGeneticCV"
-            android:layout_width="0dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="8dp"
-            android:elevation="8dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/space4"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@+id/space4" />
+    <Transition
+        motion:constraintSetEnd="@+id/endCannabinoids"
+        motion:constraintSetStart="@id/start"
+        motion:duration="500"
+        motion:motionInterpolator="easeIn" />
+
+    <ConstraintSet android:id="@+id/start">
+
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/endGeneticCanabinoids">
+    <ConstraintSet android:id="@+id/endFlowertime">
+
         <Constraint
-            android:id="@+id/newPlantCannabinoidsCV"
+            android:id="@+id/newPlantFlowertimeCV"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/space4"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/newPlantCannabinoidsCV"
+            android:visibility="gone" />
 
         <Constraint
             android:id="@+id/newPlantGeneticCV"
             android:visibility="gone" />
 
+        <Constraint
+            android:id="@+id/newPlantGeneticRG"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/newPlantGeneticSaveBTN"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/newPlantDetailTitleTV"
+            android:visibility="gone" />
+
     </ConstraintSet>
 
-    <ConstraintSet android:id="@+id/endGeneticDetail">
+    <ConstraintSet android:id="@+id/endCannabinoids">
+
         <Constraint
-            android:id="@+id/newPlantGeneticCV"
+            android:id="@+id/newPlantCannabinoidsCV"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/space4"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
+            android:id="@+id/newPlantFlowertimeCV"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/newPlantGeneticCV"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/newPlantGeneticRG"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/newPlantGeneticSaveBTN"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/newPlantDetailTitleTV"
+            android:visibility="gone" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/endDetail">
+
+        <Constraint
+            android:id="@+id/newPlantGeneticCV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@+id/newPlantFlowertimeCV"
+            android:visibility="gone" />
+
+        <Constraint
             android:id="@+id/newPlantCannabinoidsCV"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/newPlantGeneticRG"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/newPlantGeneticSaveBTN"
+            android:visibility="gone" />
+
+        <Constraint
+            android:id="@+id/newPlantDetailTitleTV"
             android:visibility="gone" />
 
     </ConstraintSet>

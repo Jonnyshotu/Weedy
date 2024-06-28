@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weedy.data.models.record.WateringRecord
 import com.example.weedy.databinding.ListItemBinding
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ListWaterAdapter(private val dataset: List<WateringRecord>) : RecyclerView.Adapter<ListWaterAdapter.ListItemViewHolder>() {
 
     inner class ListItemViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val TAG = "Water Adapter"
+    private val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
@@ -24,10 +27,10 @@ class ListWaterAdapter(private val dataset: List<WateringRecord>) : RecyclerView
 
         with(holder.binding){
             listItemHeader1TV.text = "Water in ml"
-            listItemHeader2TV.text = null
+            listItemHeader2TV.text = if (listEntry.ph != null) "PH" else null
             listItemTV1.text = listEntry.amount.toString()
-            listItem2TV.text = listEntry.ph.toString()
-            listItemDateTV.text = listEntry.date.toString()
+            listItem2TV.text = if (listEntry.ph != null) listEntry.ph.toString() else null
+            listItemDateTV.text = listEntry.date.format(dateFormatter)
         }
 
     }

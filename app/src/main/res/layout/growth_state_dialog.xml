@@ -20,18 +20,18 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/newPlantgrowthStateTV"
+                android:id="@+id/dialogGrowthStateTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Select the growth sate"
+                android:text="@string/select_the_growth_sate"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <RadioGroup
-                android:id="@+id/newPlantgrowthStateRG"
+                android:id="@+id/dialogGrowthStateRG"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -41,14 +41,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantgrowthStateTV">
+                app:layout_constraintTop_toBottomOf="@+id/dialogGrowthStateTV">
 
                 <RadioButton
                     android:id="@+id/seedling_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="12dp"
-                    android:checked="true"
                     android:text="@string/seedling" />
 
                 <RadioButton

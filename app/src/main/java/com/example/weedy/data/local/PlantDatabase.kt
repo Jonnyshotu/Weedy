@@ -14,8 +14,7 @@ import com.example.weedy.data.entities.Soil
 import com.example.weedy.data.local.dao.LocalGeneticDao
 import com.example.weedy.data.local.dao.PlantDao
 import com.example.weedy.data.local.dao.RemoteGeneticDao
-import com.example.weedy.data.models.actions.GerminationSoilAction
-import com.example.weedy.data.models.actions.GerminationWaterAction
+import com.example.weedy.data.models.actions.GerminationAction
 import com.example.weedy.data.models.actions.PlantedAction
 import com.example.weedy.data.models.actions.RepotAction
 import com.example.weedy.data.models.record.GrowthStateRecord
@@ -35,8 +34,7 @@ import com.example.weedy.data.models.record.WateringRecord
         RemoteGenetic::class,
         Nutrients::class,
         Soil::class,
-        GerminationWaterAction::class,
-        GerminationSoilAction::class,
+        GerminationAction::class,
         PlantedAction::class,
         RepotAction::class,
         GrowthStateRecord::class,
