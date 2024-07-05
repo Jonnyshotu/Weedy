@@ -51,35 +51,7 @@ interface PlantDao {
 
     //endregion
 
-    //region Nutrients
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNutrient(nutrient: Nutrients)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNutrientList(nutrientList: List<Nutrients>)
-
-    @Query("SELECT * FROM nutrients_table")
-    fun getAllNutrients(): LiveData<List<Nutrients>>
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateNutrient(nutrient: Nutrients)
-    //endregion
-
-    //region Soil
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSoil(soil: Soil)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSoilList(soilList: List<Soil>)
-
-    @Query("SELECT * FROM soil_table")
-    fun getAllSoilTypes(): LiveData<List<Soil>>
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateSoil(soil: Soil)
-    //endregion
-
-    //region GerminationWater
+    //region Germination
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGermination(germination: GerminationAction)
 
@@ -96,6 +68,57 @@ interface PlantDao {
     suspend fun updatePlanted(planted: PlantedAction)
 
     //endregion
+
+    //region Watering Record
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertWateringRecord(watering: WateringRecord)
+
+    @Query("SELECT * FROM watering_record_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getWateringRecordByPlantID(plantID: Long) : LiveData<List<WateringRecord>>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateWateringRecord(watering: WateringRecord)
+
+    //endregion
+
+    //region Nutrients
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNutrient(nutrient: Nutrients)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNutrientList(nutrientList: List<Nutrients>)
+
+    @Query("SELECT * FROM nutrients_table")
+    fun getAllNutrients(): LiveData<List<Nutrients>>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateNutrient(nutrient: Nutrients)
+    //endregion
+
+    //region Nutrients Record
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNutrientsRecord(nutrients: NutrientsRecord)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateNutrientsRecord(nutrients: NutrientsRecord)
+
+    //endregion
+
+    //region Soil
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSoil(soil: Soil)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSoilList(soilList: List<Soil>)
+
+    @Query("SELECT * FROM soil_table")
+    fun getAllSoilTypes(): LiveData<List<Soil>>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateSoil(soil: Soil)
+    //endregion
+
+
 
     //region Repot
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -151,15 +174,6 @@ interface PlantDao {
 
     //endregion
 
-    //region Nutrients Record
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNutrientsRecord(nutrients: NutrientsRecord)
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateNutrientsRecord(nutrients: NutrientsRecord)
-
-    //endregion
-
     //region Repellents Record
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRepellentsRecord(repellent: RepellentsRecord)
@@ -178,15 +192,4 @@ interface PlantDao {
 
     //endregion
 
-    //region Watering Record
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertWateringRecord(watering: WateringRecord)
-
-    @Query("SELECT * FROM watering_record_table WHERE plantID == :plantID ORDER BY id DESC")
-    fun getWateringRecordByPlantID(plantID: Long) : LiveData<List<WateringRecord>>
-
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateWateringRecord(watering: WateringRecord)
-
-    //endregion
 }

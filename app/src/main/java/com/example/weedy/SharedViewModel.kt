@@ -12,6 +12,7 @@ import com.example.weedy.data.StrainRepository
 import com.example.weedy.data.local.getDatabase
 import com.example.weedy.data.local.offlineData.NutrientsProducts
 import com.example.weedy.data.local.offlineData.SoilProducts
+import com.example.weedy.data.models.actions.GerminationAction
 import com.example.weedy.data.models.actions.PlantedAction
 import com.example.weedy.data.models.actions.RepotAction
 import com.example.weedy.data.models.record.GrowthStateRecord
@@ -105,6 +106,12 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     fun insertRepot(repot: RepotAction) {
         viewModelScope.launch {
             appRepository.insertRepot(repot)
+        }
+    }
+
+    fun insertGermination(germination: GerminationAction) {
+        viewModelScope.launch {
+            appRepository.insertGermination(germination)
         }
     }
 

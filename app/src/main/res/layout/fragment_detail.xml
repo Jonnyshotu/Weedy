@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
@@ -16,7 +18,7 @@
             android:fitsSystemWindows="true"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
                 android:id="@+id/detailPlantIV"
@@ -34,9 +36,53 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"
-                app:title="Plant Strain" />
+                app:navigationIcon="@drawable/back_arrow_white"
+                app:titleTextColor="@color/md_theme_background_highContrast" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/detailTL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="scrollable">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -45,422 +91,17 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/detailPlant"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.DetailFragment">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="24dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailInfoGeneticCV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="8dp"
-                android:elevation="12dp"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/detailVP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/detailGeneticCL"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/detailRuderalisDisplayTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="%"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/detailIndicaDisplayTV"
-                        app:layout_constraintTop_toTopOf="@+id/detailIndicaDisplayTV" />
-
-                    <TextView
-                        android:id="@+id/detailIndicaDisplayTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:gravity="center"
-                        android:text="%"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/detailSativaDisplayTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="%"
-                        app:layout_constraintEnd_toStartOf="@+id/detailIndicaDisplayTV"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/detailIndicaDisplayTV" />
-
-                    <TextView
-                        android:id="@+id/detailRuderalisTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Ruderalis"
-                        app:layout_constraintEnd_toEndOf="@+id/detailRuderalisDisplayTV"
-                        app:layout_constraintStart_toStartOf="@+id/detailRuderalisDisplayTV"
-                        app:layout_constraintTop_toTopOf="@+id/detailIndicaTV" />
-
-                    <TextView
-                        android:id="@+id/detailIndicaTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:gravity="center"
-                        android:text="Indica"
-                        app:layout_constraintEnd_toEndOf="@+id/detailIndicaDisplayTV"
-                        app:layout_constraintStart_toStartOf="@+id/detailIndicaDisplayTV"
-                        app:layout_constraintTop_toBottomOf="@+id/detailIndicaDisplayTV" />
-
-                    <TextView
-                        android:id="@+id/detailSativaTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Sativa"
-                        app:layout_constraintEnd_toEndOf="@+id/detailSativaDisplayTV"
-                        app:layout_constraintStart_toStartOf="@+id/detailSativaDisplayTV"
-                        app:layout_constraintTop_toTopOf="@+id/detailIndicaTV" />
-
-                    <TextView
-                        android:id="@+id/detailGerminationTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="TextView"
-                        app:layout_constraintEnd_toEndOf="@+id/detailIndicaTV"
-                        app:layout_constraintStart_toStartOf="@+id/detailIndicaTV"
-                        app:layout_constraintTop_toBottomOf="@+id/detailIndicaTV" />
-
-                    <TextView
-                        android:id="@+id/detailManufacturerTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="Manufacturer"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/detailIndicaTV"
-                        app:layout_constraintStart_toStartOf="@+id/detailIndicaTV"
-                        app:layout_constraintTop_toBottomOf="@+id/detailGerminationTV" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailProgressCv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:elevation="12dp"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="@+id/detailInfoGeneticCV"
-                app:layout_constraintStart_toStartOf="@+id/detailInfoGeneticCV"
-                app:layout_constraintTop_toBottomOf="@+id/detailInfoGeneticCV">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/detailProgressTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="Growth progress"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/detailProgressStartGerminationWaterTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="Water germination"
-                        app:layout_constraintEnd_toEndOf="@+id/detailProgressTV"
-                        app:layout_constraintStart_toStartOf="@+id/detailProgressTV"
-                        app:layout_constraintTop_toBottomOf="@+id/detailProgressTV" />
-
-                    <TextView
-                        android:id="@+id/detailProgressSoilTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Soil germination"
-                        app:layout_constraintEnd_toEndOf="@+id/detailProgressStartGerminationWaterTV"
-                        app:layout_constraintStart_toStartOf="@+id/detailProgressStartGerminationWaterTV"
-                        app:layout_constraintTop_toBottomOf="@+id/detailProgressStartGerminationWaterTV" />
-
-                    <TextView
-                        android:id="@+id/detailProgressWeekOfTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="example"
-                        app:layout_constraintEnd_toEndOf="@+id/detailProgressTV"
-                        app:layout_constraintStart_toStartOf="@+id/detailProgressTV"
-                        app:layout_constraintTop_toBottomOf="@+id/detailProgressSoilTV" />
-
-                    <TextView
-                        android:id="@+id/detailProgressStartDateTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:text="example"
-                        app:layout_constraintBottom_toTopOf="@+id/detaillProgressWeekPB"
-                        app:layout_constraintStart_toStartOf="@+id/detaillProgressWeekPB" />
-
-                    <TextView
-                        android:id="@+id/detailProgressEndDateTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:text="example"
-                        app:layout_constraintBottom_toTopOf="@+id/detaillProgressWeekPB"
-                        app:layout_constraintEnd_toEndOf="@+id/detaillProgressWeekPB" />
-
-                    <ProgressBar
-                        android:id="@+id/detaillProgressWeekPB"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/detailProgressWeekOfTV" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailLightCV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:elevation="12dp"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="@+id/detailProgressCv"
-                app:layout_constraintStart_toStartOf="@+id/detailProgressCv"
-                app:layout_constraintTop_toBottomOf="@+id/detailProgressCv">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/detaillLightTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="Light"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/detaillLightHoursTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="example"
-                        app:layout_constraintEnd_toEndOf="@+id/detaillLightTV"
-                        app:layout_constraintStart_toStartOf="@+id/detaillLightTV"
-                        app:layout_constraintTop_toBottomOf="@+id/detaillLightTV" />
-
-                    <ProgressBar
-                        android:id="@+id/detaillLightCyclePB"
-                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:max="24"
-                        android:progress="0"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/detaillLightHoursTV" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/detailWateringTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="Watering History"
-                app:layout_constraintEnd_toEndOf="@+id/detailLightCV"
-                app:layout_constraintStart_toStartOf="@+id/detailLightCV"
-                app:layout_constraintTop_toBottomOf="@+id/detailLightCV" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailWaterCV"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="-200dp"
-                app:layout_constraintBottom_toBottomOf="@+id/detailWateringTV"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailWateringTV">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/detailWaterRV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item" />
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/detailNutrientsTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="Nutrients history"
-                app:layout_constraintEnd_toEndOf="@+id/detailWateringTV"
-                app:layout_constraintStart_toStartOf="@+id/detailWateringTV"
-                app:layout_constraintTop_toBottomOf="@+id/detailWaterCV" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailNutrientsCV"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="-200dp"
-                app:layout_constraintBottom_toBottomOf="@+id/detailNutrientsTV"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailNutrientsTV">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/detailNutrientsRV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item" />
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/detailRepellentsTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="Repellents history"
-                app:layout_constraintEnd_toEndOf="@+id/detailNutrientsTV"
-                app:layout_constraintStart_toStartOf="@+id/detailNutrientsTV"
-                app:layout_constraintTop_toBottomOf="@+id/detailNutrientsCV" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailRepellentsCV"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="-200dp"
-                app:layout_constraintBottom_toBottomOf="@+id/detailRepellentsTV"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailRepellentsTV">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/detailRepellentsRV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item" />
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/detailTrainingTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="Training history"
-                app:layout_constraintEnd_toEndOf="@+id/detailRepellentsTV"
-                app:layout_constraintStart_toStartOf="@+id/detailRepellentsTV"
-                app:layout_constraintTop_toBottomOf="@+id/detailRepellentsCV" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailTrainingCV"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="-200dp"
-                app:layout_constraintBottom_toBottomOf="@+id/detailTrainingTV"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailTrainingTV">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/detailTrainingRV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item" />
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/detailMeasurementsTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="Mesaurements history"
-                app:layout_constraintEnd_toEndOf="@+id/detailTrainingTV"
-                app:layout_constraintStart_toStartOf="@+id/detailTrainingTV"
-                app:layout_constraintTop_toBottomOf="@+id/detailTrainingCV" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailMeasurementsCV"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="-200dp"
-                app:layout_constraintBottom_toBottomOf="@+id/detailMeasurementsTV"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailMeasurementsTV">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/detailMeasurementsRV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item_measurements" />
-
-            </androidx.cardview.widget.CardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

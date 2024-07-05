@@ -5,6 +5,7 @@ import com.example.weedy.data.local.PlantDatabase
 import com.example.weedy.data.entities.Nutrients
 import com.example.weedy.data.entities.Soil
 import com.example.weedy.data.entities.MasterPlant
+import com.example.weedy.data.models.actions.GerminationAction
 import com.example.weedy.data.models.actions.PlantedAction
 import com.example.weedy.data.models.actions.RepotAction
 import com.example.weedy.data.models.record.GrowthStateRecord
@@ -29,6 +30,9 @@ class AppRepository(private val database: PlantDatabase) {
 
 
     suspend fun insertPlanted(planted: PlantedAction) = database.plantDao.insertPlanted(planted)
+    suspend fun insertGermination(germination: GerminationAction) =
+        database.plantDao.insertGermination(germination)
+
     suspend fun insertRepot(repot: RepotAction) = database.plantDao.insertRepot(repot)
     suspend fun insertGrowthState(state: GrowthStateRecord) =
         database.plantDao.insertGrowthStateRecord(state)

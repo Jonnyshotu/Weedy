@@ -1,5 +1,7 @@
 package com.example.weedy.ui.new_plant
 
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,14 +18,16 @@ import com.example.weedy.R
 import com.example.weedy.SharedViewModel
 import com.example.weedy.data.entities.MasterPlant
 import com.example.weedy.databinding.FragmentNewPlantGeneticBinding
+import com.example.weedy.ui.main.MainFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class NewPlantGeneticFragment : Fragment() {
+class NewPlantGeneticFragment : MainFragment() {
 
     private val TAG = "New Plant Genetic Fragment"
     private lateinit var binding: FragmentNewPlantGeneticBinding
     private val viewModel: SharedViewModel by activityViewModels()
+
     private val args: NewPlantGeneticFragmentArgs by navArgs()
     private lateinit var plant: MasterPlant
 
@@ -222,6 +226,7 @@ class NewPlantGeneticFragment : Fragment() {
      * @param plant the plant to be processed
      */
     private fun updatePlant(plant: MasterPlant) {
+
         try {
             viewModel.updatePlant(plant)
             Toast.makeText(context, "Plant updated", Toast.LENGTH_SHORT).show()
@@ -236,46 +241,50 @@ class NewPlantGeneticFragment : Fragment() {
      *
      */
     private fun expandDetail() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            delay(600)
-            with(binding) {
-                newPlantDetailBackgroundIV.visibility = View.GONE
-                newPlantDetailTitleTV.visibility = View.GONE
-                newPlantGeneticStrainTV.visibility = View.VISIBLE
-                newPlantSativaTV.visibility = View.VISIBLE
-                newPlantSativaResultTV.visibility = View.VISIBLE
-                newPlantGeneticSativaSB.visibility = View.VISIBLE
-                newPlantIndicaTV.visibility = View.VISIBLE
-                newPlantIndicaResultTV.visibility = View.VISIBLE
-                newPlantGeneticIndicaSB.visibility = View.VISIBLE
-                newPlantRuderalisTV.visibility = View.VISIBLE
-                newPlantRuderalisResultTV.visibility = View.VISIBLE
-                newPlantGeneticRuderalisSB.visibility = View.VISIBLE
-                newPlantHybridCB.visibility = View.VISIBLE
-                newPlantGeneticDominanceRG.visibility = View.VISIBLE
-            }
+
+        with(binding) {
+
+            animateViewToGone(newPlantDetailBackgroundIV)
+            animateViewToGone(newPlantDetailTitleTV)
+
+            animateViewToVisible(newPlantGeneticStrainTV)
+            animateViewToVisible(newPlantSativaTV)
+            animateViewToVisible(newPlantSativaResultTV)
+            animateViewToVisible(newPlantGeneticSativaSB)
+            animateViewToVisible(newPlantIndicaTV)
+            animateViewToVisible(newPlantIndicaResultTV)
+            animateViewToVisible(newPlantGeneticIndicaSB)
+            animateViewToVisible(newPlantRuderalisTV)
+            animateViewToVisible(newPlantRuderalisResultTV)
+            animateViewToVisible(newPlantGeneticRuderalisSB)
+            animateViewToVisible(newPlantHybridCB)
+            animateViewToVisible(newPlantGeneticDominanceRG)
         }
+
     }
 
     /** Collapse detail section
      *
      */
     private fun collapseDetail() {
+
         with(binding) {
-            newPlantDetailBackgroundIV.visibility = View.VISIBLE
-            newPlantDetailTitleTV.visibility = View.VISIBLE
-            newPlantGeneticStrainTV.visibility = View.INVISIBLE
-            newPlantSativaTV.visibility = View.INVISIBLE
-            newPlantSativaResultTV.visibility = View.INVISIBLE
-            newPlantGeneticSativaSB.visibility = View.INVISIBLE
-            newPlantIndicaTV.visibility = View.INVISIBLE
-            newPlantIndicaResultTV.visibility = View.INVISIBLE
-            newPlantGeneticIndicaSB.visibility = View.INVISIBLE
-            newPlantRuderalisTV.visibility = View.INVISIBLE
-            newPlantRuderalisResultTV.visibility = View.INVISIBLE
-            newPlantGeneticRuderalisSB.visibility = View.INVISIBLE
-            newPlantHybridCB.visibility = View.INVISIBLE
-            newPlantGeneticDominanceRG.visibility = View.INVISIBLE
+
+            animateViewToVisible(newPlantDetailBackgroundIV)
+            animateViewToVisible(newPlantDetailTitleTV)
+
+            animateViewToInvisible(newPlantGeneticStrainTV)
+            animateViewToInvisible(newPlantSativaTV)
+            animateViewToInvisible(newPlantSativaResultTV)
+            animateViewToInvisible(newPlantGeneticSativaSB)
+            animateViewToInvisible(newPlantIndicaTV)
+            animateViewToInvisible(newPlantIndicaResultTV)
+            animateViewToInvisible(newPlantGeneticIndicaSB)
+            animateViewToInvisible(newPlantRuderalisTV)
+            animateViewToInvisible(newPlantRuderalisResultTV)
+            animateViewToInvisible(newPlantGeneticRuderalisSB)
+            animateViewToInvisible(newPlantHybridCB)
+            animateViewToInvisible(newPlantGeneticDominanceRG)
         }
     }
 
@@ -283,16 +292,16 @@ class NewPlantGeneticFragment : Fragment() {
      *
      */
     private fun expandCannabinoids() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            delay(600)
-            with(binding) {
-                newPlantCannabinoidsBackgroundIV.visibility = View.GONE
-                newPlantCannabinoidsTitleTV.visibility = View.GONE
-                newPlantTHCTV.visibility = View.VISIBLE
-                newPlantTHCSB.visibility = View.VISIBLE
-                newPlantCBDTV.visibility = View.VISIBLE
-                newPlantCBDSB.visibility = View.VISIBLE
-            }
+
+        with(binding) {
+
+            animateViewToGone(newPlantCannabinoidsBackgroundIV)
+            animateViewToGone(newPlantCannabinoidsTitleTV)
+
+            animateViewToVisible(newPlantTHCTV)
+            animateViewToVisible(newPlantTHCSB)
+            animateViewToVisible(newPlantCBDTV)
+            animateViewToVisible(newPlantCBDSB)
         }
     }
 
@@ -300,13 +309,16 @@ class NewPlantGeneticFragment : Fragment() {
      *
      */
     private fun collapseCannabinoids() {
+
         with(binding) {
-            newPlantCannabinoidsBackgroundIV.visibility = View.VISIBLE
-            newPlantCannabinoidsTitleTV.visibility = View.VISIBLE
-            newPlantTHCTV.visibility = View.INVISIBLE
-            newPlantTHCSB.visibility = View.INVISIBLE
-            newPlantCBDTV.visibility = View.INVISIBLE
-            newPlantCBDSB.visibility = View.INVISIBLE
+
+            animateViewToVisible(newPlantCannabinoidsBackgroundIV)
+            animateViewToVisible(newPlantCannabinoidsTitleTV)
+
+            animateViewToInvisible(newPlantTHCSB)
+            animateViewToInvisible(newPlantTHCSB)
+            animateViewToInvisible(newPlantCBDTV)
+            animateViewToInvisible(newPlantCBDSB)
         }
     }
 
@@ -314,15 +326,16 @@ class NewPlantGeneticFragment : Fragment() {
      *
      */
     private fun expandFlowertime() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            delay(600)
-            with(binding) {
-                newPlantFlowertimeBackgroundIV.visibility = View.GONE
-                newPlantFlowertimeTitleTV.visibility = View.GONE
-                newPlantFlowertimeDescriptionTV.visibility = View.VISIBLE
-                newPlantFlowertimeSB.visibility = View.VISIBLE
-                newPlantFlowertimeDisplayTV.visibility = View.VISIBLE
-            }
+
+        with(binding) {
+
+            animateViewToGone(newPlantFlowertimeBackgroundIV)
+            animateViewToGone(newPlantFlowertimeTitleTV)
+
+
+            animateViewToVisible(newPlantFlowertimeDescriptionTV)
+            animateViewToVisible(newPlantFlowertimeSB)
+            animateViewToVisible(newPlantFlowertimeDisplayTV)
         }
     }
 
@@ -330,12 +343,21 @@ class NewPlantGeneticFragment : Fragment() {
      *
      */
     private fun collapseFlowertime() {
+
         with(binding) {
-            newPlantFlowertimeBackgroundIV.visibility = View.VISIBLE
-            newPlantFlowertimeTitleTV.visibility = View.VISIBLE
-            newPlantFlowertimeDescriptionTV.visibility = View.INVISIBLE
-            newPlantFlowertimeSB.visibility = View.INVISIBLE
-            newPlantFlowertimeDisplayTV.visibility = View.INVISIBLE
+
+            animateViewToVisible(newPlantFlowertimeBackgroundIV)
+            animateViewToVisible(newPlantFlowertimeTitleTV)
+
+            animateViewToInvisible(newPlantFlowertimeDescriptionTV)
+            animateViewToInvisible(newPlantFlowertimeSB)
+            animateViewToInvisible(newPlantFlowertimeDisplayTV)
         }
+    }
+
+    override fun onImageCaptured(imageBitmap: Bitmap) {
+    }
+
+    override fun onImagePicked(imageUri: Uri?) {
     }
 }

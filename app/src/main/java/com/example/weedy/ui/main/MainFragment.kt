@@ -64,9 +64,8 @@ abstract class MainFragment : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-                // All permissions are granted
             } else {
-                Toast.makeText(context, "Permissions not granted", Toast.LENGTH_SHORT).show()
+                Log.d(TAG,"Camera permissions not granted")
             }
         }
     }
@@ -170,7 +169,7 @@ abstract class MainFragment : Fragment() {
                     val dialogView =
                         LayoutInflater.from(v.context).inflate(R.layout.water_dialog, null, false)
                     val input = dialogView.findViewById<EditText>(R.id.waterDialogET)
-                    Log.d(TAG,"Watering clicked")
+                    Log.d(TAG, "Watering clicked")
 
                     MaterialAlertDialogBuilder(v.context).setTitle(resources.getString(R.string.watering))
                         .setView(dialogView).setNegativeButton("Cancel") { _, _ ->
@@ -178,7 +177,7 @@ abstract class MainFragment : Fragment() {
                             val watering = input.text.toString().toDoubleOrNull()
                             try {
                                 if (watering != null) {
-                                    Log.d(TAG,"Watering: $watering")
+                                    Log.d(TAG, "Watering: $watering")
 
                                     viewModel.insertWatering(
                                         WateringRecord(
@@ -211,7 +210,7 @@ abstract class MainFragment : Fragment() {
                     var items: List<String> = emptyList()
                     viewModel.nutrientsList.observe(viewLifecycleOwner) { nutrientsList ->
                         items = nutrientsList.map { it.name }
-                        Log.d(TAG,"Nutrients list: $items")
+                        Log.d(TAG, "Nutrients list: $items")
                     }
                     val adapter = ArrayAdapter(
                         v.context, android.R.layout.simple_spinner_dropdown_item, items
@@ -291,10 +290,11 @@ abstract class MainFragment : Fragment() {
                         }.setPositiveButton("Save") { _, _ ->
                             val selectedId = radioGroup.checkedRadioButtonId
                             val growthState = when (selectedId) {
-                                R.id.seedling_radio -> 1
-                                R.id.cutting_radio -> 2
-                                R.id.veg_radio -> 3
-                                R.id.flower_radio -> 4
+                                R.id.germination_radio -> 1
+                                R.id.seedling_radio -> 2
+                                R.id.cutting_radio -> 3
+                                R.id.veg_radio -> 4
+                                R.id.flower_radio -> 5
                                 else -> 0
                             }
                             try {
@@ -328,7 +328,7 @@ abstract class MainFragment : Fragment() {
                     var items: List<String> = emptyList()
                     viewModel.soilList.observe(viewLifecycleOwner) { soilList ->
                         items = soilList.map { it.name }
-                        Log.d(TAG,"Soil list: $items")
+                        Log.d(TAG, "Soil list: $items")
 
                     }
                     val adapter = ArrayAdapter(
@@ -487,6 +487,49 @@ abstract class MainFragment : Fragment() {
             }
         }
         popup.show()
+    }
+
+    open fun animateViewToGone(view: View) {
+        view.animate()
+            .alpha(0f)
+            .scaleX(0f)
+            .scaleY(0f)
+            .setDuration(300)
+            .withEndAction {
+                view.visibility = View.GONE
+                view.alpha = 1f
+                view.scaleX = 1f
+                view.scaleY = 1f
+            }
+            .start()
+    }
+
+    open fun animateViewToInvisible(view: View){
+        view.animate()
+            .alpha(0f)
+            .scaleX(0f)
+            .scaleY(0f)
+            .setDuration(300)
+            .withEndAction {
+                view.visibility = View.INVISIBLE
+                view.alpha = 1f
+                view.scaleX = 1f
+                view.scaleY = 1f
+            }
+            .start()
+    }
+
+    open fun animateViewToVisible(view: View) {
+        view.visibility = View.VISIBLE
+        view.alpha = 0f
+        view.scaleX = 0f
+        view.scaleY = 0f
+        view.animate()
+            .alpha(1f)
+            .scaleX(1f)
+            .scaleY(1f)
+            .setDuration(300)
+            .start()
     }
 }
 

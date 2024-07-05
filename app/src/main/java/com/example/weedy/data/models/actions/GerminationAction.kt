@@ -23,7 +23,7 @@ data class GerminationAction(
 
     val plantID: Long,
 
-    val medium: String,
+    val medium: String? = null,
 
     val germinationStart: LocalDate,
 

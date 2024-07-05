@@ -39,7 +39,7 @@
         tools:layout="@layout/fragment_checkup" />
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.weedy.ui.DetailFragment"
+        android:name="com.example.weedy.ui.detail.DetailFragment"
         android:label="DetailFragment" >
         <argument
             android:name="masterPlantDatabaseID"

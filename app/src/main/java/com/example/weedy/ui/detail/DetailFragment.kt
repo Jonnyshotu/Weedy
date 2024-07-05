@@ -1,4 +1,4 @@
-package com.example.weedy.ui
+package com.example.weedy.ui.detail
 
 import android.graphics.Bitmap
 import android.net.Uri
@@ -7,9 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.weedy.SharedViewModel
 import com.example.weedy.adapter.list.ListMeasurementsAdapter
 import com.example.weedy.adapter.list.ListNutrientsAdapter
@@ -19,6 +23,7 @@ import com.example.weedy.adapter.list.ListWaterAdapter
 import com.example.weedy.data.entities.MasterPlant
 import com.example.weedy.databinding.FragmentDetailBinding
 import com.example.weedy.ui.main.MainFragment
+import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailFragment : MainFragment() {
 
@@ -36,7 +41,6 @@ class DetailFragment : MainFragment() {
     private lateinit var repellentsAdapter: ListRepellentsAdapter
     private lateinit var trainingAdapter: ListTrainingAdapter
     private lateinit var measurementsAdapter: ListMeasurementsAdapter
-    private lateinit var waterRecyclerView: RecyclerView
     private lateinit var nutrientsRecyclerView: RecyclerView
     private lateinit var repellentsRecyclerView: RecyclerView
     private lateinit var trainingRecyclerView: RecyclerView
@@ -44,48 +48,81 @@ class DetailFragment : MainFragment() {
 
     //endregion
 
+    private inner class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+        override fun getItemCount(): Int = 7
+
+        override fun createFragment(position: Int): Fragment {
+            return when (position) {
+                0 -> DetailHomeFragment()
+                1 -> DetailWaterFragment()
+                2 -> DetailNutrientsFragment()
+                3 -> DetailRepellentsFragment()
+                4 -> DetailTrainingFragment()
+                5 -> DetailMeasurementsFragment()
+                6 -> DetailLightFragment()
+                else -> throw IllegalStateException("Unexpected position $position")
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDetailBinding.inflate(inflater)
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Get the plant ID passed via navigation
+        setupViewPager()
+        setupPlantData()
+
+        binding.detailToolbar.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
+    private fun setupViewPager() {
+        val viewPagerAdapter = ViewPagerAdapter(requireActivity())
+        binding.detailVP.adapter = viewPagerAdapter
+
+        TabLayoutMediator(binding.detailTL, binding.detailVP) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Details"
+                1 -> "Water"
+                2 -> "Nutrients"
+                3 -> "Repellents"
+                4 -> "Training"
+                5 -> "Measurements"
+                6 -> "Light"
+                else -> null
+            }
+        }.attach()
+    }
+
+    private fun setupPlantData() {
         val databaseID = args.masterPlantDatabaseID
         Log.d(TAG, "Navigation plant ID: $databaseID")
 
-        // Retrieve the plant data by ID
         viewModel.getPlantByID(databaseID)
 
-        // Observe the plant data
         viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
             plant = masterPlant
-
-            with(binding) {
-
-                detailToolbar.title = plant.strainName
-                detailIndicaDisplayTV.text = plant.indica
-                detailSativaDisplayTV.text = plant.sativa
-                detailRuderalisDisplayTV.text = plant.ruderalis
-                detailManufacturerTV.text = plant.seedCompany
-                detailGerminationTV.text = plant.breedingType
-
-                waterRecyclerView = detailWaterRV
-
-                viewModel.getWateringRecordByPlantID(plant.id).observe(viewLifecycleOwner) { wateringRecords ->
-                    Log.d(TAG, "Watering Recordsize: ${wateringRecords.size}")
-                    waterRecyclerView.adapter = ListWaterAdapter(wateringRecords)
-                }
-            }
+            updateUI()
         }
+    }
 
-        with(binding) {
+    private fun updateUI() {
+
+        binding.detailToolbar.title = plant.strainName
+        Log.d(TAG, "update ui: ${plant.strainName}")
+
+    }
+
+
 
 //            detailProgressStartDateTV.text = plant.germinationWaterActions.find { it. }
 //            val weeksTilHarvest = plant.harvestDate
@@ -112,7 +149,7 @@ class DetailFragment : MainFragment() {
 //                detaillLightHoursTV.text = "No data"
 //            }
 
-            //region Recycler Views
+    //region Recycler Views
 //
 //            nutrientsRecyclerView = detailNutrientsRV
 //
@@ -155,9 +192,8 @@ class DetailFragment : MainFragment() {
 //            }
 //
 
-            //endregion
-        }
-    }
+    //endregion
+
 
     override fun onImageCaptured(imageBitmap: Bitmap) {
         TODO("Not yet implemented")

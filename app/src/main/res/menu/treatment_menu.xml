@@ -4,9 +4,6 @@
         android:id="@+id/photo_option"
         android:title="Photo" />
     <item
-        android:id="@+id/health_option"
-        android:title="Health" />
-    <item
         android:id="@+id/watering_option"
         android:title="Watering" />
     <item
@@ -16,14 +13,17 @@
         android:id="@+id/repellents_option"
         android:title="Repellents" />
     <item
+        android:id="@+id/training_option"
+        android:title="Training" />
+    <item
+        android:id="@+id/health_option"
+        android:title="Health" />
+    <item
         android:id="@+id/growth_state_change_option"
         android:title="Growth state change" />
     <item
         android:id="@+id/repot_option"
         android:title="Repot" />
-    <item
-        android:id="@+id/training_option"
-        android:title="Training" />
     <item
         android:id="@+id/light_option"
         android:title="Light cycle" />
