@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("androidx.navigation.safeargs.kotlin")
-    id ("kotlin-kapt")
+    id("kotlin-kapt")
 }
 
 android {
@@ -55,27 +55,31 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // Flowing drawer
+    implementation("com.mxn.soul:flowingdrawer-core:2.1.0")
+    implementation("com.nineoldandroids:library:2.4.0")
+
     // GSON
-    implementation (libs.gson)
+    implementation(libs.gson)
 
     // Logging Interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 
     // Retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
     // Moshi
-    implementation ("com.squareup.moshi:moshi-kotlin:1.15.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
 
     // Coil
-    implementation ("io.coil-kt:coil:2.4.0")
+    implementation("io.coil-kt:coil:2.4.0")
 
     // Room Dependencies
-    implementation ("androidx.room:room-runtime:2.6.1")
-    kapt ("androidx.room:room-compiler:2.6.1")
-    implementation ("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
 
     // Jetty Server
     implementation("org.eclipse.jetty:jetty-server:9.4.44.v20210927")

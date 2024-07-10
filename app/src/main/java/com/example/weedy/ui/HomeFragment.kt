@@ -25,7 +25,6 @@ class HomeFragment : MainFragment(), OnClick {
     private lateinit var recyclerView: RecyclerView
     private val viewModel: SharedViewModel by activityViewModels()
 
-
     private val TAG = "Home Fragment"
 
     override fun onCreateView(
@@ -57,25 +56,13 @@ class HomeFragment : MainFragment(), OnClick {
             Log.d("$TAG Observer", viewModel.plantList.value.toString())
         }
 
-        with(binding)
-        {
-
-            homeRefreshBTN.setOnClickListener {
-                viewModel.loadRemoteenetics()
-            }
-
-            homeExploreBTN.setOnClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToExploreFragment())
-            }
-
-            homeAddFAB.setOnClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewPlantFragment())
-            }
+        binding.homeAddFAB.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNewPlantFragment())
         }
     }
 
     override fun onPlantClick(plant: MasterPlant) {
-        Log.d(TAG,"Plant id: ${plant.id}")
+        Log.d(TAG, "Plant id: ${plant.id}")
         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(plant.id))
     }
 

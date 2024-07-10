@@ -9,13 +9,13 @@
 
     <item
         android:id="@+id/edit"
-        android:icon="@drawable/edit"
+        android:icon="@drawable/edit_black"
         android:title="@string/edit_icon"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/delete"
-        android:icon="@drawable/delete"
+        android:icon="@drawable/delete_black"
         android:title="@string/delete_icon"
         app:showAsAction="ifRoom" />
 

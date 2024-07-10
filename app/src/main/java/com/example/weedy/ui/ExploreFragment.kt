@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.example.weedy.R
 import com.example.weedy.SharedViewModel
 import com.example.weedy.databinding.FragmentExploreBinding
 
@@ -31,6 +32,14 @@ class ExploreFragment : Fragment() {
         viewModel.localGeneticCollection.observe(viewLifecycleOwner) { genetics ->
             adapter = ListExploreAdapter(genetics)
             binding.exploreRV.adapter = adapter
+        }
+
+        binding.exploreFilterBTN.setOnClickListener {
+            binding.exploreML.transitionToState(R.id.endFilter)
+        }
+
+        binding.exploreTHCSlider.addOnChangeListener { _, thc, _ ->
+            binding.exploreTHCTV.text = thc.toString()
         }
     }
 }

@@ -1,20 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/exploreCL"
+    android:id="@+id/exploreML"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_explore_scene"
     tools:context=".ui.ExploreFragment">
+
+    <View
+        android:id="@+id/exploreHeaderV"
+        android:layout_width="wrap_content"
+        android:layout_height="260dp"
+        android:background="@drawable/gradient_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/exploreHeaderTV"
+        style="@style/headTitles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/explore_header"
+        app:layout_constraintEnd_toEndOf="@+id/exploreHeaderV"
+        app:layout_constraintStart_toStartOf="@+id/exploreHeaderV"
+        app:layout_constraintTop_toTopOf="@+id/exploreHeaderV" />
+
+    <Button
+        android:id="@+id/exploreFilterBTN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Filter"
+        app:layout_constraintEnd_toEndOf="@+id/exploreHeaderV"
+        app:layout_constraintStart_toStartOf="@+id/exploreHeaderV"
+        app:layout_constraintTop_toBottomOf="@+id/exploreHeaderV" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/exploreSearchCV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exploreHeaderV">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
+                android:id="@+id/space6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/repellentsDialogET"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:hint="@string/search"
+                    android:inputType="text"
+                    android:minLines="5" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/exploreRG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/space6"
+                app:layout_constraintEnd_toStartOf="@+id/space6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/space6">
+
+                <RadioButton
+                    android:id="@+id/exploreSativaRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:text="@string/sativa" />
+
+                <RadioButton
+                    android:id="@+id/exploreIndicaRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:text="@string/indica" />
+
+                <RadioButton
+                    android:id="@+id/exploreHybridRB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="16dp"
+                    android:text="@string/hybrid" />
+
+            </RadioGroup>
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/exploreTHCSlider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:stepSize="1"
+                android:value="0"
+                android:valueFrom="0"
+                android:valueTo="35"
+                app:labelBehavior="floating"
+                app:layout_constraintBottom_toBottomOf="@+id/space6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/space6"
+                app:layout_constraintTop_toTopOf="@+id/space6"
+                app:thumbColor="@color/md_theme_tertiary"
+                app:trackHeight="16dp" />
+
+            <TextView
+                android:id="@+id/exploreSelectTHCTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/select_thc"
+                app:layout_constraintBottom_toTopOf="@+id/exploreTHCSlider"
+                app:layout_constraintStart_toStartOf="@+id/space6" />
+
+            <TextView
+                android:id="@+id/exploreTHCTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/exploreTHCSlider"
+                app:layout_constraintStart_toStartOf="@+id/exploreTHCSlider"
+                app:layout_constraintTop_toBottomOf="@+id/exploreTHCSlider" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exploreRV"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exploreFilterBTN"
         tools:listitem="@layout/list_item_explore" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
