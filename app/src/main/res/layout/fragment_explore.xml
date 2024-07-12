@@ -37,7 +37,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Filter"
+        android:text="@string/filter_btn"
         app:layout_constraintEnd_toEndOf="@+id/exploreHeaderV"
         app:layout_constraintStart_toStartOf="@+id/exploreHeaderV"
         app:layout_constraintTop_toBottomOf="@+id/exploreHeaderV" />
@@ -48,6 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
+        android:elevation="24dp"
+        app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exploreHeaderV">
@@ -63,10 +65,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/exploreSearchETLayout" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
+                android:id="@+id/exploreSearchETLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -78,7 +80,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/repellentsDialogET"
+                    android:id="@+id/exploreSearchET"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="top"
@@ -119,6 +121,26 @@
 
             </RadioGroup>
 
+            <TextView
+                android:id="@+id/exploreSelectTHCTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/select_thc"
+                app:layout_constraintBottom_toTopOf="@+id/exploreTHCSlider"
+                app:layout_constraintStart_toStartOf="@+id/space6" />
+
+            <TextView
+                android:id="@+id/exploreTHCTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/exploreSelectTHCTV"
+                app:layout_constraintEnd_toEndOf="@+id/exploreTHCSlider"
+                app:layout_constraintTop_toTopOf="@+id/exploreSelectTHCTV" />
+
+
             <com.google.android.material.slider.Slider
                 android:id="@+id/exploreTHCSlider"
                 android:layout_width="0dp"
@@ -136,23 +158,14 @@
                 app:thumbColor="@color/md_theme_tertiary"
                 app:trackHeight="16dp" />
 
-            <TextView
-                android:id="@+id/exploreSelectTHCTV"
+            <Button
+                android:id="@+id/exploreResetBTN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="24dp"
-                android:text="@string/select_thc"
-                app:layout_constraintBottom_toTopOf="@+id/exploreTHCSlider"
-                app:layout_constraintStart_toStartOf="@+id/space6" />
-
-            <TextView
-                android:id="@+id/exploreTHCTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="@string/reset_btn"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/exploreTHCSlider"
-                app:layout_constraintStart_toStartOf="@+id/exploreTHCSlider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/space6"
                 app:layout_constraintTop_toBottomOf="@+id/exploreTHCSlider" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -168,5 +181,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exploreFilterBTN"
-        tools:listitem="@layout/list_item_explore" />
+        tools:listitem="@layout/list_item_explore">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/explorePageUPBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:src="@drawable/arrow_up_white"
+        app:backgroundTint="#80A2A2A2"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </androidx.constraintlayout.motion.widget.MotionLayout>

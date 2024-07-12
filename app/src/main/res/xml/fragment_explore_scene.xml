@@ -3,33 +3,49 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetEnd="@id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="500"
-        motion:motionInterpolator="overshoot">
+        motion:motionInterpolator="linear">
         <OnSwipe
             motion:dragDirection="dragUp"
-            motion:touchAnchorId="@id/exploreRV"/>
-
+            motion:touchAnchorId="@id/exploreRV" />
     </Transition>
 
     <Transition
-        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetEnd="@id/end"
         motion:constraintSetStart="@id/endFilter"
+        motion:duration="500"
+        motion:motionInterpolator="easeOut">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/exploreRV" />
+    </Transition>
+
+    <Transition
+        motion:constraintSetEnd="@id/endFilter"
+        motion:constraintSetStart="@id/start"
+        motion:duration="500"
+        motion:motionInterpolator="easeIn">
+        <OnClick
+            motion:targetId="@id/exploreFilterBTN"
+            motion:clickAction="transitionToEnd" />
+    </Transition>
+
+    <Transition
+        motion:constraintSetEnd="@id/start"
+        motion:constraintSetStart="@id/end"
         motion:duration="500"
         motion:motionInterpolator="overshoot">
         <OnSwipe
-            motion:dragDirection="dragUp"
-            motion:touchAnchorId="@id/exploreRV"/>
-
+            motion:dragDirection="dragDown"
+            motion:touchAnchorId="@id/exploreRV" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
-
         <Constraint
             android:id="@+id/exploreSearchCV"
             android:visibility="gone" />
-
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/endFilter">
@@ -37,11 +53,12 @@
             android:id="@+id/exploreSearchCV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:layout_margin="16dp"
             android:visibility="visible"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/exploreHeaderV" />
+            motion:layout_constraintTop_toBottomOf="@id/exploreHeaderV" />
         <Constraint
             android:id="@+id/exploreFilterBTN"
             android:visibility="gone" />
@@ -61,9 +78,9 @@
             android:layout_marginEnd="16dp"
             android:text="Explore"
             android:textSize="24sp"
-            motion:layout_constraintEnd_toEndOf="@+id/exploreHeaderV"
-            motion:layout_constraintStart_toStartOf="@+id/exploreHeaderV"
-            motion:layout_constraintTop_toTopOf="@+id/exploreHeaderV" />
+            motion:layout_constraintEnd_toEndOf="@id/exploreHeaderV"
+            motion:layout_constraintStart_toStartOf="@id/exploreHeaderV"
+            motion:layout_constraintTop_toTopOf="@id/exploreHeaderV" />
         <Constraint
             android:id="@+id/exploreRV"
             android:layout_width="0dp"
@@ -72,12 +89,10 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/exploreSearchCV" />
-
+            motion:layout_constraintTop_toBottomOf="@id/exploreSearchCV" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
-
         <Constraint
             android:id="@+id/exploreSearchCV"
             android:visibility="gone" />
@@ -98,11 +113,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Explore"
-            android:textSize="24sp"
-            motion:layout_constraintEnd_toEndOf="@+id/exploreHeaderV"
-            motion:layout_constraintStart_toStartOf="@+id/exploreHeaderV"
-            motion:layout_constraintTop_toTopOf="@+id/exploreHeaderV" />
+            motion:layout_constraintEnd_toEndOf="@id/exploreHeaderV"
+            motion:layout_constraintStart_toStartOf="@id/exploreHeaderV"
+            motion:layout_constraintTop_toTopOf="@id/exploreHeaderV" />
         <Constraint
             android:id="@+id/exploreRV"
             android:layout_width="0dp"
@@ -111,6 +124,6 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/exploreHeaderV" />
+            motion:layout_constraintTop_toBottomOf="@id/exploreHeaderV" />
     </ConstraintSet>
 </MotionScene>

@@ -2,6 +2,7 @@ package com.example.weedy
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -13,6 +14,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.weedy.databinding.ActivityMainBinding
+import com.example.weedy.ui.DragView
+import com.mxn.soul.flowingdrawer_core.ElasticDrawer
 import com.mxn.soul.flowingdrawer_core.FlowingDrawer
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "Main Activity"
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var drawer: FlowingDrawer
+    private lateinit var flowingDrawer: FlowingDrawer
+    private lateinit var dragView: DragView
     private lateinit var navController: NavController
     private val viewModel: SharedViewModel by lazy {
         ViewModelProvider(this)[SharedViewModel::class.java]
@@ -37,23 +41,29 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.mainNavHostContainerView) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.mainNavHostContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
-        drawer = binding.drawerlayout
+        flowingDrawer = binding.drawerlayout
+        dragView = binding.mainDrawerDV
+        dragView.setFlowingDrawer(flowingDrawer)
 
-        val homeBTN = drawer.findViewById<CardView>(R.id.drawer_homeCV)
-        val exploreBTN = drawer.findViewById<CardView>(R.id.drawer_exploreCV)
-        val refreshBTN = drawer.findViewById<CardView>(R.id.drawer_refreshCV)
+        setupDrawerStateListener()
+
+        val homeBTN = flowingDrawer.findViewById<CardView>(R.id.drawer_homeCV)
+        val exploreBTN = flowingDrawer.findViewById<CardView>(R.id.drawer_exploreCV)
+        val refreshBTN = flowingDrawer.findViewById<CardView>(R.id.drawer_refreshCV)
 
         homeBTN.setOnClickListener {
-            drawer.closeMenu()
+            flowingDrawer.closeMenu()
             Log.d(TAG, "home clicked")
             navController.navigate(R.id.homeFragment)
+            navController.popBackStack(R.id.nav_graph, false)
         }
 
         exploreBTN.setOnClickListener {
-            drawer.closeMenu()
+            flowingDrawer.closeMenu()
             Log.d(TAG, "explore clicked")
             navController.navigate(R.id.exploreFragment)
         }
@@ -62,5 +72,33 @@ class MainActivity : AppCompatActivity() {
             viewModel.loadRemoteenetics()
             Log.d(TAG, "refresh clicked")
         }
+    }
+
+    private fun setupDrawerStateListener() {
+        flowingDrawer.setOnDrawerStateChangeListener(object :
+            ElasticDrawer.OnDrawerStateChangeListener {
+            override fun onDrawerStateChange(oldState: Int, newState: Int) {
+                when (newState) {
+                    FlowingDrawer.STATE_OPENING -> {
+                        binding.mainDrawerDV.visibility = View.GONE
+                    }
+
+                    FlowingDrawer.STATE_OPEN -> {
+                        binding.mainDrawerDV.visibility = View.GONE
+                    }
+
+                    FlowingDrawer.STATE_CLOSING -> {
+                        binding.mainDrawerDV.visibility = View.VISIBLE
+                    }
+
+                    FlowingDrawer.STATE_CLOSED -> {
+                        binding.mainDrawerDV.visibility = View.VISIBLE
+                    }
+
+                }
+            }
+
+            override fun onDrawerSlide(openRatio: Float, offsetPixels: Int) {}
+        })
     }
 }

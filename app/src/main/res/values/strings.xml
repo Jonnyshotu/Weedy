@@ -38,4 +38,7 @@
     <string name="search">Search</string>
     <string name="explore_header">Explore the diversity of cannabis genetics</string>
     <string name="select_thc">Select THC</string>
+    <string name="explore">Explore</string>
+    <string name="filter_btn">Filter</string>
+    <string name="reset_btn">Reset</string>
 </resources>

@@ -30,7 +30,6 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     private val TAG = "ViewModel"
 
-
     private val database = getDatabase(application)
     private val appRepository = AppRepository(database)
     private val strainRepository = StrainRepository(database, application.applicationContext)

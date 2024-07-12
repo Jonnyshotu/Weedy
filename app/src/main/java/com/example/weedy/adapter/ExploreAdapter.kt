@@ -1,19 +1,21 @@
+package com.example.weedy.adapter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.weedy.R
 import com.example.weedy.data.entities.LocalGenetic
 import com.example.weedy.databinding.ListItemExploreBinding
 
-class ListExploreAdapter(private val dataset: List<LocalGenetic>) :
-    RecyclerView.Adapter<ListExploreAdapter.ListItemViewHolder>() {
+class ExploreAdapter : ListAdapter<LocalGenetic, ExploreAdapter.ListItemViewHolder>(DiffCallback) {
 
     private val TAG = "Explore Adapter"
 
     inner class ListItemViewHolder(val binding: ListItemExploreBinding) :
         RecyclerView.ViewHolder(binding.root)
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListItemViewHolder {
         val binding =
@@ -22,16 +24,13 @@ class ListExploreAdapter(private val dataset: List<LocalGenetic>) :
     }
 
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
-
-        val listEntry = dataset[position]
+        val listEntry = getItem(position)
 
         with(holder.binding) {
-            if (listEntry.strainImageURL == "") {
+            if (listEntry.strainImageURL.isNullOrEmpty()) {
                 exploreItemIV.setImageResource(R.drawable.example_plant)
             } else {
-                exploreItemIV.load(
-                    listEntry.strainImageURL
-                )
+                exploreItemIV.load(listEntry.strainImageURL)
             }
             exploreItemStrainTV.text = listEntry.strainName
             exploreItemTypeTV.text = listEntry.strainType
@@ -40,7 +39,15 @@ class ListExploreAdapter(private val dataset: List<LocalGenetic>) :
         }
     }
 
-    override fun getItemCount(): Int {
-        return dataset.size
+    companion object {
+        private val DiffCallback = object : DiffUtil.ItemCallback<LocalGenetic>() {
+            override fun areItemsTheSame(oldItem: LocalGenetic, newItem: LocalGenetic): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: LocalGenetic, newItem: LocalGenetic): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }

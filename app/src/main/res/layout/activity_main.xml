@@ -51,4 +51,16 @@
             </FrameLayout>
         </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
     </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
+
+    <com.example.weedy.ui.DragView
+        android:id="@+id/mainDrawerDV"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="-20dp"
+        android:layout_gravity="start|center_vertical"
+        android:background="@drawable/menu_book"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
