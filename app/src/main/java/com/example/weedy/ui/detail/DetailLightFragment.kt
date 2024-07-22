@@ -43,6 +43,8 @@ class DetailLightFragment : MainFragment() {
 
         // Initialize RecyclerView after setting up binding
         lightRecyclerView = binding.detailLightRV
+        val adapter = ListLightAdapter()
+        lightRecyclerView.adapter = adapter
 
         // Observe the plant data and update UI accordingly
         viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
@@ -55,8 +57,7 @@ class DetailLightFragment : MainFragment() {
                         TAG,
                         "Light Record size: ${lightRecords.size}"
                     ) // Log the size of light records
-                    lightRecyclerView.adapter =
-                        ListLightAdapter(lightRecords) // Set the adapter for RecyclerView
+                    adapter.submitList(lightRecords) // Update the adapter for RecyclerView
                 }
         }
     }

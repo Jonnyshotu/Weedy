@@ -43,6 +43,8 @@ class DetailRepotFragment : MainFragment() {
 
         // Initialize RecyclerView after setting up binding
         repotRecyclerView = binding.detailRepotRV
+        val adapter = ListRepotAdapter()
+        repotRecyclerView.adapter = adapter
 
         // Observe the plant data to update the UI
         viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
@@ -55,8 +57,7 @@ class DetailRepotFragment : MainFragment() {
                         TAG,
                         "Repot Record size: ${repotRecords.size}"
                     ) // Log the size of repot records
-                    repotRecyclerView.adapter =
-                        ListRepotAdapter(repotRecords) // Set the adapter for RecyclerView
+                    adapter.submitList(repotRecords) // Update the adapter for RecyclerView
                 }
         }
     }

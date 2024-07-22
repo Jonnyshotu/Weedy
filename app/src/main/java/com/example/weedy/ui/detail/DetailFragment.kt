@@ -35,7 +35,7 @@ class DetailFragment : MainFragment() {
     private lateinit var plant: MasterPlant // Current plant details
 
     private inner class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = 8 // Total number of pages
+        override fun getItemCount(): Int = 7 // Total number of pages
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
@@ -44,9 +44,8 @@ class DetailFragment : MainFragment() {
                 2 -> DetailNutrientsFragment() // Nutrients tab
                 3 -> DetailRepellentsFragment() // Repellents tab
                 4 -> DetailTrainingFragment() // Training tab
-                5 -> DetailMeasurementsFragment() // Measurements tab
-                6 -> DetailLightFragment() // Light tab
-                7 -> DetailRepotFragment() // Repot tab
+                5 -> DetailLightFragment() // Light tab
+                6 -> DetailRepotFragment() // Repot tab
                 else -> throw IllegalStateException("Unexpected position $position")
             }
         }
@@ -88,9 +87,8 @@ class DetailFragment : MainFragment() {
                 2 -> "Nutrients"
                 3 -> "Repellents"
                 4 -> "Training"
-                5 -> "Measurements"
-                6 -> "Light"
-                7 -> "Repot"
+                5 -> "Light"
+                6 -> "Repot"
                 else -> null
             }
         }.attach()

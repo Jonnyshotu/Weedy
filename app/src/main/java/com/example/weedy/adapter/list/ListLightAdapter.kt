@@ -2,13 +2,17 @@ package com.example.weedy.adapter.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weedy.adapter.ExploreAdapter
+import com.example.weedy.data.entities.LocalGenetic
 import com.example.weedy.data.models.record.LightRecord
 import com.example.weedy.databinding.ListItemBinding
 import java.time.format.DateTimeFormatter
 
-class ListLightAdapter(private val dataset: List<LightRecord>) :
-    RecyclerView.Adapter<ListLightAdapter.ListItemViewHolder>() {
+class ListLightAdapter :
+    ListAdapter<LightRecord, ListLightAdapter.ListItemViewHolder>(DiffCallback) {
 
     inner class ListItemViewHolder(val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -26,7 +30,7 @@ class ListLightAdapter(private val dataset: List<LightRecord>) :
 
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
         // Get the current LightRecord from the dataset
-        val listEntry = dataset[position]
+        val listEntry = getItem(position)
 
         // Use the view binding to set the data to the views
         with(holder.binding) {
@@ -44,7 +48,18 @@ class ListLightAdapter(private val dataset: List<LightRecord>) :
         }
     }
 
-    override fun getItemCount(): Int {
-        return dataset.size
+    // Companion object to define a DiffUtil.ItemCallback for efficient list updates
+    companion object {
+        private val DiffCallback = object : DiffUtil.ItemCallback<LightRecord>() {
+            // Check if two items are the same (used for detecting item identity)
+            override fun areItemsTheSame(oldItem: LightRecord, newItem: LightRecord): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            // Check if the contents of two items are the same (used for detecting content changes)
+            override fun areContentsTheSame(oldItem: LightRecord, newItem: LightRecord): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 }

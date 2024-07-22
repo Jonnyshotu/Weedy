@@ -43,6 +43,8 @@ class DetailRepellentsFragment : MainFragment() {
 
         // Initialize RecyclerView after setting up binding
         repellentsRecyclerView = binding.detailRepellentsRV
+        val adapter = ListRepellentsAdapter()
+        repellentsRecyclerView.adapter = adapter
 
         // Observe the plant data to update the UI
         viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
@@ -55,8 +57,7 @@ class DetailRepellentsFragment : MainFragment() {
                         TAG,
                         "Repellents Record size: ${repellentsRecords.size}"
                     ) // Log the size of repellent records
-                    repellentsRecyclerView.adapter =
-                        ListRepellentsAdapter(repellentsRecords) // Set the adapter for RecyclerView
+                    adapter.submitList(repellentsRecords) // Update the adapter for RecyclerView
                 }
         }
     }

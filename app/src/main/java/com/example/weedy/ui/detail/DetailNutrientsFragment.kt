@@ -43,6 +43,8 @@ class DetailNutrientsFragment : MainFragment() {
 
         // Initialize RecyclerView after setting up binding
         nutrientsRecyclerView = binding.detailNutrientsRV
+        val adapter = ListNutrientsAdapter()
+        nutrientsRecyclerView.adapter = adapter
 
         // Observe the plant data and update UI accordingly
         viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
@@ -55,8 +57,7 @@ class DetailNutrientsFragment : MainFragment() {
                         TAG,
                         "Nutrients Record size: ${nutrientsRecords.size}"
                     ) // Log the size of nutrient records
-                    nutrientsRecyclerView.adapter =
-                        ListNutrientsAdapter(nutrientsRecords) // Set the adapter for RecyclerView
+                    adapter.submitList(nutrientsRecords) // Update the adapter for RecyclerView
                 }
         }
     }

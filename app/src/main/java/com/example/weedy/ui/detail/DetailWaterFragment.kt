@@ -43,6 +43,8 @@ class DetailWaterFragment : MainFragment() {
 
         // Initialize the RecyclerView after setting up the binding
         waterRecyclerView = binding.detailWaterRV
+        val adapter = ListWaterAdapter()
+        waterRecyclerView.adapter = adapter
 
         // Observe the plant data to update the UI
         viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
@@ -55,8 +57,7 @@ class DetailWaterFragment : MainFragment() {
                         TAG,
                         "Watering Record size: ${wateringRecords.size}"
                     ) // Log the size of watering records
-                    waterRecyclerView.adapter =
-                        ListWaterAdapter(wateringRecords) // Set the adapter for RecyclerView
+                    adapter.submitList(wateringRecords) // Update the adapter for RecyclerView
                 }
         }
     }

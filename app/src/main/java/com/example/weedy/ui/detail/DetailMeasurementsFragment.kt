@@ -44,6 +44,7 @@ class DetailMeasurementsFragment : MainFragment() {
         // Initialize RecyclerView after setting up binding
         measurementsRecyclerView = binding.detailMeasurementsRV
 
+
         // Observe the plant data and update UI accordingly
         viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
             plant = masterPlant

@@ -43,6 +43,8 @@ class DetailTrainingFragment : MainFragment() {
 
         // Initialize RecyclerView after setting up binding
         trainingRecyclerView = binding.detailTrainingRV
+        val adapter = ListTrainingAdapter()
+        trainingRecyclerView.adapter = adapter
 
         // Observe the plant data to update the UI
         viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
@@ -55,8 +57,7 @@ class DetailTrainingFragment : MainFragment() {
                         TAG,
                         "Training Record size: ${trainingRecords.size}"
                     ) // Log the size of training records
-                    trainingRecyclerView.adapter =
-                        ListTrainingAdapter(trainingRecords) // Set the adapter for RecyclerView
+                    adapter.submitList(trainingRecords) // Update the adapter for RecyclerView
                 }
         }
     }
