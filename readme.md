@@ -32,13 +32,13 @@ Oberfläche durch den gesamten Prozess.
 
 ## Screenshots
 
-<img src="assets/screenshot_home.png" alt="Homescreen" width="100"> <img src="assets/screenshot_home_night.png" alt="HomescreenNight" width="100">
+<img src="assets/screenshot_home.png" alt="Homescreen" width="200">**Homescreen**<img src="assets/screenshot_home_night.png" alt="HomescreenNight" width="200">
 
-<img src="assets/screenshot_explore.png" alt="Explorescreen" width="100">
+<img src="assets/screenshot_explore.png" alt="Explorescreen" width="200">**Homescreen**
 
-<img src="assets/screenshot_newPlant.png" alt="NewPlant" width="100">
+<img src="assets/screenshot_newPlant.png" alt="NewPlant" width="200">**Homescreen**
 
-<img src="assets/screenshot_detail.png" alt="Detailscreen" width="100"> <img src="assets/screenshot_detailWater.png" alt="DetailWaterscreen" width="100">
+<img src="assets/screenshot_detail.png" alt="Detailscreen" width="200">**Homescreen**<img src="assets/screenshot_detailWater.png" alt="DetailWaterscreen" width="200">
 
 ## Vorteile
 
