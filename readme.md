@@ -5,7 +5,7 @@
 
 ## Über Weedy
 
-Weedy ist deine ultimative Begleiter-App für den privaten Cannabisanbau in Deutschland. Entwickelt  
+Weedy ist deine ultimative Begleiter-App für den privaten Cannabisanbau. Entwickelt  
 mit Kotlin für Android, bietet Weedy eine umfassende Plattform zur Unterstützung und Dokumentation  
 deines gesamten Anbau-Prozesses.
 
@@ -105,8 +105,9 @@ entwickelt. Alle Daten werden lokal auf deinem Gerät gespeichert, um deine Priv
 ## Installation
 
 1. Klone dieses Repository:
-   ```bash  
-git clone https://github.com/deinbenutzername/weedy.git ```
+     ```bash
+   git clone https://github.com/SI-Classroom-Batch-016/android-praxisprojekt-Jonnyshotu.git
+   ```
 2. Öffne das Projekt in Android Studio.
 
 3. Stelle sicher, dass alle Abhängigkeiten installiert sind.
