@@ -28,6 +28,9 @@ data class PlantedAction(
 
     val soilID: Long,
 
+    @ColumnInfo(name = "Soil")
+    val soilName: String,
+
     @ColumnInfo(name = "Date")
     val date: LocalDate,
 )

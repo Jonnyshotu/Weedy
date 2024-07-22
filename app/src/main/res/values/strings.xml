@@ -4,6 +4,7 @@
     <string name="edit_icon">Edit</string>
     <string name="delete_icon">Delete</string>
     <string name="watering">Watering</string>
+    <string name="germination">Germination</string>
     <string name="seedling">Seedling</string>
     <string name="cutting">Cutting</string>
     <string name="adult">Adult</string>
@@ -27,10 +28,10 @@
     <string name="soil_type">Soil type</string>
     <string name="save">Save</string>
     <string name="continue_button">continue</string>
-    <string name="flowering_time">Flowering time</string>
+    <string name="flowering_time">Cycle time</string>
     <string name="hybrid">Hybrid</string>
     <string name="genetic">Genetic</string>
-    <string name="genetic_n_specifications">Genetic \n specifications</string>
+    <string name="genetic_n_specifications">Genetic \nspecifications</string>
     <string name="cannabinoids">Cannabinoids</string>
     <string name="ok">ok</string>
     <string name="vegetation">Vegetation</string>
@@ -41,4 +42,10 @@
     <string name="explore">Explore</string>
     <string name="filter_btn">Filter</string>
     <string name="reset_btn">Reset</string>
+    <string name="health">Health</string>
+    <string name="no_data">No data</string>
+    <string name="last_checkup">Last Checkup</string>
+    <string name="percent_symbol">%</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

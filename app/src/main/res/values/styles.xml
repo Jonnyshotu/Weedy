@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="homeHeaderCVStyle">
-        <item name="cardBackgroundColor">@android:color/transparent</item>
-        <item name="elevation">0dp</item>
-        <item name="cornerRadius">0dp</item>
-        <item name="strokeColor">@android:color/transparent</item>
-
-    </style>
-
     <style name="headTitles">
         <item name="android:textSize">42sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/md_theme_onBackground</item>
     </style>
+
+    <style name="cardViewTitle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="subTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="infoText">
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

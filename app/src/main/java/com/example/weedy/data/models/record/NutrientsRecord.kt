@@ -28,6 +28,9 @@ data class NutrientsRecord(
 
     val nutrientID: Long,
 
+    @ColumnInfo(name = "Nutrient")
+    val nutrientName: String,
+
     @ColumnInfo(name = "Amount")
     val amount: Double,
 

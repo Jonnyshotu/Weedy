@@ -27,21 +27,21 @@ import kotlinx.coroutines.launch
 
 class NewPlantFragment : MainFragment() {
 
-    private val TAG = "New Plant Fragment"
-    private lateinit var binding: FragmentNewPlantBinding
-    private val viewModel: SharedViewModel by activityViewModels()
+    private val TAG = "New Plant Fragment" // Tag for logging
+    private lateinit var binding: FragmentNewPlantBinding // Binding object for the fragment's layout
+    private val viewModel: SharedViewModel by activityViewModels() // Shared ViewModel for data
 
-    private var remoteGeneticList: List<RemoteGenetic>? = null
-    private var localGeneticList: List<LocalGenetic>? = null
-    private var debouncedTextWatcher: TextWatcher? = null
+    private var remoteGeneticList: List<RemoteGenetic>? = null // List of remote genetic data
+    private var localGeneticList: List<LocalGenetic>? = null // List of local genetic data
+    private var debouncedTextWatcher: TextWatcher? = null // TextWatcher for debounced text changes
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNewPlantBinding.inflate(inflater, container, false)
-        return binding.root
+        binding = FragmentNewPlantBinding.inflate(inflater, container, false) // Inflate the layout
+        return binding.root // Return the root view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,13 +49,13 @@ class NewPlantFragment : MainFragment() {
 
         // Observe changes in the remote genetic collection
         viewModel.remoteGeneticCollection.observe(viewLifecycleOwner) { remoteGeneticList ->
-            this.remoteGeneticList = remoteGeneticList
+            this.remoteGeneticList = remoteGeneticList // Update remote genetic list
             Log.d(TAG, "Remote genetic list size: ${remoteGeneticList.size}")
         }
 
         // Observe changes in the local genetic collection
         viewModel.localGeneticCollection.observe(viewLifecycleOwner) { localGeneticList ->
-            this.localGeneticList = localGeneticList
+            this.localGeneticList = localGeneticList // Update local genetic list
             Log.d(TAG, "Local genetic list size: ${localGeneticList.size}")
         }
 
@@ -64,10 +64,9 @@ class NewPlantFragment : MainFragment() {
 
         // Set click listener for save button
         binding.newPlantSaveBTN.setOnClickListener {
-            val remoteGenetic = checkRemoteEntry()
-            val localGenetic = checkLocalEntry(remoteGenetic?.strainName)
-
-            savePlant(localGenetic?.id, remoteGenetic?.stainOCPC)
+            val remoteGenetic = checkRemoteEntry() // Check remote entry
+            val localGenetic = checkLocalEntry(remoteGenetic?.strainName) // Check local entry
+            savePlant(localGenetic?.id, remoteGenetic?.stainOCPC) // Save plant data
         }
     }
 
@@ -77,29 +76,29 @@ class NewPlantFragment : MainFragment() {
      * @param remoteGeneticID if a match is found in checkRemoteEntry()
      */
     private fun savePlant(localGeneticID: Long?, remoteGeneticID: String?) {
-
         try {
             // Insert plant into database
             viewModel.insertPlant(
                 MasterPlant(
-                    id = 0,
-                    strainName = binding.newPlantStrainET.text.toString(),
-                    seedCompany = binding.newPlantSeedCompanyEt.text.toString(),
-                    localGeneticID = localGeneticID,
-                    remoteGeneticID = remoteGeneticID,
+                    id = 0, // Plant ID
+                    strainName = binding.newPlantStrainET.text.toString(), // Strain name
+                    seedCompany = binding.newPlantSeedCompanyEt.text.toString(), // Seed company
+                    localGeneticID = localGeneticID, // Local genetic ID
+                    remoteGeneticID = remoteGeneticID, // Remote genetic ID
                 )
             ) { databaseID ->
-                Toast.makeText(context, "Saved!", Toast.LENGTH_LONG).show()
-                Log.d(TAG, "Inserted plant ID: $databaseID")
+                Toast.makeText(context, "Saved!", Toast.LENGTH_LONG).show() // Show success message
+                Log.d(TAG, "Inserted plant ID: $databaseID") // Log the inserted plant ID
                 findNavController().navigate(
                     NewPlantFragmentDirections.actionNewPlantFragmentToNewPlantGeneticFragment(
                         databaseID
                     )
-                )
+                ) // Navigate to the next fragment
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error inserting plant", e)
-            Toast.makeText(context, "An error occurred while saving...", Toast.LENGTH_LONG).show()
+            Log.e(TAG, "Error inserting plant", e) // Log error
+            Toast.makeText(context, "An error occurred while saving...", Toast.LENGTH_LONG)
+                .show() // Show error message
         }
     }
 
@@ -108,56 +107,55 @@ class NewPlantFragment : MainFragment() {
      * @return a Local_Genetic if a match is found
      */
     private fun checkLocalEntry(strain: String?): LocalGenetic? {
-
         // Check if the strain exists in the local genetic list
-        val result = localGeneticList?.find { it.strainName == strain }
-        Log.d(TAG, "Local entry check: $result")
-        return result
+        val result = localGeneticList?.find { it.strainName.equals(strain, ignoreCase = true) }
+        Log.d(TAG, "Local entry check: $result") // Log the result
+        return result // Return the matching local genetic
     }
 
-
     /**
-     * Checks if the input matches data from api.
+     * Checks if the input matches data from API.
      * @return a Remote_Genetic if a match is found
      */
     private fun checkRemoteEntry(): RemoteGenetic? {
-
-        val strain = binding.newPlantStrainET.text.toString()
-        val company = binding.newPlantSeedCompanyEt.text.toString()
+        val strain = binding.newPlantStrainET.text.toString().trim() // Strain from input
+        val company =
+            binding.newPlantSeedCompanyEt.text.toString().trim() // Seed company from input
 
         // Check if the strain and company exist in the remote genetic list
-        val result =
-            remoteGeneticList?.find { it.strainName == strain && it.seedCompany == company }
-        Log.d(TAG, "Database entry check: $result")
-        return result
+        val result = remoteGeneticList?.find {
+            it.strainName.equals(
+                strain,
+                ignoreCase = true
+            ) && it.seedCompany.equals(company, ignoreCase = true)
+        }
+        Log.d(TAG, "Database entry check: $result") // Log the result
+        return result // Return the matching remote genetic
     }
 
-
     /**
-     * Sets a debounced text watcher with 300 mils
+     * Sets a debounced text watcher with 300 ms
      */
     private fun setupStrainInputTextWatcher() {
-
         debouncedTextWatcher = object : TextWatcher {
-            private var debounceJob: Job? = null
+            private var debounceJob: Job? = null // Job for debouncing text changes
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
-                // Debounce user input to avoid to many RV updates
+                // Debounce user input to avoid too many RV updates
                 debounceJob?.cancel()
                 debounceJob = viewLifecycleOwner.lifecycleScope.launch {
                     delay(300)
-                    updateStrainRV(s.toString())
-                    updateCompanyRV(s.toString())
+                    updateStrainRV(s.toString()) // Update strain RecyclerView
+                    updateCompanyRV(s.toString()) // Update company RecyclerView
                 }
             }
         }
-        binding.newPlantStrainET.addTextChangedListener(debouncedTextWatcher)
+        binding.newPlantStrainET.addTextChangedListener(debouncedTextWatcher) // Add TextWatcher to strain input
     }
-
 
     /**
      * Updates the strain RV.
@@ -170,25 +168,24 @@ class NewPlantFragment : MainFragment() {
                 genetic.strainName.contains(input, ignoreCase = true)
             }
             if (filter != null) {
-                Log.d(TAG, "Filtered list size: ${filter.size}")
+                Log.d(TAG, "Filtered list size: ${filter.size}") // Log filtered list size
             }
 
             if (!filter.isNullOrEmpty()) {
                 val strainNames =
                     listOf("Select strain from database") + filter.map { it.strainName }
 
-                Log.d(TAG, "Filtered strain names: $strainNames")
+                Log.d(TAG, "Filtered strain names: $strainNames") // Log filtered strain names
 
                 // Update RecyclerView with filtered strain names
                 val adapter = ListStringAdapter(strainNames) { selectedString ->
-                    binding.newPlantStrainET.setText(selectedString)
+                    binding.newPlantStrainET.setText(selectedString) // Set selected strain name
                 }
-                binding.newPlantStrainRV.adapter = adapter
-                binding.newPlantML.transitionToState(R.id.endInput)
+                binding.newPlantStrainRV.adapter = adapter // Set adapter to RecyclerView
+                binding.newPlantML.transitionToState(R.id.endInput) // Transition to end input state
             }
         }
     }
-
 
     /**
      * Updates the seed company RV.
@@ -205,12 +202,12 @@ class NewPlantFragment : MainFragment() {
 
                 // Update RecyclerView with filtered seed company names
                 var adapter = ListStringAdapter(companyNames) { selectedString ->
-                    binding.newPlantSeedCompanyEt.setText(selectedString)
-                    binding.newPlantML.transitionToState(R.id.endContinue)
-
+                    binding.newPlantSeedCompanyEt.setText(selectedString) // Set selected seed company
+                    binding.newPlantML.transitionToState(R.id.endContinue) // Transition to end continue state
                 }
-                binding.newPlantSeedCompanyRV.adapter = adapter
+                binding.newPlantSeedCompanyRV.adapter = adapter // Set adapter to RecyclerView
 
+                // Handle text changes in the seed company field
                 binding.newPlantSeedCompanyEt.addTextChangedListener(object : TextWatcher {
                     override fun beforeTextChanged(
                         s: CharSequence?,
@@ -229,23 +226,26 @@ class NewPlantFragment : MainFragment() {
                     }
 
                     override fun afterTextChanged(s: Editable?) {
-                        Log.d(TAG, "Seed Company ET afterTextChanged: $s")
+                        Log.d(
+                            TAG,
+                            "Seed Company ET afterTextChanged: $s"
+                        ) // Log seed company text change
                         if (!s.isNullOrBlank()) {
+                            binding.newPlantML.transitionToState(R.id.endContinue) // Transition to end continue state
                             companyNames =
                                 listOf("Select seed company from database") + companyNames.filter { companyName ->
                                     companyName?.contains(s.toString(), ignoreCase = true) ?: false
                                 }
-                            if (!binding.newPlantStrainET.text.isNullOrBlank()) {
-                                binding.newPlantML.transitionToState(R.id.endContinue)
-                            }
+
                         } else {
                             companyNames = emptyList()
                         }
-                        // Update RecyclerView with filtered strain names
+                        // Update RecyclerView with filtered seed company names
                         adapter = ListStringAdapter(companyNames) { selectedString ->
-                            binding.newPlantSeedCompanyEt.setText(selectedString)
+                            binding.newPlantSeedCompanyEt.setText(selectedString) // Set selected seed company
                         }
-                        binding.newPlantSeedCompanyRV.adapter = adapter
+                        binding.newPlantSeedCompanyRV.adapter =
+                            adapter // Set adapter to RecyclerView
                     }
                 })
             }

@@ -120,7 +120,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/newPlantStrainETL"
                 app:layout_constraintStart_toStartOf="@+id/newPlantStrainETL"
                 app:layout_constraintTop_toBottomOf="@+id/newPlantStrainETL"
-                tools:listitem="@layout/simple_string_item" />
+                tools:listitem="@layout/list_itemimple_string" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/newPlantSeedCompanyETL"
@@ -154,7 +154,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/newPlantSeedCompanyETL"
                 app:layout_constraintStart_toStartOf="@+id/newPlantSeedCompanyETL"
                 app:layout_constraintTop_toBottomOf="@+id/newPlantSeedCompanyETL"
-                tools:listitem="@layout/simple_string_item" />
+                tools:listitem="@layout/list_itemimple_string" />
 
             <Button
                 android:id="@+id/newPlantSaveBTN"

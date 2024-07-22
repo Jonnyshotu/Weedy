@@ -12,29 +12,29 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weedy.R
 import com.example.weedy.SharedViewModel
-import com.example.weedy.adapter.list.ListTrainingAdapter
+import com.example.weedy.adapter.list.ListRepotAdapter
 import com.example.weedy.data.entities.MasterPlant
-import com.example.weedy.databinding.FragmentDetailTrainingBinding
+import com.example.weedy.databinding.FragmentDetailRepotBinding
 import com.example.weedy.ui.main.MainFragment
 
 /**
- * Fragment to display details about plant training records.
+ * Fragment to display details about plant repotting actions.
  */
-class DetailTrainingFragment : MainFragment() {
+class DetailRepotFragment : MainFragment() {
 
-    private val TAG = "Detail Training Fragment" // Log tag for debugging
-    private lateinit var binding: FragmentDetailTrainingBinding // View binding for this fragment
+    private val TAG = "Detail Repot Fragment" // Log tag for debugging
+    private lateinit var binding: FragmentDetailRepotBinding // View binding for this fragment
     private val viewModel: SharedViewModel by activityViewModels() // Shared ViewModel for managing plant data
 
     private lateinit var plant: MasterPlant // Current plant details
-    private lateinit var trainingRecyclerView: RecyclerView // RecyclerView for displaying training records
+    private lateinit var repotRecyclerView: RecyclerView // RecyclerView for displaying repot records
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDetailTrainingBinding.inflate(inflater, container, false)
+        binding = FragmentDetailRepotBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,21 +42,21 @@ class DetailTrainingFragment : MainFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize RecyclerView after setting up binding
-        trainingRecyclerView = binding.detailTrainingRV
+        repotRecyclerView = binding.detailRepotRV
 
         // Observe the plant data to update the UI
         viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
             plant = masterPlant
 
-            // Fetch and display training records for the current plant
-            viewModel.getTrainingRecordByPlantID(plant.id)
-                .observe(viewLifecycleOwner) { trainingRecords ->
+            // Fetch and display repot records for the current plant
+            viewModel.getRepotActionsByPlantID(plant.id)
+                .observe(viewLifecycleOwner) { repotRecords ->
                     Log.d(
                         TAG,
-                        "Training Record size: ${trainingRecords.size}"
-                    ) // Log the size of training records
-                    trainingRecyclerView.adapter =
-                        ListTrainingAdapter(trainingRecords) // Set the adapter for RecyclerView
+                        "Repot Record size: ${repotRecords.size}"
+                    ) // Log the size of repot records
+                    repotRecyclerView.adapter =
+                        ListRepotAdapter(repotRecords) // Set the adapter for RecyclerView
                 }
         }
     }

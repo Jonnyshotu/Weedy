@@ -1,4 +1,12 @@
 <resources>
+
+    <color name="health20">#BC0000</color>
+    <color name="health40">#FF5500</color>
+    <color name="health60">#FFAA00</color>
+    <color name="health80">#AAFF00</color>
+    <color name="health100">#00FF00</color>
+    <color name="health_transparent">#BF878787</color>
+
     <color name="md_theme_primary">#805610</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
     <color name="md_theme_primaryContainer">#FFDDB4</color>

@@ -1,11 +1,10 @@
-package com.example.weedy.data.models.actions
+package com.example.weedy.data.models.record
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.example.weedy.data.entities.MasterPlant
-import com.example.weedy.data.entities.Soil
 import java.time.LocalDate
 
 @Entity(
@@ -19,7 +18,7 @@ import java.time.LocalDate
         )
     ]
 )
-data class RepotAction(
+data class RepotRecord(
 
     @PrimaryKey(autoGenerate = true)
     val id: Long,
@@ -27,6 +26,9 @@ data class RepotAction(
     val plantID: Long,
 
     val soilID: Long,
+
+    @ColumnInfo(name = "Soil")
+    val soilName: String,
 
     @ColumnInfo(name = "Pot size")
     val potSize: Double,

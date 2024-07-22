@@ -29,37 +29,24 @@ class DetailFragment : MainFragment() {
 
     private val TAG = "Detail Fragment"
 
-    private lateinit var binding: FragmentDetailBinding
-    private val viewModel: SharedViewModel by activityViewModels()
-    private val args: DetailFragmentArgs by navArgs()
-    private lateinit var plant: MasterPlant
-
-    //region Recycler views
-
-    private lateinit var waterAdapter: ListWaterAdapter
-    private lateinit var nutrientsAdapter: ListNutrientsAdapter
-    private lateinit var repellentsAdapter: ListRepellentsAdapter
-    private lateinit var trainingAdapter: ListTrainingAdapter
-    private lateinit var measurementsAdapter: ListMeasurementsAdapter
-    private lateinit var nutrientsRecyclerView: RecyclerView
-    private lateinit var repellentsRecyclerView: RecyclerView
-    private lateinit var trainingRecyclerView: RecyclerView
-    private lateinit var measurementsRecyclerView: RecyclerView
-
-    //endregion
+    private lateinit var binding: FragmentDetailBinding // View binding for this fragment
+    private val viewModel: SharedViewModel by activityViewModels() // Shared ViewModel for data operations
+    private val args: DetailFragmentArgs by navArgs() // Arguments passed to this fragment
+    private lateinit var plant: MasterPlant // Current plant details
 
     private inner class ViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = 7
+        override fun getItemCount(): Int = 8 // Total number of pages
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> DetailHomeFragment()
-                1 -> DetailWaterFragment()
-                2 -> DetailNutrientsFragment()
-                3 -> DetailRepellentsFragment()
-                4 -> DetailTrainingFragment()
-                5 -> DetailMeasurementsFragment()
-                6 -> DetailLightFragment()
+                0 -> DetailHomeFragment() // Home tab
+                1 -> DetailWaterFragment() // Watering tab
+                2 -> DetailNutrientsFragment() // Nutrients tab
+                3 -> DetailRepellentsFragment() // Repellents tab
+                4 -> DetailTrainingFragment() // Training tab
+                5 -> DetailMeasurementsFragment() // Measurements tab
+                6 -> DetailLightFragment() // Light tab
+                7 -> DetailRepotFragment() // Repot tab
                 else -> throw IllegalStateException("Unexpected position $position")
             }
         }
@@ -77,14 +64,19 @@ class DetailFragment : MainFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupViewPager()
-        setupPlantData()
+        setupViewPager() // Initialize the ViewPager with fragments
+        setupPlantData() // Load plant data and update UI
+        setupActionBTN() // Set up the action button
 
+        // Set up toolbar navigation
         binding.detailToolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
     }
 
+    /**
+     * Sets up the ViewPager with tabs using TabLayoutMediator.
+     */
     private fun setupViewPager() {
         val viewPagerAdapter = ViewPagerAdapter(requireActivity())
         binding.detailVP.adapter = viewPagerAdapter
@@ -92,113 +84,64 @@ class DetailFragment : MainFragment() {
         TabLayoutMediator(binding.detailTL, binding.detailVP) { tab, position ->
             tab.text = when (position) {
                 0 -> "Details"
-                1 -> "Water"
+                1 -> "Watering"
                 2 -> "Nutrients"
                 3 -> "Repellents"
                 4 -> "Training"
                 5 -> "Measurements"
                 6 -> "Light"
+                7 -> "Repot"
                 else -> null
             }
         }.attach()
     }
 
+    /**
+     * Loads plant data from the ViewModel and updates the UI.
+     */
     private fun setupPlantData() {
-        val databaseID = args.masterPlantDatabaseID
+        val databaseID = args.masterPlantDatabaseID // Plant ID from arguments
         Log.d(TAG, "Navigation plant ID: $databaseID")
 
-        viewModel.getPlantByID(databaseID)
+        viewModel.getPlantByID(databaseID) // Fetch plant data by ID
 
         viewModel.plant.observe(viewLifecycleOwner) { masterPlant ->
             plant = masterPlant
-            updateUI()
+            updateUI() // Update UI with the fetched plant data
         }
     }
 
+    /**
+     * Updates the UI elements with plant details.
+     */
     private fun updateUI() {
-
-        binding.detailToolbar.title = plant.strainName
+        binding.detailTitleTV.text = plant.strainName // Set plant name in title
         Log.d(TAG, "update ui: ${plant.strainName}")
-
     }
 
+    /**
+     * Sets up the action button to show a treatment menu.
+     */
+    private fun setupActionBTN() {
+        binding.detailActionBTN.setOnClickListener {
+            showTreatmentMenu(plant.id, it) // Show treatment options for the plant
+        }
+    }
 
-
-//            detailProgressStartDateTV.text = plant.germinationWaterActions.find { it. }
-//            val weeksTilHarvest = plant.harvestDate
-//            val weeksOld = plant.weeksOld
-//            detailProgressEndDateTV.text = weeksTilHarvest.toString()
-//            detailProgressWeekOfTV.text = "Week $weeksOld of ${plant.genetic.floweringTime}"
-//            with(detaillProgressWeekPB) {
-//                max = plant.genetic.floweringTime
-//                progress = weeksOld.toInt()
-//            }
-
-//            detailProgressStartGerminationWaterTV.text =
-//                "Germination Water: ${plant.germinationWater?.germinationWater}"
-//            detailProgressSoilTV.text =
-//                "Germination Soil: ${plant.germinationSoil?.germinationSoil}"
-//
-//            val latestEntry = plant.light?.lightHours
-//            if (latestEntry != null) {
-//                detaillLightCyclePB.progress = latestEntry
-//                detaillLightHoursTV.text =
-//                    "${latestEntry} hours light on and ${24 - latestEntry} hours off"
-//            } else {
-//                detaillLightCyclePB.progress = 0
-//                detaillLightHoursTV.text = "No data"
-//            }
-
-    //region Recycler Views
-//
-//            nutrientsRecyclerView = detailNutrientsRV
-//
-//            if (plant.nutrients.isNotEmpty()) {
-//                nutrientsAdapter = ListNutrientsAdapter(plant.nutrients)
-//                nutrientsRecyclerView.adapter = nutrientsAdapter
-//            } else {
-//                detailNutrientsCV.visibility = View.GONE
-//                detailNutrientsTV.text = "No nutrients records"
-//            }
-//
-//            repellentsRecyclerView = detailRepellentsRV
-//
-//            if (plant.repellents.isNotEmpty()) {
-//                repellentsAdapter = ListRepellentsAdapter(plant.repellents)
-//                repellentsRecyclerView.adapter = repellentsAdapter
-//            } else {
-//                detailRepellentsCV.visibility = View.GONE
-//                detailRepellentsTV.text = "No repellents records"
-//            }
-//
-//            trainingRecyclerView = detailTrainingRV
-//
-//            if (plant.training.isNotEmpty()) {
-//                trainingAdapter = ListTrainingAdapter(plant.training)
-//                trainingRecyclerView.adapter = trainingAdapter
-//            } else {
-//                detailTrainingCV.visibility = View.GONE
-//                detailTrainingTV.text = "No training records"
-//            }
-//
-//            measurementsRecyclerView = detailMeasurementsRV
-//
-//            if (plant.measurements.isNotEmpty()) {
-//                measurementsAdapter = ListMeasurementsAdapter(plant.measurements)
-//                measurementsRecyclerView.adapter = measurementsAdapter
-//            } else {
-//                detailMeasurementsCV.visibility = View.GONE
-//                detailMeasurementsTV.text = "No measurement records"
-//            }
-//
-
-    //endregion
-
-
+    /**
+     * Called when an image is captured.
+     *
+     * @param imageBitmap The captured image as a Bitmap.
+     */
     override fun onImageCaptured(imageBitmap: Bitmap) {
         TODO("Not yet implemented")
     }
 
+    /**
+     * Called when an image is picked from the gallery.
+     *
+     * @param imageUri The URI of the picked image.
+     */
     override fun onImagePicked(imageUri: Uri?) {
         TODO("Not yet implemented")
     }

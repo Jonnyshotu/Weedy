@@ -9,7 +9,6 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -21,12 +20,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.weedy.R
 import com.example.weedy.SharedViewModel
-import com.example.weedy.data.entities.MasterPlant
-import com.example.weedy.data.entities.Soil
-import com.example.weedy.data.models.actions.RepotAction
+import com.example.weedy.data.models.record.RepotRecord
 import com.example.weedy.data.models.record.GrowthStateRecord
 import com.example.weedy.data.models.record.HealthRecord
 import com.example.weedy.data.models.record.LightRecord
@@ -37,39 +35,58 @@ import com.example.weedy.data.models.record.WateringRecord
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.time.LocalDate
 
+/**
+ * Abstract base fragment class providing common functionalities for handling plant data.
+ */
 abstract class MainFragment : Fragment() {
 
     private val TAG = "Main Fragment"
 
     private val viewModel: SharedViewModel by activityViewModels()
 
-    //region photo request
-
+    //region Photo request constants
     val REQUEST_CODE_PERMISSIONS = 1001
-    val REQUEST_IMAGE_CAPTURE = 1
-    val REQUEST_IMAGE_PICK = 2
+    private val REQUEST_IMAGE_CAPTURE = 1
+    private val REQUEST_IMAGE_PICK = 2
     val REQUIRED_PERMISSIONS = arrayOf(
         Manifest.permission.CAMERA,
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
+    //endregion
 
+    /**
+     * Checks if all required permissions are granted.
+     *
+     * @return True if all required permissions are granted, otherwise false.
+     */
     open fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
+    /**
+     * Handles the result of permission requests.
+     *
+     * @param requestCode The request code for the permission request.
+     * @param permissions The requested permissions.
+     * @param grantResults The grant results for the permissions.
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                // Permissions granted
             } else {
-                Log.d(TAG,"Camera permissions not granted")
+                Log.d(TAG, "Camera permissions not granted")
             }
         }
     }
 
+    /**
+     * Initiates an intent to capture a photo using the device's camera.
+     */
     protected fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
@@ -77,12 +94,22 @@ abstract class MainFragment : Fragment() {
         }
     }
 
+    /**
+     * Initiates an intent to pick a photo from the device's gallery.
+     */
     protected fun dispatchPickPictureIntent() {
         val pickPhotoIntent =
             Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(pickPhotoIntent, REQUEST_IMAGE_PICK)
     }
 
+    /**
+     * Handles the result of the photo capture or pick operation.
+     *
+     * @param requestCode The request code of the operation.
+     * @param resultCode The result code of the operation.
+     * @param data The intent containing the result data.
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -104,31 +131,57 @@ abstract class MainFragment : Fragment() {
         }
     }
 
+    /**
+     * Called when an image is captured.
+     *
+     * @param imageBitmap The captured image as a Bitmap.
+     */
     abstract fun onImageCaptured(imageBitmap: Bitmap)
-    abstract fun onImagePicked(imageUri: Uri?)
-//endregion
 
     /**
-     * displays the treatment menu and handles the selected item.
+     * Called when an image is picked from the gallery.
      *
-     * @param v View
+     * @param imageUri The URI of the picked image.
      */
-    open fun showTreatmentMenu(plant: MasterPlant, v: View) {
+    abstract fun onImagePicked(imageUri: Uri?)
+
+    //region Treatment Menu
+
+    /**
+     * Displays the treatment options menu and handles the selected item.
+     *
+     * @param masterPlantID The ID of the plant.
+     * @param v The view that triggered the menu.
+     */
+    open fun showTreatmentMenu(masterPlantID: Long, v: View) {
 
         val popup = PopupMenu(requireContext(), v)
         popup.menuInflater.inflate(R.menu.treatment_menu, popup.menu)
 
+        var nutrientsNameList: List<String> = emptyList()
+
+        viewModel.nutrientsList.observe(viewLifecycleOwner) { nutrientsList ->
+            nutrientsNameList = nutrientsList.map { it.name }
+            Log.d(TAG, "Nutrients list: $nutrientsNameList")
+        }
+
+        var soilNameList: List<String> = emptyList()
+
+        viewModel.soilList.observe(viewLifecycleOwner) { soilList ->
+            soilNameList = soilList.map { it.name }
+            Log.d(TAG, "Soil list: $soilNameList")
+        }
+
         popup.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-// Dialog Photo
                 R.id.photo_option -> {
                     showPhotoOptionMenu(v)
                     true
                 }
-// Health Dialog
+
                 R.id.health_option -> {
                     val dialogView =
-                        LayoutInflater.from(v.context).inflate(R.layout.health_dialog, null, false)
+                        LayoutInflater.from(v.context).inflate(R.layout.dialog_health, null, false)
                     val input = dialogView.findViewById<RatingBar>(R.id.healhDialogRB)
 
                     MaterialAlertDialogBuilder(v.context).setTitle(resources.getString(R.string.watering))
@@ -148,26 +201,26 @@ abstract class MainFragment : Fragment() {
                                 viewModel.insertHealth(
                                     HealthRecord(
                                         id = 0,
-                                        plantID = plant.id,
+                                        plantID = masterPlantID,
                                         health = health,
                                         date = LocalDate.now()
                                     )
                                 )
                                 Toast.makeText(
                                     requireContext(),
-                                    "Healt record saved",
+                                    "Health record saved",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             } catch (e: Exception) {
-                                Log.e(TAG, "Failed inserting healt record", e)
+                                Log.e(TAG, "Failed inserting health record", e)
                             }
                         }.show()
                     true
                 }
-// Dialog Water
+
                 R.id.watering_option -> {
                     val dialogView =
-                        LayoutInflater.from(v.context).inflate(R.layout.water_dialog, null, false)
+                        LayoutInflater.from(v.context).inflate(R.layout.dialog_water, null, false)
                     val input = dialogView.findViewById<EditText>(R.id.waterDialogET)
                     Log.d(TAG, "Watering clicked")
 
@@ -182,7 +235,7 @@ abstract class MainFragment : Fragment() {
                                     viewModel.insertWatering(
                                         WateringRecord(
                                             id = 0,
-                                            plantID = plant.id,
+                                            plantID = masterPlantID,
                                             amount = watering,
                                             ph = null,
                                             date = LocalDate.now()
@@ -200,18 +253,15 @@ abstract class MainFragment : Fragment() {
                         }.show()
                     true
                 }
-// Dialog Nutrients
+
                 R.id.nutrients_option -> {
                     val dialogView = LayoutInflater.from(v.context)
-                        .inflate(R.layout.nutrients_dialog, null, false)
+                        .inflate(R.layout.dialog_nutrients, null, false)
                     val spinner = dialogView.findViewById<Spinner>(R.id.spinner_nutrients)
                     val input = dialogView.findViewById<EditText>(R.id.nutrientsDialogET)
 
-                    var items: List<String> = emptyList()
-                    viewModel.nutrientsList.observe(viewLifecycleOwner) { nutrientsList ->
-                        items = nutrientsList.map { it.name }
-                        Log.d(TAG, "Nutrients list: $items")
-                    }
+                    val items = nutrientsNameList
+
                     val adapter = ArrayAdapter(
                         v.context, android.R.layout.simple_spinner_dropdown_item, items
                     )
@@ -229,7 +279,8 @@ abstract class MainFragment : Fragment() {
                                     viewModel.insertNutrient(
                                         NutrientsRecord(
                                             id = 0,
-                                            plantID = plant.id,
+                                            plantID = masterPlantID,
+                                            nutrientName = nutrient.name,
                                             nutrientID = nutrient.id,
                                             amount = amount,
                                             date = LocalDate.now()
@@ -247,22 +298,22 @@ abstract class MainFragment : Fragment() {
                         }.show()
                     true
                 }
-// Dialog Repellents
+
                 R.id.repellents_option -> {
                     val dialogView = LayoutInflater.from(v.context)
-                        .inflate(R.layout.repellents_dialog, null, false)
+                        .inflate(R.layout.dialog_repellents, null, false)
                     val input = dialogView.findViewById<EditText>(R.id.repellentsDialogET)
 
                     MaterialAlertDialogBuilder(v.context).setTitle("Repellents").setView(dialogView)
                         .setNegativeButton("Cancel") { _, _ ->
                         }.setPositiveButton("Save") { _, _ ->
-                            if (input.toString().isNotBlank()) {
+                            if (input.text.isNotBlank()) {
                                 try {
                                     viewModel.insertRepellent(
                                         RepellentsRecord(
                                             id = 0,
-                                            plantID = plant.id,
-                                            infestationType = input.toString(),
+                                            plantID = masterPlantID,
+                                            infestationType = input.text.toString(),
                                             date = LocalDate.now()
                                         )
                                     )
@@ -273,16 +324,15 @@ abstract class MainFragment : Fragment() {
                                     ).show()
                                 } catch (e: Exception) {
                                     Log.e(TAG, "Failed inserting repellent record", e)
-
                                 }
                             }
                         }.show()
                     true
                 }
-// Dialog Growth State
+
                 R.id.growth_state_change_option -> {
                     val dialog = LayoutInflater.from(v.context)
-                        .inflate(R.layout.growth_state_dialog, null, false)
+                        .inflate(R.layout.dialog_growth_state, null, false)
                     val radioGroup = dialog.findViewById<RadioGroup>(R.id.dialogGrowthStateRG)
 
                     MaterialAlertDialogBuilder(v.context).setTitle("Growth State").setView(dialog)
@@ -301,7 +351,7 @@ abstract class MainFragment : Fragment() {
                                 viewModel.insertGrowthState(
                                     GrowthStateRecord(
                                         id = 0,
-                                        plantID = plant.id,
+                                        plantID = masterPlantID,
                                         growthState = growthState,
                                         date = LocalDate.now()
                                     )
@@ -314,23 +364,20 @@ abstract class MainFragment : Fragment() {
                             } catch (e: Exception) {
                                 Log.e(TAG, "Failed inserting growth state record", e)
                             }
-
                         }.show()
                     true
                 }
-// Dialog Repot
+
                 R.id.repot_option -> {
+                    Log.d(TAG, "Repot option clicked")
+
                     val dialogView =
-                        LayoutInflater.from(v.context).inflate(R.layout.repot_dialog, null, false)
+                        LayoutInflater.from(v.context).inflate(R.layout.dialog_repot, null, false)
                     val spinner = dialogView.findViewById<Spinner>(R.id.dialogRepotSpinner_pot_size)
                     val input = dialogView.findViewById<EditText>(R.id.dialogRepotPotSizeET)
 
-                    var items: List<String> = emptyList()
-                    viewModel.soilList.observe(viewLifecycleOwner) { soilList ->
-                        items = soilList.map { it.name }
-                        Log.d(TAG, "Soil list: $items")
+                    var items: List<String> = soilNameList
 
-                    }
                     val adapter = ArrayAdapter(
                         v.context, android.R.layout.simple_spinner_dropdown_item, items
                     )
@@ -346,10 +393,11 @@ abstract class MainFragment : Fragment() {
                             if (potSize != null && soil != null) {
                                 try {
                                     viewModel.insertRepot(
-                                        RepotAction(
+                                        RepotRecord(
                                             id = 0,
-                                            plantID = plant.id,
+                                            plantID = masterPlantID,
                                             soilID = soil.id,
+                                            soilName = soil.name,
                                             potSize = potSize,
                                             date = LocalDate.now()
                                         )
@@ -366,24 +414,24 @@ abstract class MainFragment : Fragment() {
                         }.show()
                     true
                 }
-// Dialog Trainng
+
                 R.id.training_option -> {
+                    Log.d(TAG, "Training option clicked")
                     val dialogView = LayoutInflater.from(v.context)
-                        .inflate(R.layout.training_dialog, null, false)
+                        .inflate(R.layout.dialog_training, null, false)
                     val input = dialogView.findViewById<EditText>(R.id.trainingDialogET)
-                    val training = input.toString()
 
                     MaterialAlertDialogBuilder(v.context).setTitle("Training")
                         .setView(dialogView)
                         .setNegativeButton("Cancel") { _, _ ->
                         }.setPositiveButton("Save") { _, _ ->
-                            if (training.isNotBlank()) {
+                            if (input.text.isNotBlank()) {
                                 try {
                                     viewModel.insertTraining(
                                         TrainingRecord(
                                             id = 0,
-                                            plantID = plant.id,
-                                            trainingType = training,
+                                            plantID = masterPlantID,
+                                            trainingType = input.text.toString(),
                                             date = LocalDate.now()
                                         )
                                     )
@@ -399,11 +447,11 @@ abstract class MainFragment : Fragment() {
                         }.show()
                     true
                 }
-// Dialog Light Cycle
+
                 R.id.light_option -> {
                     val dialogView =
                         LayoutInflater.from(v.context)
-                            .inflate(R.layout.light_dialog, null, false)
+                            .inflate(R.layout.dialog_light, null, false)
                     val seekBar = dialogView.findViewById<SeekBar>(R.id.lightDialogSB)
 
                     seekBar.setOnSeekBarChangeListener(object :
@@ -411,7 +459,6 @@ abstract class MainFragment : Fragment() {
                         override fun onProgressChanged(
                             seekBar: SeekBar, progress: Int, fromUser: Boolean
                         ) {
-
                             val currentValue = progress
                             val lightHoursTV =
                                 dialogView.findViewById<TextView>(R.id.lightDialogHoursTV)
@@ -420,11 +467,9 @@ abstract class MainFragment : Fragment() {
                             lightHoursTV.text = "$currentValue / $nighthours cycle"
                         }
 
-                        override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                        }
+                        override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
-                        override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                        }
+                        override fun onStopTrackingTouch(seekBar: SeekBar?) {}
                     })
 
                     MaterialAlertDialogBuilder(v.context).setTitle("Light cycle")
@@ -436,7 +481,7 @@ abstract class MainFragment : Fragment() {
                                     viewModel.insertLight(
                                         LightRecord(
                                             id = 0,
-                                            plantID = plant.id,
+                                            plantID = masterPlantID,
                                             lightHours = selectedValue,
                                             date = LocalDate.now()
                                         )
@@ -454,17 +499,29 @@ abstract class MainFragment : Fragment() {
                     true
                 }
 
-                // TODO Dialog MARK DEAD
+                R.id.dead_option -> {
+                    MaterialAlertDialogBuilder(v.context).setTitle("Delete plant")
+                        .setNegativeButton("Cancel") { _, _ ->
+                        }.setPositiveButton("Delete") { _, _ ->
+                            viewModel.deletePlantByID(masterPlantID)
+                        }.show()
+                    true
+                }
+
                 else -> false
             }
         }
         popup.show()
     }
 
+    //endregion
+
+    //region Photo Option Menu
+
     /**
-     * displays the photo option menu and handles the selected option.
+     * Displays the photo option menu and handles the selected option.
      *
-     * @param v View
+     * @param v The view that triggered the menu.
      */
     open fun showPhotoOptionMenu(v: View) {
 
@@ -489,6 +546,15 @@ abstract class MainFragment : Fragment() {
         popup.show()
     }
 
+    //endregion
+
+    //region View Animation
+
+    /**
+     * Animates the view to be gone with fade out and scale down effects.
+     *
+     * @param view The view to animate.
+     */
     open fun animateViewToGone(view: View) {
         view.animate()
             .alpha(0f)
@@ -504,7 +570,12 @@ abstract class MainFragment : Fragment() {
             .start()
     }
 
-    open fun animateViewToInvisible(view: View){
+    /**
+     * Animates the view to be invisible with fade out and scale down effects.
+     *
+     * @param view The view to animate.
+     */
+    open fun animateViewToInvisible(view: View) {
         view.animate()
             .alpha(0f)
             .scaleX(0f)
@@ -519,6 +590,11 @@ abstract class MainFragment : Fragment() {
             .start()
     }
 
+    /**
+     * Animates the view to be visible with fade in and scale up effects.
+     *
+     * @param view The view to animate.
+     */
     open fun animateViewToVisible(view: View) {
         view.visibility = View.VISIBLE
         view.alpha = 0f
@@ -531,5 +607,6 @@ abstract class MainFragment : Fragment() {
             .setDuration(300)
             .start()
     }
-}
 
+    //endregion
+}

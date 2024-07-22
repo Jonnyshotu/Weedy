@@ -16,7 +16,7 @@ import com.example.weedy.data.local.dao.PlantDao
 import com.example.weedy.data.local.dao.RemoteGeneticDao
 import com.example.weedy.data.models.actions.GerminationAction
 import com.example.weedy.data.models.actions.PlantedAction
-import com.example.weedy.data.models.actions.RepotAction
+import com.example.weedy.data.models.record.RepotRecord
 import com.example.weedy.data.models.record.GrowthStateRecord
 import com.example.weedy.data.models.record.HealthRecord
 import com.example.weedy.data.models.record.ImagesRecord
@@ -36,7 +36,7 @@ import com.example.weedy.data.models.record.WateringRecord
         Soil::class,
         GerminationAction::class,
         PlantedAction::class,
-        RepotAction::class,
+        RepotRecord::class,
         GrowthStateRecord::class,
         HealthRecord::class,
         ImagesRecord::class,
@@ -57,7 +57,7 @@ abstract class PlantDatabase : RoomDatabase() {
     abstract val remoteGeneticDao: RemoteGeneticDao
 }
 
-private val TAG = "PlantDatabase"
+private val TAG = "Plant Database"
 
 private lateinit var dbInstance: PlantDatabase
 

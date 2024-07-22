@@ -12,7 +12,7 @@ import com.example.weedy.data.entities.Nutrients
 import com.example.weedy.data.entities.Soil
 import com.example.weedy.data.models.actions.GerminationAction
 import com.example.weedy.data.models.actions.PlantedAction
-import com.example.weedy.data.models.actions.RepotAction
+import com.example.weedy.data.models.record.RepotRecord
 import com.example.weedy.data.models.record.GrowthStateRecord
 import com.example.weedy.data.models.record.HealthRecord
 import com.example.weedy.data.models.record.ImagesRecord
@@ -74,7 +74,7 @@ interface PlantDao {
     suspend fun insertWateringRecord(watering: WateringRecord)
 
     @Query("SELECT * FROM watering_record_table WHERE plantID == :plantID ORDER BY id DESC")
-    fun getWateringRecordByPlantID(plantID: Long) : LiveData<List<WateringRecord>>
+    fun getWateringRecordByPlantID(plantID: Long): LiveData<List<WateringRecord>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateWateringRecord(watering: WateringRecord)
@@ -99,6 +99,9 @@ interface PlantDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNutrientsRecord(nutrients: NutrientsRecord)
 
+    @Query("SELECT * FROM nutrients_record_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getNutrientsRecordByPlantID(plantID: Long): LiveData<List<NutrientsRecord>>
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateNutrientsRecord(nutrients: NutrientsRecord)
 
@@ -118,20 +121,27 @@ interface PlantDao {
     suspend fun updateSoil(soil: Soil)
     //endregion
 
-
-
     //region Repot
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRepot(repot: RepotAction)
+    suspend fun insertRepot(repot: RepotRecord)
+
+    @Query("SELECT * FROM repot_action_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getRepotActionsByPlantID(plantID: Long): LiveData<List<RepotRecord>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateRepot(repot: RepotAction)
+    suspend fun updateRepot(repot: RepotRecord)
 
     //endregion
 
     //region Growth State Record
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGrowthStateRecord(growthState: GrowthStateRecord)
+
+    @Query("SELECT * FROM growthState_record_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getGrowthStateRecordsByPlantID(plantID: Long): LiveData<List<GrowthStateRecord>>
+
+    @Query("SELECT * FROM growthState_record_table")
+    fun getAllGrowthStateRecords(): LiveData<List<GrowthStateRecord>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateGrowthStateRecord(growthState: GrowthStateRecord)
@@ -142,6 +152,12 @@ interface PlantDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertHealthRecord(health: HealthRecord)
 
+    @Query("SELECT * FROM health_hecord_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getHealthRecordsByPlantID(plantID: Long): LiveData<List<HealthRecord>>
+
+    @Query("SELECT * FROM health_hecord_table")
+    fun getAllHealthRecords(): LiveData<List<HealthRecord>>
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateHealthRecord(health: HealthRecord)
 
@@ -150,6 +166,9 @@ interface PlantDao {
     //region Images Record
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertImagesRecord(images: ImagesRecord)
+
+    @Query("SELECT * FROM images_record_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getImagesRecordByPlantID(plantID: Long): LiveData<List<ImagesRecord>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateImagesRecord(images: ImagesRecord)
@@ -160,6 +179,9 @@ interface PlantDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLightRecord(light: LightRecord)
 
+    @Query("SELECT * FROM light_record_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getLightRecordsByPlantID(plantID: Long): LiveData<List<LightRecord>>
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateLightRecord(light: LightRecord)
 
@@ -168,6 +190,9 @@ interface PlantDao {
     //region Measurements Record
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMeasurementsRecord(measurement: MeasurementsRecord)
+
+    @Query("SELECT * FROM measurements_record_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getMeasurementsRecordByPlantID(plantID: Long): LiveData<List<MeasurementsRecord>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateMeasurementsRecord(measurement: MeasurementsRecord)
@@ -178,6 +203,9 @@ interface PlantDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRepellentsRecord(repellent: RepellentsRecord)
 
+    @Query("SELECT * FROM repellents_record_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getRepellentsRecordByPlantID(plantID: Long): LiveData<List<RepellentsRecord>>
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateRepellentsRecord(repellent: RepellentsRecord)
 
@@ -186,6 +214,9 @@ interface PlantDao {
     //region Training Record
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTrainingRecord(training: TrainingRecord)
+
+    @Query("SELECT * FROM training_record_table WHERE plantID == :plantID ORDER BY id DESC")
+    fun getTrainingRecordByPlantID(plantID: Long): LiveData<List<TrainingRecord>>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateTrainingRecord(training: TrainingRecord)

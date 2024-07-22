@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="42dp"
         android:elevation="12dp"
         app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,26 +37,22 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/plantItemWeeksTV"
+                android:id="@+id/plantItemGrowthStateTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="example Weeks"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="@+id/plantItemStrainTV"
                 app:layout_constraintTop_toBottomOf="@+id/plantItemStrainTV" />
 
 
             <ProgressBar
-                android:id="@+id/plantItemHealthBar"
+                android:id="@+id/plantItemAgePB"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
+                android:layout_width="166dp"
                 android:layout_height="19dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/middle"
-                app:layout_constraintTop_toTopOf="@+id/middle" />
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/plantItemGrowthStateTV"
+                app:layout_constraintTop_toBottomOf="@+id/plantItemGrowthStateTV" />
 
             <ImageButton
                 android:id="@+id/plantItemActionBTN"
@@ -80,7 +76,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/middle"
                 app:layout_constraintStart_toStartOf="@+id/plantItemStrainTV"
-                app:layout_constraintTop_toBottomOf="@+id/plantItemWeeksTV" />
+                app:layout_constraintTop_toBottomOf="@+id/plantItemAgePB" />
 
             <ImageButton
                 android:id="@+id/plantItemCheckupBTN"
@@ -106,33 +102,51 @@
                 app:layout_constraintTop_toTopOf="@+id/plantItemStrainTV" />
 
             <TextView
+                android:id="@+id/plantItemHealthTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/health"
+                app:layout_constraintBottom_toTopOf="@+id/plantItemHealthIV"
+                app:layout_constraintEnd_toEndOf="@+id/plantItemHealthIV"
+                app:layout_constraintStart_toStartOf="@+id/plantItemHealthIV" />
+
+            <ImageView
+                android:id="@+id/plantItemHealthIV"
+                android:layout_width="85dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="@+id/middle"
+                app:layout_constraintStart_toEndOf="@+id/middle"
+                app:srcCompat="@drawable/no_data" />
+
+            <TextView
                 android:id="@+id/plantItemCheckupTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Last Checkup"
-                app:layout_constraintEnd_toEndOf="@+id/plantItemHealthBar"
-                app:layout_constraintTop_toBottomOf="@+id/plantItemHealthBar" />
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/last_checkup"
+                app:layout_constraintBottom_toTopOf="@+id/plantItemLastCheckupTV"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/plantItemLastCheckupTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="example Date"
-                app:layout_constraintEnd_toEndOf="@+id/plantItemCheckupTV"
-                app:layout_constraintTop_toBottomOf="@+id/plantItemCheckupTV" />
+                android:text="@string/no_data"
+                app:layout_constraintBottom_toBottomOf="@+id/middle"
+                app:layout_constraintEnd_toEndOf="@+id/plantItemCheckupTV" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="90dp"
-        android:layout_height="60dp"
+        android:layout_width="110dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="-32dp"
         android:layout_marginEnd="16dp"
         android:elevation="20dp"
         app:cardCornerRadius="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/plantItemCV"
         app:layout_constraintEnd_toEndOf="@+id/plantItemCV"
         app:layout_constraintTop_toTopOf="@+id/plantItemCV">
 
@@ -141,7 +155,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/example_plant" />
+            app:srcCompat="@drawable/no_image_available" />
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

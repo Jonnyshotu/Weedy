@@ -12,24 +12,36 @@ import kotlinx.coroutines.withContext
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
+/**
+ * Repository class for managing strain-related data operations.
+ *
+ * @param database The PlantDatabase instance for database operations.
+ * @param context The Context used to access assets.
+ */
 class StrainRepository(private val database: PlantDatabase, private val context: Context) {
 
     private val TAG = "StrainRepository"
 
+    // LiveData collection of local genetic strains from the database.
     var localGeneticCollection = database.localGeneticDao.getAllGenetics()
+
+    // LiveData collection of remote genetic strains from the database.
     var remoteGeneticCollection = database.remoteGeneticDao.getAllGenetics()
 
-
+    /**
+     * Fetches remote strains from the API and inserts them into the database.
+     *
+     * This function handles pagination and retries fetching in case of an error.
+     *
+     * @throws Exception if there is an error during network operations.
+     */
     suspend fun getRemoteStrains() {
-
         withContext(Dispatchers.IO) {
-
             var currentPage = 1
             var totalPages = 1
 
             do {
                 try {
-
                     val response = StrainApi.apiService.getRemoteStrainResponse(currentPage)
                     Log.d(TAG, "Response: $response")
 
@@ -53,13 +65,12 @@ class StrainRepository(private val database: PlantDatabase, private val context:
                         database.remoteGeneticDao.insertGeneticList(remoteGeneticList)
 
                         totalPages = response.meta.pagination.total_pages
-
                     } else {
                         Log.d(TAG, "No strains fetched from API")
                     }
                 } catch (e: Exception) {
                     Log.e(TAG, "Error fetching strains", e)
-                    delay(35000) // Api timeout
+                    delay(35000) // Wait 35 seconds before retrying
                 }
 
                 currentPage++
@@ -67,9 +78,13 @@ class StrainRepository(private val database: PlantDatabase, private val context:
         }
     }
 
+    /**
+     * Loads local strain data from a JSON file and inserts it into the database.
+     *
+     * @throws Exception if there is an error reading the JSON file or parsing the data.
+     */
     suspend fun getLocalStrains() {
         withContext(Dispatchers.IO) {
-
             try {
                 val gson = Gson()
                 val inputStream = context.assets.open("leafly_strain_data.json")
@@ -77,7 +92,6 @@ class StrainRepository(private val database: PlantDatabase, private val context:
 
                 val type = object : TypeToken<List<LocalStrain>>() {}.type
                 val strains = gson.fromJson<List<LocalStrain>>(jsonString, type)
-
 
                 Log.d(TAG, "Local strains count: ${strains.size} strains")
 
@@ -96,7 +110,6 @@ class StrainRepository(private val database: PlantDatabase, private val context:
                     }
 
                     database.localGeneticDao.insertGeneticList(localGeneticList)
-
                 } else {
                     Log.d(TAG, "No strains loaded from local")
                 }

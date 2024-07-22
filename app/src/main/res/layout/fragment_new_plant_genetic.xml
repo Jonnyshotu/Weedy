@@ -10,11 +10,12 @@
 
     <TextView
         android:id="@+id/newPlantGeneticStrainTV"
+        style="@style/headTitles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:textSize="32sp"
-        android:textStyle="bold"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +23,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/newPlantCannabinoidsCV"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="180dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
@@ -40,6 +41,7 @@
 
             <TextView
                 android:id="@+id/newPlantCannabinoidsTitleTV"
+                style="@style/cardViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -65,6 +67,7 @@
 
             <TextView
                 android:id="@+id/newPlantTHCTV"
+                style="@style/subTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -76,31 +79,37 @@
 
             <TextView
                 android:id="@+id/newPlantTHCResultTV"
+                style="@style/infoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="%"
                 android:layout_marginEnd="16dp"
+                android:text="@string/percent_symbol"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/newPlantTHCTV"
                 app:layout_constraintEnd_toEndOf="@+id/newPlantTHCSB"
                 app:layout_constraintTop_toTopOf="@+id/newPlantTHCTV" />
 
-            <SeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/newPlantTHCSB"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:max="35"
-                android:progress="0"
-                android:text="@string/thc"
+                android:layout_marginBottom="32dp"
+                android:stepSize="1"
+                android:value="0"
+                android:valueFrom="0"
+                android:valueTo="35"
                 android:visibility="invisible"
+                app:labelBehavior="floating"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantTHCTV" />
+                app:layout_constraintTop_toBottomOf="@+id/newPlantTHCTV"
+                app:thumbColor="@color/md_theme_tertiary"
+                app:trackHeight="16dp" />
 
             <TextView
                 android:id="@+id/newPlantCBDTV"
+                style="@style/subTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -111,27 +120,33 @@
 
             <TextView
                 android:id="@+id/newPlantCBDResultTV"
+                style="@style/infoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="%"
                 android:layout_marginEnd="16dp"
+                android:text="@string/percent_symbol"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/newPlantCBDTV"
                 app:layout_constraintEnd_toEndOf="@+id/newPlantCBDSB"
                 app:layout_constraintTop_toTopOf="@+id/newPlantCBDTV" />
 
-            <SeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/newPlantCBDSB"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
-                android:max="20"
-                android:progress="0"
-                android:text="@string/cbd"
+                android:stepSize="1"
+                android:value="0"
+                android:valueFrom="0"
+                android:valueTo="20"
                 android:visibility="invisible"
+                app:labelBehavior="floating"
                 app:layout_constraintEnd_toEndOf="@id/newPlantTHCSB"
                 app:layout_constraintStart_toStartOf="@+id/newPlantTHCSB"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantCBDTV" />
+                app:layout_constraintTop_toBottomOf="@+id/newPlantCBDTV"
+                app:thumbColor="@color/md_theme_tertiary"
+                app:trackHeight="16dp" />
 
             <Button
                 android:id="@+id/newPlantCannabinoidsOKBTN"
@@ -139,7 +154,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
-                android:text="ok"
+                android:text="@string/ok"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +167,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/newPlantFlowertimeCV"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="180dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
@@ -168,6 +184,7 @@
 
             <TextView
                 android:id="@+id/newPlantFlowertimeTitleTV"
+                style="@style/cardViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -193,6 +210,7 @@
 
             <TextView
                 android:id="@+id/newPlantFlowertimeDescriptionTV"
+                style="@style/subTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -204,26 +222,32 @@
 
             <TextView
                 android:id="@+id/newPlantFlowertimeDisplayTV"
+                style="@style/infoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
+                android:layout_marginEnd="32dp"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/newPlantFlowertimeSB"
-                app:layout_constraintEnd_toEndOf="@+id/newPlantFlowertimeSB" />
+                app:layout_constraintBottom_toBottomOf="@+id/newPlantFlowertimeDescriptionTV"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/newPlantFlowertimeDescriptionTV" />
 
-            <SeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/newPlantFlowertimeSB"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:max="20"
-                android:progress="0"
+                android:layout_marginBottom="32dp"
+                android:stepSize="1"
+                android:value="0"
+                android:valueFrom="0"
+                android:valueTo="16"
                 android:visibility="invisible"
+                app:labelBehavior="floating"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantFlowertimeDescriptionTV" />
+                app:layout_constraintTop_toBottomOf="@+id/newPlantFlowertimeDescriptionTV"
+                app:thumbColor="@color/md_theme_tertiary"
+                app:trackHeight="16dp" />
 
             <Button
                 android:id="@+id/newPlantFlowertimeOKBTN"
@@ -232,6 +256,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 android:text="@string/ok"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -259,6 +284,7 @@
 
             <TextView
                 android:id="@+id/newPlantDetailTitleTV"
+                style="@style/cardViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -284,6 +310,7 @@
 
             <TextView
                 android:id="@+id/newPlantGeneticDescriptionTV"
+                style="@style/subTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -296,6 +323,7 @@
 
             <TextView
                 android:id="@+id/newPlantSativaTV"
+                style="@style/subTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -306,31 +334,37 @@
 
             <TextView
                 android:id="@+id/newPlantSativaResultTV"
+                style="@style/infoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="%"
+                android:text="@string/percent_symbol"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/newPlantSativaTV"
                 app:layout_constraintEnd_toEndOf="@+id/newPlantGeneticSativaSB"
                 app:layout_constraintTop_toTopOf="@+id/newPlantSativaTV" />
 
-            <SeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/newPlantGeneticSativaSB"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:max="100"
-                android:progress="0"
+                android:layout_marginBottom="32dp"
+                android:stepSize="1"
+                android:value="0"
+                android:valueFrom="0"
+                android:valueTo="100"
                 android:visibility="invisible"
+                app:labelBehavior="floating"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantSativaTV" />
+                app:layout_constraintTop_toBottomOf="@+id/newPlantSativaTV"
+                app:thumbColor="@color/md_theme_tertiary"
+                app:trackHeight="16dp" />
 
             <TextView
                 android:id="@+id/newPlantIndicaTV"
+                style="@style/subTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -341,30 +375,36 @@
 
             <TextView
                 android:id="@+id/newPlantIndicaResultTV"
+                style="@style/infoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="%"
+                android:text="@string/percent_symbol"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/newPlantIndicaTV"
                 app:layout_constraintEnd_toEndOf="@+id/newPlantSativaResultTV"
                 app:layout_constraintTop_toTopOf="@+id/newPlantIndicaTV" />
 
-            <SeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/newPlantGeneticIndicaSB"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:max="100"
-                android:progress="0"
+                android:layout_marginBottom="32dp"
+                android:stepSize="1"
+                android:value="0"
+                android:valueFrom="0"
+                android:valueTo="100"
                 android:visibility="invisible"
+                app:labelBehavior="floating"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantIndicaTV" />
+                app:layout_constraintTop_toBottomOf="@+id/newPlantIndicaTV"
+                app:thumbColor="@color/md_theme_tertiary"
+                app:trackHeight="16dp" />
 
             <TextView
                 android:id="@+id/newPlantRuderalisTV"
+                style="@style/subTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -375,27 +415,32 @@
 
             <TextView
                 android:id="@+id/newPlantRuderalisResultTV"
+                style="@style/infoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="%"
+                android:text="@string/percent_symbol"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/newPlantRuderalisTV"
                 app:layout_constraintEnd_toEndOf="@+id/newPlantIndicaResultTV"
                 app:layout_constraintTop_toTopOf="@+id/newPlantRuderalisTV" />
 
-            <SeekBar
+            <com.google.android.material.slider.Slider
                 android:id="@+id/newPlantGeneticRuderalisSB"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:max="50"
-                android:progress="0"
+                android:layout_marginBottom="32dp"
+                android:stepSize="1"
+                android:value="0"
+                android:valueFrom="0"
+                android:valueTo="50"
                 android:visibility="invisible"
+                app:labelBehavior="floating"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newPlantRuderalisTV" />
+                app:layout_constraintTop_toBottomOf="@+id/newPlantRuderalisTV"
+                app:thumbColor="@color/md_theme_tertiary"
+                app:trackHeight="16dp" />
 
             <CheckBox
                 android:id="@+id/newPlantHybridCB"
@@ -413,8 +458,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newPlantHybridCB">
@@ -424,6 +469,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:layout_weight="1"
                     android:padding="8dp"
                     android:text="@string/sativa" />
 
@@ -432,6 +478,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:layout_weight="1"
                     android:padding="8dp"
                     android:text="@string/indica" />
 
@@ -454,12 +501,11 @@
 
     <RadioGroup
         android:id="@+id/newPlantGeneticRG"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticCV">
 
@@ -468,6 +514,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_weight="1"
             android:padding="8dp"
             android:text="@string/regular" />
 
@@ -476,6 +523,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_weight="1"
             android:padding="8dp"
             android:text="@string/feminized" />
 
@@ -484,6 +532,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_weight="1"
             android:padding="8dp"
             android:text="@string/automatic" />
 
@@ -507,13 +556,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/newPlantGeneticStrainTV" />
 
     <Space
         android:id="@+id/space3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/space4"
         app:layout_constraintStart_toStartOf="@id/space4"
