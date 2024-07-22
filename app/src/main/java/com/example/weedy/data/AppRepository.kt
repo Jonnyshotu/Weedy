@@ -41,6 +41,9 @@ class AppRepository(private val database: PlantDatabase) {
     // Retrieves all health records from the database.
     val healthRecordsList = database.plantDao.getAllHealthRecords()
 
+    // Retrieves all image records from the database.
+    val imageRecordsList = database.plantDao.getAllImagesRecords()
+
     // Retrieves all growth state records from the database.
     val growthStateRecordList = database.plantDao.getAllGrowthStateRecords()
 

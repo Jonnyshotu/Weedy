@@ -1,12 +1,16 @@
 # Weedy - Dein digitaler Grow-Assistent
 
-![Weedy Logo](link_zum_logo.png)
+![Weedy Logo](assets/Weedy.png)
 
-## 🌱 Über Weedy
+## Über Weedy
 
 Weedy ist deine ultimative Begleiter-App für den privaten Cannabisanbau in Deutschland. Entwickelt mit Kotlin für Android, bietet Weedy eine umfassende Plattform zur Unterstützung und Dokumentation deines gesamten Anbau-Prozesses.
 
-## 🚀 Hauptfunktionen
+## Benutzerfreundlichkeit
+
+Weedy wurde mit dem Fokus auf eine intuitive Benutzeroberfläche entwickelt. Egal, ob du dein erstes Pflänzchen anbaust oder bereits ein erfahrener Grower bist, die App führt dich mit einer einfachen Oberfläche durch den gesamten Prozess.
+
+## Hauptfunktionen
 
 - **Riesige Sortenauswahl**: Zugriff auf über 8.000 Cannabis-Sorten aus einer API
 - **Inspirations-Datenbank**: Entdecke mehr als 4.000 Sorten mit detaillierten Filtermöglichkeiten
@@ -19,13 +23,17 @@ Weedy ist deine ultimative Begleiter-App für den privaten Cannabisanbau in Deut
     - Umtopf-Protokolle
     - Keimungs-Tracking
 - **Ernte-Prognose**: Behalte den Überblick über deine voraussichtlichen Erntezeiten
-- **Wachstumsphasen-Tracking**: Dokumentiere jede Phase des Pflanzenwachstums
-
 - **Übersicht der Wachstumsphasen**: Verfolge jede Phase des Wachstums und erhalte wertvolle Einblicke, um deinen Anbau zu optimieren.
 
-## Benutzerfreundlichkeit
+## 📱 Screenshots
 
-Weedy wurde mit dem Fokus auf eine intuitive Benutzeroberfläche entwickelt. Egal, ob du dein erstes Pflänzchen anbaust oder bereits ein erfahrener Grower bist, die App führt dich mit einer einfachen Oberfläche durch den gesamten Prozess.
+![Homescreen](assets/screenshot_home.png) ![HomescreenNight](assets/screenshot_home_night.png)
+
+![Explorescreen](assets/screenshot_explore.png)
+
+![NewPlant](assets/screenshot_newPlant.png)
+
+![Detailscreen](assets/screenshot_detail.png) ![DetailWaterscreen](assets/screenshot_detailWater.png)
 
 ## Vorteile
 
@@ -34,6 +42,10 @@ Weedy wurde mit dem Fokus auf eine intuitive Benutzeroberfläche entwickelt. Ega
 - **Inspiration durch Vielfalt**: Lass dich von der großen Auswahl an Sorten inspirieren und finde die besten Pflanzen für deine individuellen Bedürfnisse.
 
 - **Dokumentation und Analyse**: Halte alle wichtigen Daten fest und analysiere deinen Anbau, um zukünftig noch bessere Ergebnisse zu erzielen.
+
+## Datenschutz & Legalität
+
+Weedy wurde unter Berücksichtigung der aktuellen deutschen Gesetzgebung zum privaten Cannabisanbau entwickelt. Alle Daten werden lokal auf deinem Gerät gespeichert, um deine Privatsphäre zu schützen.
 
 ## Installation
 
@@ -61,43 +73,16 @@ Wir freuen uns über Beiträge zur Verbesserung von Weedy! Wenn du Ideen oder Fe
 
 ## Lizenz
 
-Dieses Projekt ist unter der MIT-Lizenz lizenziert. Siehe die [LICENSE.md](LICENSE.md) Datei für weitere Informationen.
+Dieses Projekt ist unter der MIT-Lizenz lizenziert. Siehe die ## [LICENSE](./LICENCE) Datei für weitere Informationen.
 
 ## Kontakt
 
 Falls du Fragen oder Anregungen hast, erreichst du mich unter:
 
-- **E-Mail**: dein.email@example.com
-- **GitHub**: [deinbenutzername](https://github.com/deinbenutzername)
+- **E-Mail**: jonasgoetzenberger@icloud.com
+- **GitHub**: [Jonnyshotu](https://github.com/Jonnyshotu)
 
 ---
 
-## 📱 Screenshots
-
-[Hier könnten einige Screenshots der App eingefügt werden]
-
-## 🛠 Installation
-
-1. Lade die APK-Datei herunter
-2. Aktiviere "Installation aus unbekannten Quellen" in deinen Android-Einstellungen
-3. Öffne die heruntergeladene APK und folge den Installationsanweisungen
-
-## 🔒 Datenschutz & Legalität
-
-Weedy wurde unter Berücksichtigung der aktuellen deutschen Gesetzgebung zum privaten Cannabisanbau entwickelt. Alle Daten werden lokal auf deinem Gerät gespeichert, um deine Privatsphäre zu schützen.
-
-## 🤝 Mitwirken
-
-Wir freuen uns über Beiträge der Community! Wenn du Ideen zur Verbesserung hast oder Bugs findest, eröffne bitte ein Issue oder sende einen Pull Request.
-
-## 📬 Kontakt
-
-Bei Fragen oder Anregungen, kontaktiere uns unter: [deine_email@example.com]
-
-## 📄 Lizenz
-
-Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert.
-
----
 
 Happy Growing mit Weedy! 🌱

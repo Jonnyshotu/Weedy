@@ -38,6 +38,9 @@ class PlantAdapter(
             // Set the strain name
             plantItemStrainTV.text = plant.strainName
 
+            // Set image based on image record
+            plant.plantImage?.let { plantItemPlantIV.setImageResource(it) }
+
             // Set the health image based on the health percentage
             plant.health.let { percentage ->
                 when (percentage) {

@@ -31,8 +31,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="example Strain"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                style="@style/subTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                style="@style/infoText"
                 app:layout_constraintStart_toStartOf="@+id/plantItemStrainTV"
                 app:layout_constraintTop_toBottomOf="@+id/plantItemStrainTV" />
 
@@ -107,6 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/health"
+                style="@style/infoText"
                 app:layout_constraintBottom_toTopOf="@+id/plantItemHealthIV"
                 app:layout_constraintEnd_toEndOf="@+id/plantItemHealthIV"
                 app:layout_constraintStart_toStartOf="@+id/plantItemHealthIV" />
@@ -155,7 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/no_image_available" />
+            app:srcCompat="@drawable/example_plant" />
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -70,11 +70,19 @@ class HomeFragment : MainFragment(), OnClick {
             viewModel.updateAge() // Update plant age based on growth records
         }
 
+        // Observe growth records updates
+        viewModel.imageRecordsList.observe(viewLifecycleOwner) {
+            Log.d(TAG, "Image records updated")
+            viewModel.updateImage() // Update plant image based on image records
+        }
+
         // Observe display plant list and update adapter
         viewModel.displayPlantList.observe(viewLifecycleOwner) { displayPlantList ->
             Log.d(TAG, "Display plants updated")
             adapter.submitList(displayPlantList.sortedBy { displayPlant -> displayPlant.strainName })
         }
+
+
 
         // Handle Add Plant button click
         binding.homeAddFAB.setOnClickListener {

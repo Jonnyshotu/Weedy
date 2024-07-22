@@ -8,8 +8,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_margin="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,6 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date"
+                style="@style/infoText"
                 app:layout_constraintEnd_toStartOf="@+id/listItemHeader1TV"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/listItemHeader1TV" />
@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Value 1"
+                style="@style/infoText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Value 2"
+                style="@style/infoText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/listItemHeader1TV"
                 app:layout_constraintTop_toTopOf="@+id/listItemHeader1TV" />
@@ -55,7 +57,6 @@
                 android:id="@+id/listItemDateTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="example Date"
                 app:layout_constraintEnd_toEndOf="@+id/listItemDateHeaderTV"
                 app:layout_constraintStart_toStartOf="@+id/listItemDateHeaderTV"
                 app:layout_constraintTop_toTopOf="@+id/listItemTV1"
@@ -68,7 +69,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="example Data 1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/listItemHeader1TV"
                 app:layout_constraintStart_toStartOf="@+id/listItemHeader1TV"
@@ -80,7 +80,6 @@
                 android:id="@+id/listItem2TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="example Data 2"
                 app:layout_constraintEnd_toEndOf="@+id/listItemHeader2TV"
                 app:layout_constraintStart_toStartOf="@+id/listItemHeader2TV"
                 app:layout_constraintTop_toTopOf="@+id/listItemTV1"

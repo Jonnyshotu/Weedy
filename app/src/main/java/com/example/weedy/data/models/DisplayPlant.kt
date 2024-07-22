@@ -6,6 +6,7 @@ data class DisplayPlant(
     val strainName: String,
     val masterPlantID: Long,
     var age: Int?,
+    var image: Int?,
     var flowerTime: Int?,
     var growthState: Int?,
     var health: Int?,

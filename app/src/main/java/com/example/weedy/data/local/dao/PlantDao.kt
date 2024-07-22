@@ -167,6 +167,9 @@ interface PlantDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertImagesRecord(images: ImagesRecord)
 
+    @Query("SELECT * FROM images_record_table")
+    fun getAllImagesRecords(): LiveData<List<ImagesRecord>>
+
     @Query("SELECT * FROM images_record_table WHERE plantID == :plantID ORDER BY id DESC")
     fun getImagesRecordByPlantID(plantID: Long): LiveData<List<ImagesRecord>>
 

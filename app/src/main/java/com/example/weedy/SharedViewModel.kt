@@ -56,6 +56,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     // LiveData sources from repositories
     val plantList = appRepository.plantMasterList
     val healthRecordsList = appRepository.healthRecordsList
+    val imageRecordsList = appRepository.imageRecordsList
     val growthRecordsList = appRepository.growthStateRecordList
     val localGeneticCollection = strainRepository.localGeneticCollection
     val remoteGeneticCollection = strainRepository.remoteGeneticCollection
@@ -81,6 +82,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
                 strainName = masterPlant.strainName,
                 masterPlantID = masterPlant.id,
                 flowerTime = masterPlant.floweringTime,
+                image = null,
                 growthState = null,
                 health = null,
                 lastCheckup = null,
@@ -91,6 +93,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         Log.d(TAG, "display plants created: ${displayPlantList.value?.size}")
         updateHealthStatus()
         updateAge()
+        updateImage()
     }
 
     /**
@@ -129,6 +132,20 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
             displayPlant.copy(age = ageInFlowering?.toInt(), growthState = latestEntry?.growthState)
         } ?: emptyList()
         Log.d(TAG, "update age display plants size: ${updatedDisplayPlants.size}")
+        _displayPlantList.value = updatedDisplayPlants
+    }
+    /**
+     * Updates the image of display plants based on the image records.
+     */
+    fun updateImage(){
+        val updatedDisplayPlants = displayPlantList.value?.map { displayPlant ->
+            val latestImageRecord =
+                imageRecordsList.value?.filter { imageRecords -> imageRecords.plantID == displayPlant.masterPlantID }
+                    ?.maxByOrNull { imageRecord -> imageRecord.id }
+
+            displayPlant.copy(image = latestImageRecord?.imageResource)
+        } ?: emptyList()
+        Log.d(TAG, "update image display plants size: ${updatedDisplayPlants.size}")
         _displayPlantList.value = updatedDisplayPlants
     }
 
