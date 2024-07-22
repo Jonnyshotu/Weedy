@@ -32,13 +32,13 @@ Oberfläche durch den gesamten Prozess.
 
 ## Screenshots
 
-<img src="assets/screenshot_home.png" alt="Homescreen" width="200">**Homescreen**<img src="assets/screenshot_home_night.png" alt="HomescreenNight" width="200">
+<img src="assets/screenshot_home.png" alt="Homescreen" width="200"> **Home**: Eine Übersicht aller Pflanzen - alles auch  im Nachmodus. <img src="assets/screenshot_home_night.png" alt="HomescreenNight" width="200">
 
-<img src="assets/screenshot_explore.png" alt="Explorescreen" width="200">**Homescreen**
+<img src="assets/screenshot_explore.png" alt="Explorescreen" width="200"> **Explore**: Lass dich von verschiedenen Genetiken inspirieren!
 
-<img src="assets/screenshot_newPlant.png" alt="NewPlant" width="200">**Homescreen**
+<img src="assets/screenshot_newPlant.png" alt="NewPlant" width="200"> **Neue Pflanze anlegen**: Wähle basierend auf der rießigen Datenbank deine Sorte aus.
 
-<img src="assets/screenshot_detail.png" alt="Detailscreen" width="200">**Homescreen**<img src="assets/screenshot_detailWater.png" alt="DetailWaterscreen" width="200">
+<img src="assets/screenshot_detail.png" alt="Detailscreen" width="200"> **Detail**: Erhalte genaue Informationen zu einer pflanze. <img src="assets/screenshot_detailWater.png" alt="DetailWaterscreen" width="200">
 
 ## Vorteile
 
