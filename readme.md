@@ -1,6 +1,6 @@
 # Weedy - Dein digitaler Grow-Assistent
 
-<img src="assets/Weedy.png" alt="Weedy Logo" width="750">
+<img src="assets/Weedy.png" alt="Weedy Logo" width="1000">
 
 ## Über Weedy
 
