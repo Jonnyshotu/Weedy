@@ -92,6 +92,8 @@ class DetailFragment : MainFragment() {
                 else -> null
             }
         }.attach()
+
+        binding.detailVP.offscreenPageLimit = 7  // Loads all fragments to avoid layout crash if scrolled to fast
     }
 
     /**
