@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -46,6 +47,13 @@ class NewPlantGeneticFragment : MainFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                onBackPressedCloseML()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         // Get the plant ID passed via navigation
         val databaseID = args.databaseMasterPlantID // Plant ID from navigation
@@ -187,6 +195,13 @@ class NewPlantGeneticFragment : MainFragment() {
                 )
             )
         }
+    }
+
+    private fun onBackPressedCloseML(){
+        collapseDetail()
+        collapseFlowertime()
+        collapseCannabinoids()
+        binding.newPlantGeneticML.transitionToStart()
     }
 
     /**
